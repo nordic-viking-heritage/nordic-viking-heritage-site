@@ -11,135 +11,110 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero" id="top">
-    <nav class="nav wrap">
-      <a class="brand" href="#top" aria-label="Nordic Viking Heritage home">
-        <span class="brand-mark">ᚠ</span>
-        <span>NORDIC VIKING HERITAGE</span>
-      </a>
-      <div class="nav-links">
-        <a href="#voyage">Voyage</a>
-        <a href="#chapter">Chapter I</a>
-        <a href="#saga">The Saga</a>
-        <a href="#honors">Crew Honors</a>
-      </div>
-    </nav>
-
-    <img class="hero-image" src="hero.png" alt="Viking Voyage II artwork: a longship leaving the cold north toward warmer waters" />
-    <div class="hero-overlay"></div>
-    <div class="hero-vignette"></div>
-
-    <div class="hero-copy wrap">
-      <p class="eyebrow">ONE SHIP · ONE CREW · ONE UNFOLDING SAGA</p>
-      <h1>VIKING<br>VOYAGE II</h1>
-      <p class="sub">FROM ICE TO SUN</p>
-      <p class="lead">A 60-day, 75,000,000-step voyage from Greenland toward Florida — powered by an international crew and written one real step at a time.</p>
-      <div class="hero-actions">
-        <a class="cta primary" href="#voyage">ENTER THE VOYAGE</a>
-        <a class="cta ghost" href="#honors">MEET THE CREW</a>
-      </div>
-    </div>
-
-    <div class="hero-strip">
-      <span>GREENLAND</span><i></i><span>NORTH ATLANTIC</span><i></i><span>NORTH AMERICA</span><i></i><span>FLORIDA</span>
-    </div>
+  <!-- HOME visual is intentionally anchored to Stefan's approved reference. -->
+  <header class="approved-home" id="top">
+    <img src="home-reference.jpg" alt="Approved Nordic Viking Heritage Viking Voyage II home design" />
+    <a class="hotspot enter" href="#voyage" aria-label="Enter the voyage"></a>
+    <a class="hotspot crew" href="#honors" aria-label="Meet the crew"></a>
   </header>
 
   <main>
-    <section class="status" id="voyage">
+    <section class="status parchment" id="voyage">
       <div class="wrap">
-        <div class="section-kicker dark">THE SHIP'S LOG</div>
-        <div class="status-heading">
+        <div class="status-head">
           <div>
-            <h2>The fleet is underway</h2>
-            <p class="status-intro">Real activity in Pacer moves the ship. The figures below are the latest verified snapshot currently logged on this page.</p>
+            <div class="kicker red">THE SHIP'S LOG</div>
+            <h1>THE FLEET IS UNDERWAY</h1>
+            <p>Real activity in Pacer moves the ship. These are the latest verified numbers from our crew.</p>
           </div>
-          <div class="seal">OUR<br>SAGA</div>
+          <div class="seal">ONE CREW<br>ONE SAGA</div>
         </div>
+
         <div class="stats">
-          <article><small>CREW</small><strong>48</strong><span>Sailors aboard</span></article>
-          <article><small>LOGGED</small><strong>3,972,538</strong><span>Total steps</span></article>
-          <article><small>DISTANCE</small><strong>≈ 2,582 km</strong><span>From Greenland</span></article>
-          <article><small>DESTINATION</small><strong>75,000,000</strong><span>Steps to Florida</span></article>
+          <article><span class="icon">⚔</span><strong>51</strong><small>VIKINGS ABOARD</small><em>One crew</em></article>
+          <article><span class="icon">👣</span><strong>5,185,209</strong><small>TOTAL STEPS</small><em>Steps toward Florida</em></article>
+          <article><span class="icon">⛵</span><strong>3,370 KM</strong><small>DISTANCE COVERED</small><em>From Greenland</em></article>
+          <article><span class="icon">◉</span><strong>6.91%</strong><small>OF OUR GOAL</small><em>75,000,000 steps</em></article>
         </div>
-        <p class="note">The voyage began in Greenland on 21 August. New numbers are added only when they have been verified from the crew's actual results.</p>
       </div>
     </section>
 
-    <section class="chapter" id="chapter">
-      <div class="wrap chapter-layout">
-        <div class="chapter-copy">
-          <div class="section-kicker">CHAPTER I</div>
-          <h2>Across the North Atlantic</h2>
-          <p class="chapter-lead">Cold water behind us. A continent ahead. Every step decides how quickly the story changes.</p>
-          <p>The first chapter follows the fleet away from Greenland toward the North American mainland. The visual language begins in ice, stone and steel-blue water, then warms as the crew pushes south.</p>
-          <div class="chapter-tags"><span>HISTORY</span><span>MYTH &amp; SAGA</span><span>OUR SAGA</span></div>
-        </div>
-        <figure class="map-stage">
-          <div class="map-glow"></div>
-          <img src="chapter-one.png" alt="Chapter I illustrated voyage chart from Greenland toward the North American mainland" />
-          <figcaption><strong>CHAPTER I NAVIGATION CHART</strong><span>Verified artwork currently used for this stage of the voyage.</span></figcaption>
-        </figure>
+    <section class="ravens-band">
+      <div class="wrap ravens-inner">
+        <span class="raven">🐦‍⬛</span>
+        <div><strong>HUGIN &amp; MUNIN WATCH OVER US</strong><p>Every step is seen. Every effort matters. Every Viking belongs.</p></div>
+        <span class="raven">🐦‍⬛</span>
       </div>
     </section>
 
-    <section class="saga" id="saga">
+    <section class="dark-section" id="dispatch">
+      <div class="wrap two-col">
+        <figure class="framed"><img src="viking-dispatch-day-6.png" alt="Viking Dispatch Day 6" /><figcaption>VIKING DISPATCH — DAY 6</figcaption></figure>
+        <div class="copy">
+          <div class="kicker gold">LATEST VIKING DISPATCH</div>
+          <h2>51 Vikings. One crew. One ship.</h2>
+          <p><strong>5,185,209 steps</strong> have carried our fleet an estimated <strong>3,370 km</strong> from Greenland. We have completed <strong>6.91%</strong> of our 75,000,000-step voyage.</p>
+          <p>Every walk, every run and every late step keeps the longship moving. The daily Pacer Dispatch is the immediate voice of the crew; this website is the lasting record of the saga.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section" id="voyage-map">
       <div class="wrap">
-        <div class="section-kicker">THREE LAYERS — ONE EXPERIENCE</div>
-        <h2>Not just a challenge. A world.</h2>
-        <div class="cards-3">
-          <article><div class="icon">Ⅰ</div><h3>HISTORY</h3><p>Historically and archaeologically grounded material about Viking Age travel, seafaring, places and people. Where evidence is uncertain, we say so.</p></article>
-          <article><div class="icon">Ⅱ</div><h3>MYTH &amp; SAGA</h3><p>Norse mythology gives the voyage its dramatic voice — ravens, gods, omens and storms — always kept separate from documented history.</p></article>
-          <article><div class="icon">Ⅲ</div><h3>OUR SAGA</h3><p>The crew writes this layer together. Real steps, jokes, friendships, milestones, setbacks and victories become the continuing story of Viking Voyage II.</p></article>
+        <div class="kicker gold">OUR MASTER MAP</div>
+        <h2>THE CROSSING CONTINUES</h2>
+        <p class="intro">The approved Greenland → North America → Florida route remains our fixed navigational reference. The fleet position develops only from the crew's real progress.</p>
+        <figure class="wide-map"><img src="master-map.png" alt="Viking Voyage II master map from Greenland to Florida" /></figure>
+      </div>
+    </section>
+
+    <section class="chapter dark-section">
+      <div class="wrap two-col reverse">
+        <div class="copy">
+          <div class="kicker gold">CHAPTER I</div>
+          <h2>ACROSS THE NORTH ATLANTIC</h2>
+          <p>Cold water behind us. A continent ahead. The first chapter follows the fleet away from Greenland toward the North American mainland.</p>
+          <div class="tags"><span>HISTORY</span><span>MYTH &amp; SAGA</span><span>OUR SAGA</span></div>
+        </div>
+        <figure class="framed"><img src="chapter-one.png" alt="Chapter I voyage chart" /><figcaption>CHAPTER I — THE CROSSING</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="parchment honors" id="honors">
+      <div class="wrap">
+        <div class="kicker red">CREW HONORS — THE NAMING</div>
+        <h2>THREE NEW NAMES ENTER THE SHIP'S ROLL</h2>
+        <div class="two-col">
+          <figure class="framed light"><img src="crew-honors-the-naming.png" alt="Crew Honors The Naming" /></figure>
+          <div class="naming-list">
+            <article><span>ALISON</span><strong>ÁSTRÍÐR</strong><small>ᛅᛋᛏᚱᛁᚦᛦ</small><p>A name with roots connected to the gods and to the beloved/beautiful — chosen for strength and determination.</p></article>
+            <article><span>SLAVA</span><strong>KETILL</strong><small>ᚴᛅᛏᛁᛚ</small><p>An authentic Old Norse name linked to the ketill name-element — strong and unmistakably Norse.</p></article>
+            <article><span>RICHARD</span><strong>ÞORKELL</strong><small>ᚦᚢᚱᚴᛅᛏᛁᛚ</small><p>A Thor-bearing Old Norse name, chosen for strength and persistence.</p></article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="honors" id="honors">
+    <section class="ship-roll">
       <div class="wrap">
-        <div class="section-kicker dark">THE SHIP'S ROLL</div>
-        <h2>Names earned aboard the ship</h2>
-        <p class="center-note">Crew Honors are part recognition, part history and part belonging. Each name is shown with its historical Old Norse form and, where locked, a Younger Futhark rendering.</p>
-        <div class="honor-grid">
-          <article><span>SUNSHINE</span><strong>Solveig</strong><small>Sǫlveig</small><em>runic form pending final lock</em></article>
-          <article><span>PANGHOP LAM</span><strong>Hrafn</strong><small>Hrafn · ᚼᚱᛅᚠᚾ</small></article>
-          <article><span>DUKE</span><strong>Eirikr</strong><small>Eiríkr · ᛅᛁᚱᛁᚴᛦ</small></article>
-          <article><span>LOLA</span><strong>Freydis</strong><small>Freydís · ᚠᚱᛅᚢᛏᛁᛋ</small></article>
-          <article><span>AMANDA</span><strong>Sigrid</strong><small>Sigríðr · ᛋᛁᚴᚱᛁᚦᚱ</small></article>
-          <article><span>ANDREAS</span><strong>Steinn</strong><small>Steinn · ᛋᛏᛅᛁᚾ</small></article>
-          <article><span>SOCALLIFER</span><strong>Hafþórr</strong><small>Hafþórr · ᚼᛅᚠᚦᚢᚱ</small></article>
+        <div class="kicker gold">THE SHIP'S ROLL</div>
+        <h2>NAMES CARRIED ABOARD</h2>
+        <div class="roll-grid">
+          <article><span>Sunshine</span><strong>Solveig</strong><small>Sǫlveig</small></article>
+          <article><span>Panghop Lam</span><strong>Hrafn</strong><small>ᚼᚱᛅᚠᚾ</small></article>
+          <article><span>Duke</span><strong>Eirikr</strong><small>ᛅᛁᚱᛁᚴᛦ</small></article>
+          <article><span>Lola</span><strong>Freydis</strong><small>ᚠᚱᛅᚢᛏᛁᛋ</small></article>
+          <article><span>Amanda</span><strong>Sigrid</strong><small>ᛋᛁᚴᚱᛁᚦᚱ</small></article>
+          <article><span>Andreas</span><strong>Steinn</strong><small>ᛋᛏᛅᛁᚾ</small></article>
+          <article><span>socallifer</span><strong>Hafþórr</strong><small>ᚼᛅᚠᚦᚢᚱ</small></article>
+          <article><span>Alison</span><strong>Ástríðr</strong><small>ᛅᛋᛏᚱᛁᚦᛦ</small></article>
+          <article><span>Slava</span><strong>Ketill</strong><small>ᚴᛅᛏᛁᛚ</small></article>
+          <article><span>Richard</span><strong>Þorkell</strong><small>ᚦᚢᚱᚴᛅᛏᛁᛚ</small></article>
         </div>
-      </div>
-    </section>
-
-    <section class="gallery" id="gallery">
-      <div class="wrap">
-        <div class="section-kicker">VISUAL LOGBOOK</div>
-        <h2>Scenes from the voyage</h2>
-        <div class="gallery-grid two">
-          <figure class="gallery-large"><img src="hero.png" alt="Viking Voyage II From Ice to Sun artwork" /><figcaption><span>THE VOYAGE</span><strong>From Ice to Sun</strong></figcaption></figure>
-          <figure><img src="chapter-one.png" alt="Chapter I voyage chart" /><figcaption><span>CHAPTER I</span><strong>The North Atlantic crossing</strong></figcaption></figure>
-        </div>
-        <p class="visual-note">Only artwork that has been checked against the current voyage is shown here. Superseded or incorrect charts stay off the public page.</p>
-      </div>
-    </section>
-
-    <section class="principles">
-      <div class="wrap">
-        <div class="raven">🐦‍⬛</div>
-        <div class="section-kicker">THE HEART OF THE VOYAGE</div>
-        <blockquote>“Every step counts.<br>Every Viking matters.”</blockquote>
-        <p>We are not trying to create another challenge in the crowd. We are building a crew — a place where people are seen, friendships grow, and the voyage becomes something worth remembering after the final step is taken.</p>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <div><strong>NORDIC VIKING HERITAGE</strong><span>Viking Voyage II — a living project page</span></div>
-      <div class="footer-runes">ᚼ ᛅ ᛁ ᛚ</div>
-      <a href="#top">Back to top ↑</a>
-    </div>
-  </footer>
+  <footer><div class="wrap footer"><strong>NORDIC VIKING HERITAGE</strong><span>Viking Voyage II · From Ice to Sun</span><a href="#top">Back to top ↑</a></div></footer>
 </body>
 </html>
