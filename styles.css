@@ -9,7 +9,7 @@
 .stats .icon{height:48px;overflow:visible}
 .stats .icon img{width:64px;height:48px;object-fit:contain}
 .raven{width:130px;max-width:18vw;flex:0 1 130px;background:transparent}
-.honors-explainer{max-width:900px;margin:-12px 0 36px;padding:24px 28px 22px;border-left:4px solid var(--red);background:rgba(255,255,255,.26);box-shadow:inset 0 0 0 1px rgba(141,48,39,.16)}
+.honors-explainer{max-width:900px;margin:0 0 24px;padding:22px 24px 20px;border-left:4px solid var(--red);background:rgba(255,255,255,.26);box-shadow:inset 0 0 0 1px rgba(141,48,39,.16)}
 .honors-explainer h3{margin:.3rem 0 .7rem;font-family:Cinzel,serif;font-size:clamp(1.35rem,2.5vw,2rem);color:#2d2016}
 .honors-explainer p{max-width:820px;margin:.55rem 0;color:#4d443a}
 .gallery-intro{max-width:820px;margin:-12px 0 30px;color:#514940;font-size:1.02rem}
@@ -18,4 +18,5 @@
 .gallery-grid figcaption span{margin-top:5px;color:#d7cdbd}
 .gallery-grid .map-card img{object-fit:contain;background:#05090b}
 @media(max-width:520px){.stats .icon img{width:58px;height:44px}.raven{width:68px;min-width:48px;max-width:19vw}}
-@media(max-width:520px){.honors-explainer{margin-top:-4px;padding:20px 18px}}
+@media(max-width:900px){.honors-explainer{margin-top:8px}}
+@media(max-width:520px){.honors-explainer{margin-top:6px;padding:20px 18px}}
