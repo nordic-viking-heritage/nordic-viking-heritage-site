@@ -21,10 +21,11 @@ jobs:
           fetch-depth: 0
       - name: Decode Day 9 map
         run: |
-          cat map-chunks/day9-01.txt map-chunks/day9-02.txt map-chunks/day9-03.txt map-chunks/day9-04.txt > day9-map.b64
+          cat map-chunks/day9-01.txt map-chunks/day9-02a.txt map-chunks/day9-02b.txt map-chunks/day9-02c.txt map-chunks/day9-03.txt map-chunks/day9-04.txt > day9-map.b64
+          test "$(wc -c < day9-map.b64)" -eq 38688
           base64 --decode day9-map.b64 > master-map-day-9.jpg
           file master-map-day-9.jpg
-          test -s master-map-day-9.jpg
+          test "$(wc -c < master-map-day-9.jpg)" -gt 20000
       - name: Commit corrected map
         run: |
           git config user.name "github-actions[bot]"
