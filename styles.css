@@ -17,5 +17,9 @@
 .gallery-grid figcaption strong{font-family:Cinzel,serif;color:var(--gold);font-size:.82rem;letter-spacing:.05em}
 .gallery-grid figcaption span{margin-top:5px;color:#d7cdbd}
 .gallery-grid .map-card img{object-fit:contain;background:#05090b}
+#myth-day-10.parchment .copy p,#myth-day-10.parchment .intro{color:#2f281f}
+#myth-day-10.parchment .copy h2{color:#17130f}
+#myth-day-10.parchment .kicker.red{color:#8d3027}
+#myth-day-10.parchment .copy strong{color:#17130f}
 @media(max-width:520px){.stats .icon img{width:58px;height:44px}.raven{width:68px;min-width:48px;max-width:19vw}}
 @media(max-width:520px){.honors-explainer{margin-top:-4px;padding:20px 18px}}
