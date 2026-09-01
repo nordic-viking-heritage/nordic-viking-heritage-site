@@ -1,4 +1,12 @@
 (() => {
+  const roll = document.querySelector('.ship-roll .roll-grid');
+  if (roll && !document.querySelector('.captain-roll')) {
+    const captain = document.createElement('article');
+    captain.className = 'captain-roll';
+    captain.innerHTML = '<span class="captain-label">THE CAPTAIN</span><span>Stefan</span><strong>HÁKON</strong><small class="old-norse">Hákon</small><small class="runes">ᚼᛅᚴᚢᚾ</small>';
+    roll.parentNode.insertBefore(captain, roll);
+  }
+
   const box = document.getElementById('lightbox');
   if (!box) return;
   const full = box.querySelector('img');
