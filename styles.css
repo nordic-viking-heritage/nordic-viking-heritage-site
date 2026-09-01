@@ -25,5 +25,7 @@
 #captain-day-11 .copy p{color:#30271f}
 #captain-day-11 .copy strong{color:#17130f}
 #captain-day-11 h2{color:#17130f}
+/* Give the Crew Honors ceremony artwork breathing room before the first named sailor. */
+.honors .framed.light + .naming-list{margin-top:38px}
 @media(max-width:520px){.stats .icon img{width:58px;height:44px}.raven{width:68px;min-width:48px;max-width:19vw}}
-@media(max-width:520px){.honors-explainer{margin-top:-4px;padding:20px 18px}}
+@media(max-width:520px){.honors-explainer{margin-top:-4px;padding:20px 18px}.honors .framed.light + .naming-list{margin-top:30px}}
