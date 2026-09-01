@@ -7,6 +7,15 @@
     roll.parentNode.insertBefore(captain, roll);
   }
 
+  const gallery = document.getElementById('gallery');
+  if (gallery && !document.getElementById('voyage-archive')) {
+    const archive = document.createElement('section');
+    archive.className = 'voyage-archive dark-section';
+    archive.id = 'voyage-archive';
+    archive.innerHTML = '<div class="wrap"><div class="kicker gold">THE VOYAGE ARCHIVE</div><h2>RELIVE THE JOURNEY — DAY BY DAY</h2><p class="archive-intro">Yesterday remains visible above. Earlier chapters are kept here so the crew can return to the voyage and remember where we were, what we learned and what happened aboard the ship.</p><div class="archive-days"><a class="archive-day current-archive" href="#gallery"><span>DAY 10</span><strong>YESTERDAY\'S CROSSING</strong><small>Visible on this page</small></a><div class="archive-coming"><span>THE LOGBOOK GROWS WITH THE VOYAGE</span><p>As each new day begins, yesterday stays visible and the older days take their place in this archive.</p></div></div></div>';
+    gallery.insertAdjacentElement('afterend', archive);
+  }
+
   const box = document.getElementById('lightbox');
   if (!box) return;
   const full = box.querySelector('img');
