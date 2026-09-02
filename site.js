@@ -16,11 +16,11 @@
       {day:8,title:'WHEN ONE OAR RESTS...',meta:'63 sailors · 8,765,483 steps',img:'day-8-dispatch.jpg',alt:'When One Oar Rests, The Others Pull Harder — Day 8'},
       {day:7,title:'THE CROSSING',meta:'7,446,095 steps · ≈ 4,840 km',img:'day-7-dispatch.jpg',alt:'The fleet at sea — Day 7'},
       {day:6,title:'5,185,209 STEPS',meta:'51 sailors · ≈ 3,370.4 km',img:'viking-dispatch-day-6.png',alt:'Viking Dispatch — Day 6'},
-      {day:5,title:'3,972,538 STEPS',meta:'48 sailors · ≈ 2,582 km',img:'archive-prologue-day1-5.jpg',alt:'Viking Voyage II opening artwork'},
-      {day:4,title:'THE CROSSING',meta:'3,071,194 steps · ≈ 1,996 km',img:'archive-prologue-day1-5.jpg',alt:'Viking Voyage II opening artwork'},
-      {day:3,title:'1,859,699 STEPS',meta:'42 sailors · ≈ 1,208.8 km',img:'archive-prologue-day1-5.jpg',alt:'Viking Voyage II opening artwork'},
-      {day:2,title:'897,818 STEPS',meta:'29 sailors · ≈ 583.6 km',img:'archive-prologue-day1-5.jpg',alt:'Viking Voyage II opening artwork'},
-      {day:1,title:'THE JOURNEY BEGINS',meta:'29 sailors · 733,419 steps',img:'archive-prologue-day1-5.jpg',alt:'Viking Voyage II opening artwork'}
+      {day:5,title:'3,972,538 STEPS',meta:'48 sailors · ≈ 2,582 km',img:'hero.png',alt:'Viking Voyage II opening artwork'},
+      {day:4,title:'THE CROSSING',meta:'3,071,194 steps · ≈ 1,996 km',img:'hero.png',alt:'Viking Voyage II opening artwork'},
+      {day:3,title:'1,859,699 STEPS',meta:'42 sailors · ≈ 1,208.8 km',img:'hero.png',alt:'Viking Voyage II opening artwork'},
+      {day:2,title:'897,818 STEPS',meta:'29 sailors · ≈ 583.6 km',img:'hero.png',alt:'Viking Voyage II opening artwork'},
+      {day:1,title:'THE JOURNEY BEGINS',meta:'29 sailors · 733,419 steps',img:'hero.png',alt:'Viking Voyage II opening artwork'}
     ];
     const cards = days.map(d => `<a class="archive-day" href="archive/day-${d.day}.html"><div class="archive-day-image"><img src="${d.img}" alt="${d.alt}" loading="lazy"></div><div class="archive-day-copy"><span>DAY ${d.day}</span><strong>${d.title}</strong><small>${d.meta}</small></div></a>`).join('');
     const archive = document.createElement('section');
