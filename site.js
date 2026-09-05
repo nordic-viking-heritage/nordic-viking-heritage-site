@@ -30,11 +30,11 @@
     archiveAnchor.insertAdjacentElement('afterend', archive);
   }
 
-  const addDay15Artwork = (selector, src, alt, caption, placement = 'append') => {
+  const addDay15Artwork = (selector, src, alt, caption, placement = 'append', figureClass = 'framed') => {
     const section = document.querySelector(selector);
     if (!section || section.querySelector(`img[src="${src}"]`)) return;
     const figure = document.createElement('figure');
-    figure.className = selector === '#honors' ? 'framed light' : 'framed';
+    figure.className = selector === '#honors' ? 'framed light' : figureClass;
     figure.innerHTML = `<img class="zoomable" src="${src}" alt="${alt}" loading="lazy" /><figcaption>${caption}</figcaption>`;
     if (placement === 'before-naming') {
       const list = section.querySelector('.naming-list');
@@ -45,38 +45,11 @@
     }
   };
 
-  addDay15Artwork('#dispatch', 'day-15-dispatch.jpg', 'Viking Dispatch — Day 15', 'VIKING DISPATCH — DAY 15');
-  addDay15Artwork('#our-saga-day-15', 'day-15-our-saga.jpg', 'Our Saga — Day 15, The Empty Sky', 'OUR SAGA — DAY 15 · THE EMPTY SKY');
-  addDay15Artwork('#honors', 'day-15-crew-honors.jpg', 'Crew Honors — Day 15', 'CREW HONORS — DAY 15', 'before-naming');
-
-  const addEncodedArtwork = async (selector, files, alt, caption, figureClass) => {
-    const section = document.querySelector(selector);
-    if (!section || section.querySelector('[data-approved-day15]')) return;
-    try {
-      const parts = await Promise.all(files.map(async file => {
-        const response = await fetch(file, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`Unable to load ${file}`);
-        return (await response.text()).trim();
-      }));
-      const figure = document.createElement('figure');
-      figure.className = figureClass;
-      figure.dataset.approvedDay15 = 'true';
-      const img = document.createElement('img');
-      img.className = 'zoomable';
-      img.loading = 'lazy';
-      img.alt = alt;
-      img.src = `data:image/jpeg;base64,${parts.join('')}`;
-      const figcaption = document.createElement('figcaption');
-      figcaption.textContent = caption;
-      figure.append(img, figcaption);
-      (section.querySelector('.copy') || section.querySelector('.wrap'))?.appendChild(figure);
-    } catch (error) {
-      console.warn('Day 15 approved artwork could not be loaded.', error);
-    }
-  };
-
-  addEncodedArtwork('#voyage-map', ['day-15-map-final.jpg'], 'The Voyage Map — Day 15, Chapter I complete', 'THE VOYAGE MAP — DAY 15 · CHAPTER I COMPLETE', 'wide-map');
-  addEncodedArtwork('#chapter-one-complete', ['assets/chapter-i-finale.b64.1','assets/chapter-i-finale.b64.2','assets/chapter-i-finale.b64.3','assets/chapter-i-finale.b64.4'], 'Viking Voyage II — Chapter I finale', 'CHAPTER I · THE NORTH ATLANTIC CROSSING IS COMPLETE', 'framed');
+  addDay15Artwork('#dispatch', 'wide_cinematic_promotional_poster_infographic_styl.png', 'Viking Dispatch — Day 15', 'VIKING DISPATCH — DAY 15');
+  addDay15Artwork('#voyage-map', 'wide_cinematic_illustrated_infographic_map_poster.png', 'The Voyage Map — Day 15, Chapter I complete', 'THE VOYAGE MAP — DAY 15 · CHAPTER I COMPLETE', 'append', 'wide-map');
+  addDay15Artwork('#our-saga-day-15', 'a_dramatic_cinematic_nighttime_scene_over_a_dark.png', 'Our Saga — Day 15, The Empty Sky', 'OUR SAGA — DAY 15 · THE EMPTY SKY');
+  addDay15Artwork('#honors', 'a_dramatic_cinematic_viking_themed_poster_image_i.png', 'Crew Honors — Day 15', 'CREW HONORS — DAY 15', 'before-naming');
+  addDay15Artwork('#chapter-one-complete', 'a_dramatic_epic_poster_illustration_scene_a_cinem.png', 'Viking Voyage II — Chapter I finale', 'CHAPTER I · THE NORTH ATLANTIC CROSSING IS COMPLETE');
 
   const box = document.getElementById('lightbox');
   if (!box) return;
