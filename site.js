@@ -30,6 +30,25 @@
     archiveAnchor.insertAdjacentElement('afterend', archive);
   }
 
+  const addDay15Artwork = (selector, src, alt, caption, placement = 'append') => {
+    const section = document.querySelector(selector);
+    if (!section || section.querySelector(`img[src="${src}"]`)) return;
+    const figure = document.createElement('figure');
+    figure.className = selector === '#honors' ? 'framed light' : 'framed';
+    figure.innerHTML = `<img class="zoomable" src="${src}" alt="${alt}" loading="lazy" /><figcaption>${caption}</figcaption>`;
+    if (placement === 'before-naming') {
+      const list = section.querySelector('.naming-list');
+      if (list) list.parentNode.insertBefore(figure, list); else section.querySelector('.wrap')?.appendChild(figure);
+    } else {
+      const copy = section.querySelector('.copy') || section.querySelector('.wrap');
+      copy?.appendChild(figure);
+    }
+  };
+
+  addDay15Artwork('#dispatch', 'day-15-dispatch.jpg', 'Viking Dispatch — Day 15', 'VIKING DISPATCH — DAY 15');
+  addDay15Artwork('#our-saga-day-15', 'day-15-our-saga.jpg', 'Our Saga — Day 15, The Empty Sky', 'OUR SAGA — DAY 15 · THE EMPTY SKY');
+  addDay15Artwork('#honors', 'day-15-crew-honors.jpg', 'Crew Honors — Day 15', 'CREW HONORS — DAY 15', 'before-naming');
+
   const box = document.getElementById('lightbox');
   if (!box) return;
   const full = box.querySelector('img');
