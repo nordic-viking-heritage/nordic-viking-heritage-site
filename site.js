@@ -12,6 +12,8 @@
     const days = [
       {day:15,title:'CHAPTER I COMPLETE',meta:'72 sailors · 19,155,478 steps · ≈ 12,451.1 km',img:'wide_cinematic_promotional_poster_infographic_styl.png',alt:'Viking Dispatch — Day 15',href:'#dispatch'},
       {day:14,title:'THE POWER OF SIXTY OARS',meta:'72 sailors · 17,840,511 steps · ≈ 11,596.3 km',img:'day-14-history.jpg',alt:'History — Day 14',href:'#history-day-14'},
+      {day:13,title:'THE SILENCE AFTER THE STORM',meta:'71 sailors · 15,984,888 steps · ≈ 10,390.2 km',img:'day-13-dispatch.png',alt:'Viking Dispatch — Day 13',href:'archive/day-13.html'},
+      {day:12,title:'THE OCEAN IS LOSING GROUND',meta:'69 sailors · 14,331,674 steps · ≈ 9,315.6 km',img:'day-12-dispatch.jpg',alt:'Viking Dispatch — Day 12',href:'archive/day-12.html'},
       {day:11,title:'THE SEA CHANGES',meta:'66 sailors · 12,567,373 steps · ≈ 8,168.8 km',img:'3603CAC6-D075-49DC-A4AC-C0DA57129282.png',alt:'Viking Dispatch — Day 11',href:'archive/day-11.html'},
       {day:10,title:'WESTWARD',meta:'65 sailors · 11,159,358 steps · ≈ 7,253.6 km',img:'day-10-dispatch.jpg',alt:'Viking Dispatch — Day 10',href:'archive/day-10.html'},
       {day:9,title:'THE TEN MILLION HORIZON',meta:'64 sailors · 9,904,699 steps · ≈ 6,438 km',img:'day-9-dispatch.jpg',alt:'The Ten Million Horizon — Day 9',href:'archive/day-9.html'},
