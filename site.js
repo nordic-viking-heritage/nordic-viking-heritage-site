@@ -49,6 +49,35 @@
   addDay15Artwork('#our-saga-day-15', 'day-15-our-saga.jpg', 'Our Saga — Day 15, The Empty Sky', 'OUR SAGA — DAY 15 · THE EMPTY SKY');
   addDay15Artwork('#honors', 'day-15-crew-honors.jpg', 'Crew Honors — Day 15', 'CREW HONORS — DAY 15', 'before-naming');
 
+  const addEncodedArtwork = async (selector, files, alt, caption, figureClass) => {
+    const section = document.querySelector(selector);
+    if (!section || section.querySelector('[data-approved-day15]')) return;
+    try {
+      const parts = await Promise.all(files.map(async file => {
+        const response = await fetch(file, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Unable to load ${file}`);
+        return (await response.text()).trim();
+      }));
+      const figure = document.createElement('figure');
+      figure.className = figureClass;
+      figure.dataset.approvedDay15 = 'true';
+      const img = document.createElement('img');
+      img.className = 'zoomable';
+      img.loading = 'lazy';
+      img.alt = alt;
+      img.src = `data:image/jpeg;base64,${parts.join('')}`;
+      const figcaption = document.createElement('figcaption');
+      figcaption.textContent = caption;
+      figure.append(img, figcaption);
+      (section.querySelector('.copy') || section.querySelector('.wrap'))?.appendChild(figure);
+    } catch (error) {
+      console.warn('Day 15 approved artwork could not be loaded.', error);
+    }
+  };
+
+  addEncodedArtwork('#voyage-map', ['day-15-map-final.jpg'], 'The Voyage Map — Day 15, Chapter I complete', 'THE VOYAGE MAP — DAY 15 · CHAPTER I COMPLETE', 'wide-map');
+  addEncodedArtwork('#chapter-one-complete', ['assets/chapter-i-finale.b64.1','assets/chapter-i-finale.b64.2','assets/chapter-i-finale.b64.3','assets/chapter-i-finale.b64.4'], 'Viking Voyage II — Chapter I finale', 'CHAPTER I · THE NORTH ATLANTIC CROSSING IS COMPLETE', 'framed');
+
   const box = document.getElementById('lightbox');
   if (!box) return;
   const full = box.querySelector('img');
@@ -59,24 +88,28 @@
     full.removeAttribute('src');
     document.body.classList.remove('lightbox-open');
   };
+  const openImage = img => {
+    full.src = img.src;
+    full.alt = img.alt || 'Enlarged voyage artwork';
+    box.classList.add('open');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+    close.focus();
+  };
+  document.addEventListener('click', e => {
+    const img = e.target.closest?.('img.zoomable');
+    if (img) openImage(img);
+  });
+  document.addEventListener('keydown', e => {
+    const img = e.target.closest?.('img.zoomable');
+    if (img && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openImage(img); }
+    if (e.key === 'Escape' && box.classList.contains('open')) shut();
+  });
   document.querySelectorAll('img.zoomable').forEach(img => {
     img.setAttribute('tabindex', '0');
     img.setAttribute('role', 'button');
     img.setAttribute('aria-label', `${img.alt || 'Voyage artwork'} — tap to enlarge`);
-    const open = () => {
-      full.src = img.src;
-      full.alt = img.alt || 'Enlarged voyage artwork';
-      box.classList.add('open');
-      box.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('lightbox-open');
-      close.focus();
-    };
-    img.addEventListener('click', open);
-    img.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-    });
   });
   close.addEventListener('click', shut);
   box.addEventListener('click', e => { if (e.target === box) shut(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && box.classList.contains('open')) shut(); });
 })();
