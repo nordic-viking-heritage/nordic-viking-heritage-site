@@ -7,6 +7,18 @@
     roll.parentNode.insertBefore(captain, roll);
   }
 
+  // The Crew page opens with the complete Ship's Roll first.
+  // Crew Honors and the newest naming updates follow underneath it.
+  const shipRollSection = document.querySelector('.ship-roll');
+  const honorsSection = document.getElementById('honors');
+  if (shipRollSection && honorsSection) {
+    shipRollSection.id = 'ship-roll';
+    honorsSection.parentNode.insertBefore(shipRollSection, honorsSection);
+    document.querySelectorAll('a[href="#honors"]').forEach(link => {
+      link.setAttribute('href', '#ship-roll');
+    });
+  }
+
   const archive = document.getElementById('voyage-archive');
   if (archive) {
     const days = [
