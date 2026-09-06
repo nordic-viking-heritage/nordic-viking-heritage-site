@@ -49,4 +49,10 @@
     archiveImage.alt = 'Viking Voyage II — Day 16 · Chapter II';
     archiveImage.classList.add('zoomable');
   }
+
+  document.querySelectorAll('#voyage-archive .archive-day').forEach(card => {
+    const dayLabel = card.querySelector('.archive-day-copy span')?.textContent.trim();
+    if (dayLabel === 'DAY 14') card.setAttribute('href', 'archive/day-14.html');
+    if (dayLabel === 'DAY 15') card.setAttribute('href', 'archive/day-15.html');
+  });
 })();
