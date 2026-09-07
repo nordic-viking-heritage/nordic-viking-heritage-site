@@ -8,10 +8,10 @@
     const style = document.createElement('style');
     style.id = 'day17-layout-fixes';
     style.textContent = `
-      .ship-roll > .wrap { border: 1px solid rgba(211,177,106,.55); padding: clamp(22px,4vw,42px); box-shadow: inset 0 0 0 1px rgba(211,177,106,.08); }
+      .ship-roll > .wrap { border: 0; padding: 0; box-shadow: none; }
       #myth-day-17 { padding-top: 92px; padding-bottom: 92px; }
       #night-watch-day-17 { padding-top: 96px; }
-      @media (max-width:800px) { .ship-roll > .wrap { padding: 22px 18px; } #myth-day-17 { padding-top: 82px; } #night-watch-day-17 { padding-top: 86px; } }
+      @media (max-width:800px) { .ship-roll > .wrap { padding: 0; } #myth-day-17 { padding-top: 82px; } #night-watch-day-17 { padding-top: 86px; } }
     `;
     document.head.appendChild(style);
   }
