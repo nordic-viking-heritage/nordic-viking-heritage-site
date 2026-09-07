@@ -1,6 +1,36 @@
 (() => {
-  // Generic site behaviour only. Current voyage content is rendered directly
-  // from index.html and must never be overwritten by a previous day's script.
+  // Current voyage content remains in index.html. This script only restores
+  // stable layout/behaviour and the voyage archive; it never rewrites day data.
+
+  const roll = document.querySelector('.ship-roll .roll-grid');
+  if (roll && !document.querySelector('.captain-roll')) {
+    const captain = document.createElement('article');
+    captain.className = 'captain-roll';
+    captain.innerHTML = '<span class="captain-label">THE CAPTAIN</span><span>Stefan</span><strong>HÁKON</strong><small class="old-norse">Hákon</small><small class="runes">ᚼᛅᚴᚢᚾ</small>';
+    roll.parentNode.insertBefore(captain, roll);
+  }
+
+  const ourSaga = document.getElementById('our-saga-day-17');
+  if (ourSaga && !ourSaga.querySelector('img[src="day-17-viking-dispatch.png"]')) {
+    const copy = ourSaga.querySelector('.copy');
+    if (copy) {
+      const figure = document.createElement('figure');
+      figure.className = 'framed';
+      figure.innerHTML = '<img class="zoomable" src="day-17-viking-dispatch.png" alt="Our Saga — Day 17" loading="lazy"><figcaption>OUR SAGA — DAY 17</figcaption>';
+      copy.appendChild(figure);
+    }
+  }
+
+  const honors = document.getElementById('honors');
+  if (honors) {
+    const figure = honors.querySelector('figure');
+    const explainer = honors.querySelector('.honors-explainer');
+    const naming = honors.querySelector('.naming-list');
+    if (figure && explainer && naming) {
+      figure.classList.add('light');
+      naming.parentNode.insertBefore(figure, naming);
+    }
+  }
 
   const archive = document.getElementById('voyage-archive');
   if (archive) {
@@ -23,37 +53,22 @@
       {day:2,title:'897,818 STEPS',meta:'29 sailors · ≈ 583.6 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-2.html'},
       {day:1,title:'THE JOURNEY BEGINS',meta:'29 sailors · 733,419 steps',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-1.html'}
     ];
-
-    const cards = days.map(d => `
-      <a class="archive-day" href="${d.href}">
-        <div class="archive-day-image"><img src="${d.img}" alt="${d.alt}" loading="lazy"></div>
-        <div class="archive-day-copy"><span>DAY ${d.day}</span><strong>${d.title}</strong><small>${d.meta}</small></div>
-      </a>`).join('');
-
+    const cards = days.map(d => `<a class="archive-day" href="${d.href}"><div class="archive-day-image"><img src="${d.img}" alt="${d.alt}" loading="lazy"></div><div class="archive-day-copy"><span>DAY ${d.day}</span><strong>${d.title}</strong><small>${d.meta}</small></div></a>`).join('');
     archive.classList.add('voyage-archive','dark-section');
-    archive.innerHTML = `
-      <div class="wrap">
-        <div class="kicker gold">THE VOYAGE ARCHIVE</div>
-        <h2>RELIVE THE JOURNEY — DAY BY DAY</h2>
-        <p class="archive-intro">Every completed day remains part of the voyage. Chapter I is frozen in the archive; Chapter II continues from the North American mainland toward Newfoundland.</p>
-        <div class="archive-days">${cards}</div>
-      </div>`;
+    archive.innerHTML = `<div class="wrap"><div class="kicker gold">THE VOYAGE ARCHIVE</div><h2>RELIVE THE JOURNEY — DAY BY DAY</h2><p class="archive-intro">Every completed day remains part of the voyage. Chapter I is frozen in the archive; Chapter II continues from the North American mainland toward Newfoundland.</p><div class="archive-days">${cards}</div></div>`;
   }
 
   const box = document.getElementById('lightbox');
   if (!box) return;
-
   const full = box.querySelector('img');
   const close = box.querySelector('button');
-
   const shut = () => {
     box.classList.remove('open');
     box.setAttribute('aria-hidden', 'true');
     if (full) full.removeAttribute('src');
     document.body.classList.remove('lightbox-open');
   };
-
-  const openImage = (img) => {
+  const openImage = img => {
     if (!full || !img) return;
     full.src = img.src;
     full.alt = img.alt || 'Enlarged voyage artwork';
@@ -61,20 +76,14 @@
     box.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lightbox-open');
   };
-
-  document.querySelectorAll('img.zoomable, .framed img, .gallery-grid img, .archive-day img').forEach((img) => {
-    img.addEventListener('click', (event) => {
+  document.querySelectorAll('img.zoomable, .framed img, .gallery-grid img, .archive-day img').forEach(img => {
+    img.addEventListener('click', event => {
       if (img.closest('a.archive-day')) return;
       event.preventDefault();
       openImage(img);
     });
   });
-
   if (close) close.addEventListener('click', shut);
-  box.addEventListener('click', (event) => {
-    if (event.target === box) shut();
-  });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') shut();
-  });
+  box.addEventListener('click', event => { if (event.target === box) shut(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') shut(); });
 })();
