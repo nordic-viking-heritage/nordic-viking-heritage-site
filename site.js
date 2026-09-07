@@ -8,18 +8,10 @@
     const style = document.createElement('style');
     style.id = 'day17-layout-fixes';
     style.textContent = `
-      .ship-roll > .wrap {
-        border: 1px solid rgba(211,177,106,.55);
-        padding: clamp(22px,4vw,42px);
-        box-shadow: inset 0 0 0 1px rgba(211,177,106,.08);
-      }
+      .ship-roll > .wrap { border: 1px solid rgba(211,177,106,.55); padding: clamp(22px,4vw,42px); box-shadow: inset 0 0 0 1px rgba(211,177,106,.08); }
       #myth-day-17 { padding-top: 92px; padding-bottom: 92px; }
       #night-watch-day-17 { padding-top: 96px; }
-      @media (max-width:800px) {
-        .ship-roll > .wrap { padding: 22px 18px; }
-        #myth-day-17 { padding-top: 82px; }
-        #night-watch-day-17 { padding-top: 86px; }
-      }
+      @media (max-width:800px) { .ship-roll > .wrap { padding: 22px 18px; } #myth-day-17 { padding-top: 82px; } #night-watch-day-17 { padding-top: 86px; } }
     `;
     document.head.appendChild(style);
   }
@@ -32,27 +24,22 @@
     roll.parentNode.insertBefore(captain, roll);
   }
 
-  // Remove the temporary wrong image that was mistakenly reused from Dispatch.
-  // OUR SAGA will remain without a substituted image until its exact intended
-  // artwork is identified; no new/guessed artwork is inserted here.
   const ourSaga = document.getElementById('our-saga-day-17');
-  if (ourSaga) {
-    ourSaga.querySelectorAll('figure').forEach(figure => {
-      const img = figure.querySelector('img');
-      if (img && img.getAttribute('src') === 'day-17-viking-dispatch.png' && figure.querySelector('figcaption')?.textContent.trim() === 'OUR SAGA — DAY 17') {
-        figure.remove();
-      }
-    });
+  if (ourSaga && !ourSaga.querySelector('img[src="day-17-our-saga.jpg"]')) {
+    const copy = ourSaga.querySelector('.copy');
+    if (copy) {
+      const figure = document.createElement('figure');
+      figure.className = 'framed';
+      figure.innerHTML = '<img class="zoomable" src="day-17-our-saga.jpg" alt="Our Saga — Day 17" loading="lazy"><figcaption>OUR SAGA — DAY 17</figcaption>';
+      copy.appendChild(figure);
+    }
   }
 
   const honors = document.getElementById('honors');
   if (honors) {
     const figure = honors.querySelector('figure');
     const naming = honors.querySelector('.naming-list');
-    if (figure && naming) {
-      figure.classList.add('light');
-      naming.parentNode.insertBefore(figure, naming);
-    }
+    if (figure && naming) { figure.classList.add('light'); naming.parentNode.insertBefore(figure, naming); }
   }
 
   const archive = document.getElementById('voyage-archive');
@@ -85,26 +72,10 @@
   if (!box) return;
   const full = box.querySelector('img');
   const close = box.querySelector('button');
-  const shut = () => {
-    box.classList.remove('open');
-    box.setAttribute('aria-hidden', 'true');
-    if (full) full.removeAttribute('src');
-    document.body.classList.remove('lightbox-open');
-  };
-  const openImage = img => {
-    if (!full || !img) return;
-    full.src = img.src;
-    full.alt = img.alt || 'Enlarged voyage artwork';
-    box.classList.add('open');
-    box.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('lightbox-open');
-  };
+  const shut = () => { box.classList.remove('open'); box.setAttribute('aria-hidden','true'); if (full) full.removeAttribute('src'); document.body.classList.remove('lightbox-open'); };
+  const openImage = img => { if (!full || !img) return; full.src = img.src; full.alt = img.alt || 'Enlarged voyage artwork'; box.classList.add('open'); box.setAttribute('aria-hidden','false'); document.body.classList.add('lightbox-open'); };
   document.querySelectorAll('img.zoomable, .framed img, .gallery-grid img, .archive-day img').forEach(img => {
-    img.addEventListener('click', event => {
-      if (img.closest('a.archive-day')) return;
-      event.preventDefault();
-      openImage(img);
-    });
+    img.addEventListener('click', event => { if (img.closest('a.archive-day')) return; event.preventDefault(); openImage(img); });
   });
   if (close) close.addEventListener('click', shut);
   box.addEventListener('click', event => { if (event.target === box) shut(); });
