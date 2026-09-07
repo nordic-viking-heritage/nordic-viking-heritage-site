@@ -2,6 +2,28 @@
   // Current voyage content remains in index.html. This script only restores
   // stable layout/behaviour and the voyage archive; it never rewrites day data.
 
+  // Safe, scoped visual corrections. Kept here to avoid replacing the complete
+  // minified stylesheet while preserving all existing site styles.
+  if (!document.getElementById('day17-layout-fixes')) {
+    const style = document.createElement('style');
+    style.id = 'day17-layout-fixes';
+    style.textContent = `
+      .ship-roll > .wrap {
+        border: 1px solid rgba(211,177,106,.55);
+        padding: clamp(22px,4vw,42px);
+        box-shadow: inset 0 0 0 1px rgba(211,177,106,.08);
+      }
+      #myth-day-17 { padding-top: 92px; padding-bottom: 92px; }
+      #night-watch-day-17 { padding-top: 96px; }
+      @media (max-width:800px) {
+        .ship-roll > .wrap { padding: 22px 18px; }
+        #myth-day-17 { padding-top: 82px; }
+        #night-watch-day-17 { padding-top: 86px; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   const roll = document.querySelector('.ship-roll .roll-grid');
   if (roll && !document.querySelector('.captain-roll')) {
     const captain = document.createElement('article');
@@ -10,23 +32,24 @@
     roll.parentNode.insertBefore(captain, roll);
   }
 
+  // Remove the temporary wrong image that was mistakenly reused from Dispatch.
+  // OUR SAGA will remain without a substituted image until its exact intended
+  // artwork is identified; no new/guessed artwork is inserted here.
   const ourSaga = document.getElementById('our-saga-day-17');
-  if (ourSaga && !ourSaga.querySelector('img[src="day-17-viking-dispatch.png"]')) {
-    const copy = ourSaga.querySelector('.copy');
-    if (copy) {
-      const figure = document.createElement('figure');
-      figure.className = 'framed';
-      figure.innerHTML = '<img class="zoomable" src="day-17-viking-dispatch.png" alt="Our Saga — Day 17" loading="lazy"><figcaption>OUR SAGA — DAY 17</figcaption>';
-      copy.appendChild(figure);
-    }
+  if (ourSaga) {
+    ourSaga.querySelectorAll('figure').forEach(figure => {
+      const img = figure.querySelector('img');
+      if (img && img.getAttribute('src') === 'day-17-viking-dispatch.png' && figure.querySelector('figcaption')?.textContent.trim() === 'OUR SAGA — DAY 17') {
+        figure.remove();
+      }
+    });
   }
 
   const honors = document.getElementById('honors');
   if (honors) {
     const figure = honors.querySelector('figure');
-    const explainer = honors.querySelector('.honors-explainer');
     const naming = honors.querySelector('.naming-list');
-    if (figure && explainer && naming) {
+    if (figure && naming) {
       figure.classList.add('light');
       naming.parentNode.insertBefore(figure, naming);
     }
