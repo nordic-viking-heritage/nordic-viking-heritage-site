@@ -21,33 +21,42 @@
 
   const honors = q('#honors');
   if (honors && !q('#crew-honors-archive')) {
+    const cards = [
+      ['18','day-18-crew-honors.png','TORSTEN · SVALA · BJARNI'],
+      ['17','day-17-crew-honors.png','CREW HONORS'],
+      ['16','day-16-crew-honors.png','CREW HONORS'],
+      ['14','day-14-crew-honors.jpg','CREW HONORS'],
+      ['13','day-13-crew-honors.jpg','CREW HONORS'],
+      ['12','day-12-crew-honors-CORRECT.jpg','CREW HONORS'],
+      ['10','day-10-crew-honors.jpg','CREW HONORS']
+    ].map(([day,src,names]) => `<figure style="margin:0;width:100%;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:auto;cursor:zoom-in" src="${src}" alt="Crew Honors Day ${day}" /><figcaption style="padding:.72rem .8rem .8rem;background:#071116;text-align:left"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.72rem;letter-spacing:.12em;margin-bottom:.28rem">DAY ${day}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.76rem;line-height:1.3">${names}</span></figcaption></figure>`).join('');
     honors.insertAdjacentHTML('afterend', `
       <section class="parchment" id="crew-honors-archive" style="padding-bottom:5rem">
         <div class="wrap">
           <div class="kicker red">THE CREW HONORS ARCHIVE</div>
           <h2>EVERY NAME HAS A FACE. EVERY FACE HAS A STORY.</h2>
           <p style="max-width:780px;margin-bottom:2rem">Crew Honors portraits are part of the permanent record of Viking Voyage II. Once a Viking receives a name and a face in our saga, that moment remains here for the rest of the voyage.</p>
-          <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,190px));gap:1.25rem;align-items:start">
-            <figure style="margin:0;width:100%;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:auto;cursor:zoom-in" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption style="padding:.72rem .8rem .8rem;background:#071116;text-align:left"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.72rem;letter-spacing:.12em;margin-bottom:.28rem">DAY 18</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.76rem;line-height:1.3">TORSTEN · SVALA · BJARNI</span></figcaption></figure>
-          </div>
+          <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,190px));gap:1.25rem;align-items:start">${cards}</div>
           <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Earlier Crew Honors portraits will be restored as their original artwork is added to the voyage record.</p>
         </div>
       </section>`);
   }
 
-  const archiveZoom = q('#crew-honors-archive img.zoomable');
   const lightbox = q('#lightbox');
-  if (archiveZoom && lightbox && !archiveZoom.dataset.zoomBound) {
+  if (lightbox) {
     const full = lightbox.querySelector('img');
-    archiveZoom.dataset.zoomBound = '1';
-    archiveZoom.addEventListener('click', (event) => {
-      event.preventDefault();
-      if (!full) return;
-      full.src = archiveZoom.src;
-      full.alt = archiveZoom.alt || 'Enlarged Crew Honors artwork';
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('lightbox-open');
+    document.querySelectorAll('#crew-honors-archive img.zoomable').forEach((archiveZoom) => {
+      if (archiveZoom.dataset.zoomBound) return;
+      archiveZoom.dataset.zoomBound = '1';
+      archiveZoom.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (!full) return;
+        full.src = archiveZoom.src;
+        full.alt = archiveZoom.alt || 'Enlarged Crew Honors artwork';
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+      });
     });
   }
 
