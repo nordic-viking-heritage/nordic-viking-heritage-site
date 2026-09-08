@@ -10,29 +10,31 @@
   const sagaLayer = q('.layer-grid a[href="#our-saga-day-17"]'); if (sagaLayer) sagaLayer.setAttribute('href', '#our-saga-day-18');
   const navSaga = q('.floating-nav a[href="#our-saga-day-17"]'); if (navSaga) navSaga.setAttribute('href', '#our-saga-day-18');
   const saga17 = q('#our-saga-day-17');
-  if (saga17) { saga17.id = 'our-saga-day-18'; setHTML('#our-saga-day-18 .copy', `<div class="kicker gold">OUR SAGA — DAY 18</div><h2>THE LAND BEYOND THE FOG</h2><p>Yesterday, the sea took away our horizon. Wind tore at the sails. Waves rose against the hulls. Fog closed around the fleet.</p><p>We knew Newfoundland was somewhere ahead. But knowing land exists is not the same as finding it.</p><p>So we rowed. Through the night. Through the grey. Through the uncertainty.</p><p>Slowly, the darkness ahead changed. At first, perhaps only a shadow. Cliffs. Rock. <strong>Land.</strong></p><p>A cry passed from ship to ship: <strong>NEWFOUNDLAND!</strong></p><p>One by one, the longships reached shore. Keels scraped stone. Ropes were thrown. Boots touched solid ground.</p><p>Pull the ships ashore. Lay down the oars. Light the fires. Listen to the waves behind us.</p><p><strong>WE FOUND THE LAND WE FEARED WE MIGHT NEVER SEE.</strong></p><p><strong>CHAPTER II IS COMPLETE.</strong></p><p>Tomorrow, a new chapter begins. But tonight… <strong>WE ARE IN NEWFOUNDLAND.</strong></p><figure class="framed"><img class="zoomable" src="day-18-our-saga.png" alt="Our Saga Day 18 — The Land Beyond the Fog" /><figcaption>OUR SAGA — DAY 18 · THE LAND BEYOND THE FOG</figcaption></figure>`); }
+  if (saga17) { saga17.id = 'our-saga-day-18'; setHTML('#our-saga-day-18 .copy', `<div class="kicker gold">OUR SAGA — DAY 18</div><h2>THE LAND BEYOND THE FOG</h2><p>Yesterday, the sea took away our horizon. Wind tore at the sails. Waves rose against the ships and fog closed around the fleet.</p><p>We knew Newfoundland was somewhere ahead. But knowing land exists is not the same as finding it.</p><p>So we rowed. Through the night. Through the grey. Through the uncertainty.</p><p>Slowly, the darkness ahead changed. At first, perhaps only a shadow. Cliffs. Rock. <strong>Land.</strong></p><p>A cry passed from ship to ship: <strong>NEWFOUNDLAND!</strong></p><p>One by one, the longships reached shore. Keels scraped stone. Ropes were thrown. Boots touched solid ground.</p><p>Pull the ships ashore. Lay down the oars. Light the fires. Listen to the waves behind us.</p><p><strong>WE FOUND THE LAND WE FEARED WE MIGHT NEVER SEE.</strong></p><p><strong>CHAPTER II IS COMPLETE.</strong></p><p>Tomorrow, a new chapter begins. But tonight… <strong>WE ARE IN NEWFOUNDLAND.</strong></p><figure class="framed"><img class="zoomable" src="day-18-our-saga.png" alt="Our Saga Day 18 — The Land Beyond the Fog" /><figcaption>OUR SAGA — DAY 18 · THE LAND BEYOND THE FOG</figcaption></figure>`); }
 
   const roll = q('#ship-roll .roll-grid');
   if (roll && ![...roll.querySelectorAll('span')].some(x => x.textContent.trim() === 'manuelmorenocaz')) roll.insertAdjacentHTML('beforeend', `<article><span>manuelmorenocaz</span><strong>Torsten</strong><small class="old-norse">Þórsteinn</small><small class="runes">ᚦᚢᚱᛋᛏᛁᚾ</small></article><article><span>Dania</span><strong>Svala</strong><small class="old-norse">Svala</small><small class="runes">ᛋᚢᛅᛚᛅ</small></article><article><span>Jonathan</span><strong>Bjarni</strong><small class="old-norse">Bjarni</small><small class="runes">ᛒᛁᛅᚱᚾᛁ</small></article>`);
 
   if (roll) {
     const entries = [...roll.querySelectorAll('article')];
-    const captainEntry = entries.find((entry) => entry.querySelector('span')?.textContent.trim() === 'Stefan');
-    const thoraEntry = entries.find((entry) => entry.querySelector('span')?.textContent.trim().startsWith('Starfire Silverstar'));
-    if (captainEntry && thoraEntry) {
-      captainEntry.style.gridColumn = '1 / -1';
-      captainEntry.style.border = '3px solid #c9a35b';
-      captainEntry.style.boxShadow = '0 0 0 1px rgba(201,163,91,.32), 0 0 16px rgba(201,163,91,.14)';
-      captainEntry.style.background = 'linear-gradient(135deg, rgba(201,163,91,.10), rgba(7,17,22,.02))';
-      if (!captainEntry.querySelector('.ship-role')) captainEntry.insertAdjacentHTML('beforeend', `<small class="ship-role" style="display:block;margin-top:.55rem;color:#c9a35b;font-weight:700;letter-spacing:.12em">⚔️ THE CAPTAIN</small>`);
-
-      captainEntry.insertAdjacentElement('afterend', thoraEntry);
-      const thoraName = thoraEntry.querySelector('strong'); if (thoraName) thoraName.textContent = 'Þóra';
-      thoraEntry.style.gridColumn = '1 / -1';
-      thoraEntry.style.border = '2px solid rgba(201,163,91,.72)';
-      thoraEntry.style.boxShadow = '0 0 0 1px rgba(201,163,91,.18), 0 0 14px rgba(201,163,91,.10)';
-      thoraEntry.style.background = 'linear-gradient(135deg, rgba(114,18,27,.16), rgba(7,17,22,.02))';
-      if (!thoraEntry.querySelector('.saga-role')) thoraEntry.insertAdjacentHTML('beforeend', `<small class="saga-role" style="display:block;margin-top:.55rem;color:#c9a35b;font-weight:700;letter-spacing:.11em">🐦‍⬛ KEEPER OF THE SAGA</small>`);
+    const stefanEntry = entries.find((entry) => entry.querySelector('span')?.textContent.trim() === 'Stefan');
+    const starfireEntry = entries.find((entry) => entry.querySelector('span')?.textContent.trim().startsWith('Starfire Silverstar'));
+    if (stefanEntry && starfireEntry) {
+      [stefanEntry, starfireEntry].forEach((entry) => {
+        entry.style.gridColumn = '';
+        entry.style.border = '';
+        entry.style.boxShadow = '';
+        entry.style.background = '';
+        entry.querySelector('.ship-role')?.remove();
+        entry.querySelector('.saga-role')?.remove();
+      });
+      const starfireName = starfireEntry.querySelector('strong'); if (starfireName) starfireName.textContent = 'Þóra';
+      const existingRoles = q('#ship-roll .ship-role-cards'); if (existingRoles) existingRoles.remove();
+      const roleCards = document.createElement('div');
+      roleCards.className = 'ship-role-cards';
+      roleCards.style.cssText = 'grid-column:1/-1;display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:1.2rem';
+      roleCards.innerHTML = `<article style="padding:1.45rem 1.55rem;border:3px solid #c9a35b;box-shadow:0 0 0 1px rgba(201,163,91,.32),0 0 16px rgba(201,163,91,.14);background:linear-gradient(135deg,rgba(201,163,91,.10),rgba(7,17,22,.02))"><small style="display:block;color:#c9a35b;font-weight:700;letter-spacing:.16em;margin-bottom:.85rem">THE CAPTAIN</small><span>Stefan</span><strong style="display:block">HÁKON</strong><small class="old-norse">Hákon</small><small class="runes">ᚼᛅᚴᚢᚾ</small></article><article style="padding:1.45rem 1.55rem;border:2px solid rgba(201,163,91,.72);box-shadow:0 0 0 1px rgba(201,163,91,.18),0 0 14px rgba(201,163,91,.10);background:linear-gradient(135deg,rgba(114,18,27,.16),rgba(7,17,22,.02))"><small style="display:block;color:#c9a35b;font-weight:700;letter-spacing:.14em;margin-bottom:.85rem">🐦‍⬛ KEEPER OF THE SAGA</small><span>Starfire Silverstar</span><strong style="display:block">ÞÓRA</strong><small class="old-norse">Þóra</small><small class="runes">ᚦᚢᚱᛅ</small></article>`;
+      roll.insertBefore(roleCards, roll.firstChild);
     }
   }
 
