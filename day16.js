@@ -38,7 +38,11 @@
       ['DAY 3','day-3-crew-honors.jpg','HRAFN · EIRIKR · FREYDIS · SIGRID'],
       ['DAY 2','day-2-crew-honors.jpg','SOLVEIG'],
       ['THE CAPTAIN','crew-honors-hakon-captain-naming.jpg','HÁKON · THE NAMING OF THE CAPTAIN']
-    ].map(([label,src,names]) => `<figure class="${label === 'THE CAPTAIN' ? 'captain-honors-card' : ''}" style="margin:0;width:100%;min-width:0;height:100%;display:grid;grid-template-rows:1fr 4.2rem;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><div style="aspect-ratio:4/5;background:#071116;display:flex;align-items:center;justify-content:center;overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in" src="${src}" alt="Crew Honors ${label} — ${names}" /></div><figcaption style="height:4.2rem;box-sizing:border-box;padding:.58rem .6rem .65rem;background:#071116;text-align:left;overflow:hidden"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">${label}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere">${names}</span></figcaption></figure>`).join('');
+    ].map(([label,src,names]) => {
+      const isCaptain = label === 'THE CAPTAIN';
+      const runes = isCaptain ? `<span aria-hidden="true" style="position:absolute;inset:.22rem .22rem 4.42rem .22rem;z-index:3;pointer-events:none;border:1px solid rgba(201,163,91,.82);box-shadow:inset 0 0 12px rgba(201,163,91,.12)"><span style="position:absolute;top:.08rem;left:50%;transform:translateX(-50%);padding:0 .25rem;background:rgba(7,17,22,.78);color:#e0bd72;font-size:.62rem;letter-spacing:.22em;white-space:nowrap">ᚼᛅᚴᚢᚾ · ᚼᛅᚴᚢᚾ</span><span style="position:absolute;bottom:.08rem;left:50%;transform:translateX(-50%);padding:0 .25rem;background:rgba(7,17,22,.78);color:#e0bd72;font-size:.62rem;letter-spacing:.22em;white-space:nowrap">ᚼᛅᚴᚢᚾ · ᚼᛅᚴᚢᚾ</span><span style="position:absolute;top:50%;left:.04rem;transform:translateY(-50%);padding:.2rem 0;background:rgba(7,17,22,.78);color:#e0bd72;font-size:.58rem;writing-mode:vertical-rl;text-orientation:upright">ᚼᛅᚴᚢᚾ</span><span style="position:absolute;top:50%;right:.04rem;transform:translateY(-50%);padding:.2rem 0;background:rgba(7,17,22,.78);color:#e0bd72;font-size:.58rem;writing-mode:vertical-rl;text-orientation:upright">ᚼᛅᚴᚢᚾ</span></span>` : '';
+      return `<figure class="${isCaptain ? 'captain-honors-card' : ''}" style="position:relative;margin:0;width:100%;min-width:0;height:100%;display:grid;grid-template-rows:1fr 4.2rem;background:#071116;border:${isCaptain ? '2px solid #c9a35b' : '1px solid rgba(201,163,91,.45)'};box-shadow:${isCaptain ? '0 0 0 2px rgba(201,163,91,.18),0 0 22px rgba(201,163,91,.25)' : 'none'};overflow:hidden"><div style="aspect-ratio:4/5;background:#071116;display:flex;align-items:center;justify-content:center;overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in" src="${src}" alt="Crew Honors ${label} — ${names}" /></div>${runes}<figcaption style="height:4.2rem;box-sizing:border-box;padding:.58rem .6rem .65rem;background:#071116;text-align:left;overflow:hidden;${isCaptain ? 'box-shadow:inset 0 1px 0 rgba(201,163,91,.7)' : ''}"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">${label}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere">${names}</span></figcaption></figure>`;
+    }).join('');
     honors.insertAdjacentHTML('afterend', `
       <section class="parchment" id="crew-honors-archive" style="padding-bottom:5rem">
         <div class="wrap">
@@ -46,23 +50,13 @@
           <h2>EVERY NAME HAS A FACE. EVERY FACE HAS A STORY.</h2>
           <p style="max-width:780px;margin-bottom:2rem">Crew Honors portraits are part of the permanent record of Viking Voyage II. Once a Viking receives a name and a face in our saga, that moment remains here for the rest of the voyage.</p>
           <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;align-items:stretch;max-width:760px">${cards}</div>
-          <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Day 6 remains withheld until its full naming record is verified. Day 9 is being restored with face-forward portraits to match the permanent Crew Honors standard.</p>
+          <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Day 6 and Day 9 are being restored with face-forward portraits to match the permanent Crew Honors standard.</p>
         </div>
       </section>`);
   }
 
   const archiveGrid = q('#crew-honors-archive .crew-honors-archive-grid');
   if (archiveGrid && window.matchMedia('(min-width: 760px)').matches) archiveGrid.style.gridTemplateColumns = 'repeat(4,minmax(0,1fr))';
-
-  const captainCard = q('#crew-honors-archive .captain-honors-card');
-  if (captainCard) {
-    captainCard.style.position = 'relative';
-    captainCard.style.border = '2px solid rgba(201,163,91,.9)';
-    captainCard.style.boxShadow = '0 0 0 1px rgba(201,163,91,.2), 0 0 18px rgba(201,163,91,.18)';
-    captainCard.insertAdjacentHTML('beforeend', `<span aria-hidden="true" style="position:absolute;top:.18rem;left:50%;transform:translateX(-50%);z-index:3;color:#c9a35b;font-size:.55rem;letter-spacing:.18em;white-space:nowrap;text-shadow:0 1px 2px #000">ᚼ ᛅ ᚴ ᚢ ᚾ · ᚼ ᛅ ᚴ ᚢ ᚾ</span><span aria-hidden="true" style="position:absolute;bottom:4.35rem;left:50%;transform:translateX(-50%);z-index:3;color:#c9a35b;font-size:.55rem;letter-spacing:.18em;white-space:nowrap;text-shadow:0 1px 2px #000">ᚼ ᛅ ᚴ ᚢ ᚾ · ᚼ ᛅ ᚴ ᚢ ᚾ</span><span aria-hidden="true" style="position:absolute;top:50%;left:.08rem;transform:translateY(-70%);z-index:3;color:#c9a35b;font-size:.48rem;line-height:1.15;writing-mode:vertical-rl;text-orientation:upright;text-shadow:0 1px 2px #000">ᚼᛅᚴᚢᚾ</span><span aria-hidden="true" style="position:absolute;top:50%;right:.08rem;transform:translateY(-70%);z-index:3;color:#c9a35b;font-size:.48rem;line-height:1.15;writing-mode:vertical-rl;text-orientation:upright;text-shadow:0 1px 2px #000">ᚼᛅᚴᚢᚾ</span>`);
-    const captainCaption = captainCard.querySelector('figcaption');
-    if (captainCaption) captainCaption.style.boxShadow = 'inset 0 1px 0 rgba(201,163,91,.55)';
-  }
 
   const lightbox = q('#lightbox');
   if (lightbox) {
