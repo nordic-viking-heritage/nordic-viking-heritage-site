@@ -29,14 +29,14 @@
       ['13','day-13-crew-honors.jpg','CREW HONORS'],
       ['12','day-12-crew-honors-CORRECT.jpg','CREW HONORS'],
       ['10','day-10-crew-honors.jpg','CREW HONORS']
-    ].map(([day,src,names]) => `<figure style="margin:0;width:100%;min-width:0;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:auto;cursor:zoom-in" src="${src}" alt="Crew Honors Day ${day}" /><figcaption style="padding:.58rem .6rem .65rem;background:#071116;text-align:left"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">DAY ${day}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere">${names}</span></figcaption></figure>`).join('');
+    ].map(([day,src,names]) => `<figure style="margin:0;width:100%;min-width:0;height:100%;display:grid;grid-template-rows:1fr 4.2rem;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><div style="aspect-ratio:4/5;background:#071116;display:flex;align-items:center;justify-content:center;overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in" src="${src}" alt="Crew Honors Day ${day}" /></div><figcaption style="height:4.2rem;box-sizing:border-box;padding:.58rem .6rem .65rem;background:#071116;text-align:left;overflow:hidden"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">DAY ${day}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere">${names}</span></figcaption></figure>`).join('');
     honors.insertAdjacentHTML('afterend', `
       <section class="parchment" id="crew-honors-archive" style="padding-bottom:5rem">
         <div class="wrap">
           <div class="kicker red">THE CREW HONORS ARCHIVE</div>
           <h2>EVERY NAME HAS A FACE. EVERY FACE HAS A STORY.</h2>
           <p style="max-width:780px;margin-bottom:2rem">Crew Honors portraits are part of the permanent record of Viking Voyage II. Once a Viking receives a name and a face in our saga, that moment remains here for the rest of the voyage.</p>
-          <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;align-items:start;max-width:760px">${cards}</div>
+          <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;align-items:stretch;max-width:760px">${cards}</div>
           <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Earlier Crew Honors portraits will be restored as their original artwork is added to the voyage record.</p>
         </div>
       </section>`);
