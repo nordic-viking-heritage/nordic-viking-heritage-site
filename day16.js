@@ -20,7 +20,7 @@
   // Permanent Crew Honors order: heading -> explainer -> artwork -> spacing -> naming list.
   setHTML('#honors .wrap', `<div class="kicker red">CREW HONORS — DAY 18</div><h2>THREE MORE NAMES ENTER THE SHIP'S ROLL</h2><div class="honors-explainer"><div class="kicker red">THE HONOR BEHIND THE NAME</div><h3>EVERY OAR MATTERS</h3><p>Crew Honors belongs to <strong>OUR SAGA</strong>. It is a Viking Voyage II tradition, not a claimed reconstruction of a documented Viking Age ceremony.</p><p>Once entered into <strong>THE SHIP'S ROLL</strong>, a sailor's name remains part of this voyage.</p></div><figure class="framed" style="margin-bottom:2.5rem"><img class="zoomable" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption>CREW HONORS — DAY 18 · TORSTEN · SVALA · BJARNI</figcaption></figure><div class="naming-list"><article><span>MANUELMORENOCAZ</span><strong>TORSTEN <em>(Þórsteinn)</em></strong><small>ᚦᚢᚱᛋᛏᛁᚾ</small></article><article><span>DANIA</span><strong>SVALA <em>(Svala)</em></strong><small>ᛋᚢᛅᛚᛅ</small></article><article><span>JONATHAN</span><strong>BJARNI <em>(Bjarni)</em></strong><small>ᛒᛁᛅᚱᚾᛁ</small></article></div>`);
 
-  // Permanent Crew Honors Archive. Smaller thumbnails; artwork opens through the site's existing zoomable image viewer.
+  // Permanent Crew Honors Archive. Smaller thumbnails; artwork opens through the site's existing lightbox.
   const honors = q('#honors');
   if (honors && !q('#crew-honors-archive')) {
     honors.insertAdjacentHTML('afterend', `
@@ -35,6 +35,23 @@
           <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Earlier Crew Honors portraits will be restored as their original artwork is added to the voyage record.</p>
         </div>
       </section>`);
+  }
+
+  // site.js binds zoom listeners before this archive is inserted, so bind the archive image here as well.
+  const archiveZoom = q('#crew-honors-archive img.zoomable');
+  const lightbox = q('#lightbox');
+  if (archiveZoom && lightbox && !archiveZoom.dataset.zoomBound) {
+    const full = lightbox.querySelector('img');
+    archiveZoom.dataset.zoomBound = '1';
+    archiveZoom.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (!full) return;
+      full.src = archiveZoom.src;
+      full.alt = archiveZoom.alt || 'Enlarged Crew Honors artwork';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+    });
   }
 
   const historyKicker = q('#history-day-17 .kicker'); if (historyKicker) historyKicker.textContent = 'LATEST HISTORY — DAY 17';
