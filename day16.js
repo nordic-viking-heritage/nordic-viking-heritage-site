@@ -17,10 +17,8 @@
   const roll = q('#ship-roll .roll-grid');
   if (roll && ![...roll.querySelectorAll('span')].some(x => x.textContent.trim() === 'manuelmorenocaz')) roll.insertAdjacentHTML('beforeend', `<article><span>manuelmorenocaz</span><strong>Torsten</strong><small class="old-norse">Þórsteinn</small><small class="runes">ᚦᚢᚱᛋᛏᛁᚾ</small></article><article><span>Dania</span><strong>Svala</strong><small class="old-norse">Svala</small><small class="runes">ᛋᚢᛅᛚᛅ</small></article><article><span>Jonathan</span><strong>Bjarni</strong><small class="old-norse">Bjarni</small><small class="runes">ᛒᛁᛅᚱᚾᛁ</small></article>`);
 
-  // Permanent Crew Honors order: heading -> explainer -> artwork -> spacing -> naming list.
   setHTML('#honors .wrap', `<div class="kicker red">CREW HONORS — DAY 18</div><h2>THREE MORE NAMES ENTER THE SHIP'S ROLL</h2><div class="honors-explainer"><div class="kicker red">THE HONOR BEHIND THE NAME</div><h3>EVERY OAR MATTERS</h3><p>Crew Honors belongs to <strong>OUR SAGA</strong>. It is a Viking Voyage II tradition, not a claimed reconstruction of a documented Viking Age ceremony.</p><p>Once entered into <strong>THE SHIP'S ROLL</strong>, a sailor's name remains part of this voyage.</p></div><figure class="framed" style="margin-bottom:2.5rem"><img class="zoomable" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption>CREW HONORS — DAY 18 · TORSTEN · SVALA · BJARNI</figcaption></figure><div class="naming-list"><article><span>MANUELMORENOCAZ</span><strong>TORSTEN <em>(Þórsteinn)</em></strong><small>ᚦᚢᚱᛋᛏᛁᚾ</small></article><article><span>DANIA</span><strong>SVALA <em>(Svala)</em></strong><small>ᛋᚢᛅᛚᛅ</small></article><article><span>JONATHAN</span><strong>BJARNI <em>(Bjarni)</em></strong><small>ᛒᛁᛅᚱᚾᛁ</small></article></div>`);
 
-  // Permanent Crew Honors Archive. Smaller thumbnails; artwork opens through the site's existing lightbox.
   const honors = q('#honors');
   if (honors && !q('#crew-honors-archive')) {
     honors.insertAdjacentHTML('afterend', `
@@ -30,14 +28,13 @@
           <h2>EVERY NAME HAS A FACE. EVERY FACE HAS A STORY.</h2>
           <p style="max-width:780px;margin-bottom:2rem">Crew Honors portraits are part of the permanent record of Viking Voyage II. Once a Viking receives a name and a face in our saga, that moment remains here for the rest of the voyage.</p>
           <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,190px));gap:1.25rem;align-items:start">
-            <figure class="framed" style="margin:0;width:100%"><img class="zoomable" style="display:block;width:100%;height:auto;cursor:zoom-in" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption><strong>DAY 18</strong><br>TORSTEN · SVALA · BJARNI</figcaption></figure>
+            <figure style="margin:0;width:100%;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:auto;cursor:zoom-in" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption style="padding:1rem 1rem 1.1rem;background:#071116;text-align:left"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:1rem;letter-spacing:.12em;margin-bottom:.45rem">DAY 18</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:1.05rem;line-height:1.35">TORSTEN · SVALA · BJARNI</span></figcaption></figure>
           </div>
           <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Earlier Crew Honors portraits will be restored as their original artwork is added to the voyage record.</p>
         </div>
       </section>`);
   }
 
-  // site.js binds zoom listeners before this archive is inserted, so bind the archive image here as well.
   const archiveZoom = q('#crew-honors-archive img.zoomable');
   const lightbox = q('#lightbox');
   if (archiveZoom && lightbox && !archiveZoom.dataset.zoomBound) {
