@@ -22,18 +22,24 @@
   const honors = q('#honors');
   if (honors && !q('#crew-honors-archive')) {
     const cards = [
-      ['18','day-18-crew-honors.png','TORSTEN · SVALA · BJARNI'],
-      ['17','day-17-crew-honors.png','LEIF · IVAR'],
-      ['16','day-16-crew-honors.png','ARNE · THYRA · HALFDAN'],
-      ['15','day-15-crew-honors.jpg','OLAF · SVEIN · INGVAR'],
-      ['14','day-14-crew-honors.jpg','RAGNAR · TOVA · KNUT'],
-      ['13','day-13-crew-honors.jpg','HARALD · BRAND · HALL'],
-      ['12','day-12-crew-honors-CORRECT.jpg','HOLMFRID · GYRID · GUNNAR'],
-      ['11','day-11-crew-honors.jpg','ASMUND · ÅSA · GUDRUN'],
-      ['10','day-10-crew-honors.jpg','MAGNUS · HELGA · ORM'],
-      ['9','day-9-crew-honors.jpg','RAGNHILD · GUNHILD · INGA'],
-      ['6','day-6-crew-honors.jpg','ÁSTRÍÐR · KETILL · ÞORKELL']
-    ].map(([day,src,names]) => `<figure style="margin:0;width:100%;min-width:0;height:100%;display:grid;grid-template-rows:1fr 4.2rem;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><div style="aspect-ratio:4/5;background:#071116;display:flex;align-items:center;justify-content:center;overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in" src="${src}" alt="Crew Honors Day ${day} — ${names}" /></div><figcaption style="height:4.2rem;box-sizing:border-box;padding:.58rem .6rem .65rem;background:#071116;text-align:left;overflow:hidden"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">DAY ${day}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere">${names}</span></figcaption></figure>`).join('');
+      ['DAY 18','day-18-crew-honors.png','TORSTEN · SVALA · BJARNI'],
+      ['DAY 17','day-17-crew-honors.png','LEIF · IVAR'],
+      ['DAY 16','day-16-crew-honors.png','ARNE · THYRA · HALFDAN'],
+      ['DAY 15','day-15-crew-honors.jpg','OLAF · SVEIN · INGVAR'],
+      ['DAY 14','day-14-crew-honors.jpg','RAGNAR · TOVA · KNUT'],
+      ['DAY 13','day-13-crew-honors.jpg','HARALD · BRAND · HALL'],
+      ['DAY 12','day-12-crew-honors-CORRECT.jpg','HOLMFRID · GYRID · GUNNAR'],
+      ['DAY 11','day-11-crew-honors.jpg','ASMUND · ÅSA · GUDRUN'],
+      ['DAY 10','day-10-crew-honors.jpg','MAGNUS · HELGA · ORM'],
+      ['DAY 9','day-9-crew-honors.jpg','RAGNHILD · GUNHILD · INGA'],
+      ['DAY 8','day-8-crew-honors.jpg','ÞORBJØRN · ÞÓRA'],
+      ['DAY 7','day-7-crew-honors.jpg','BJORN · KARI'],
+      ['DAY 5','day-5-crew-honors.jpg','ULF · LIV'],
+      ['DAY 4','day-4-crew-honors.jpg','STEINN · HAFTHOR · FRODI'],
+      ['DAY 3','day-3-crew-honors.jpg','HRAFN · EIRIKR · FREYDIS · SIGRID'],
+      ['DAY 2','day-2-crew-honors.jpg','SOLVEIG'],
+      ['THE CAPTAIN','crew-honors-hakon-captain-naming.jpg','HÁKON · THE NAMING OF THE CAPTAIN']
+    ].map(([label,src,names]) => `<figure style="margin:0;width:100%;min-width:0;height:100%;display:grid;grid-template-rows:1fr 4.2rem;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><div style="aspect-ratio:4/5;background:#071116;display:flex;align-items:center;justify-content:center;overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in" src="${src}" alt="Crew Honors ${label} — ${names}" /></div><figcaption style="height:4.2rem;box-sizing:border-box;padding:.58rem .6rem .65rem;background:#071116;text-align:left;overflow:hidden"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">${label}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere">${names}</span></figcaption></figure>`).join('');
     honors.insertAdjacentHTML('afterend', `
       <section class="parchment" id="crew-honors-archive" style="padding-bottom:5rem">
         <div class="wrap">
@@ -41,7 +47,7 @@
           <h2>EVERY NAME HAS A FACE. EVERY FACE HAS A STORY.</h2>
           <p style="max-width:780px;margin-bottom:2rem">Crew Honors portraits are part of the permanent record of Viking Voyage II. Once a Viking receives a name and a face in our saga, that moment remains here for the rest of the voyage.</p>
           <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;align-items:stretch;max-width:760px">${cards}</div>
-          <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Earlier Crew Honors portraits will be restored as their original artwork is added to the voyage record.</p>
+          <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Day 6 remains withheld until its full naming record is verified.</p>
         </div>
       </section>`);
   }
