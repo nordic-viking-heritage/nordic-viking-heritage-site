@@ -4,9 +4,7 @@
 
   setHTML('#voyage .status-head > div:first-child', `<div class="kicker red">THE SHIP'S LOG — DAY 18</div><h1>LAND! — NEWFOUNDLAND</h1><p>After wind, waves and fog, the fleet found land. Chapter II is complete. Tonight the ships rest on the shores of Newfoundland.</p>`);
   setHTML('#voyage .stats', `<article><strong>89</strong><small>SAILORS ABOARD</small><em>One fleet</em></article><article><strong>30,701,056</strong><small>TOTAL STEPS</small><em>Steps toward Florida</em></article><article><strong>≈ 19,955.7 KM</strong><small>DISTANCE COVERED</small><em>From Greenland</em></article><article><strong>40.93%</strong><small>OF OUR GOAL</small><em>75,000,000 steps</em></article>`);
-
   setHTML('#dispatch .copy', `<div class="kicker gold">VIKING DISPATCH — DAY 18</div><h2>LAND! — NEWFOUNDLAND</h2><p>Yesterday, the sea showed us no mercy. Wind howled through the rigging, waves rose around the ships and fog swallowed the horizon.</p><p>Still, the crew rowed. Today, <strong>89 Vikings</strong> drove the fleet forward with another <strong>4,823,183 steps</strong> — approximately <strong>3,135.1 km</strong>.</p><p>And then a shape appeared through the mist. Dark. Solid. Real.</p><p><strong>LAND — NEWFOUNDLAND.</strong></p><p>After <strong>30,701,056 total steps</strong> — approximately <strong>19,955.7 km</strong> — our keels have reached the shore.</p><p><strong>CHAPTER II IS COMPLETE.</strong></p><p>Pull the ships ashore. Lay down the oars. Light the fires. Tonight, we sail no farther.</p><figure class="framed"><img class="zoomable" src="day-18-viking-dispatch.png" alt="Viking Dispatch Day 18 — Land Newfoundland" /><figcaption>VIKING DISPATCH — DAY 18 · NEWFOUNDLAND · CHAPTER II COMPLETE</figcaption></figure>`);
-
   setHTML('#voyage-map .wrap', `<div class="kicker gold">THE VOYAGE MAP — CHAPTER II</div><h2>NORTH AMERICAN MAINLAND → NEWFOUNDLAND</h2><p class="intro">The fleet has reached Newfoundland. <strong>Chapter II is complete and now frozen in the voyage record.</strong></p><p class="intro">Any progress beyond the Chapter II landfall is carried forward into the next chapter rather than rewriting the completed crossing.</p><div class="tags"><span>DAY 18</span><span>89 SAILORS</span><span>30,701,056 STEPS</span><span>≈ 19,955.7 KM</span><span>40.93% COMPLETE</span></div>`);
 
   const sagaLayer = q('.layer-grid a[href="#our-saga-day-17"]'); if (sagaLayer) sagaLayer.setAttribute('href', '#our-saga-day-18');
@@ -22,37 +20,12 @@
   const honors = q('#honors');
   if (honors && !q('#crew-honors-archive')) {
     const cards = [
-      ['DAY 18','day-18-crew-honors.png','TORSTEN · SVALA · BJARNI'],
-      ['DAY 17','day-17-crew-honors.png','LEIF · IVAR'],
-      ['DAY 16','day-16-crew-honors.png','ARNE · THYRA · HALFDAN'],
-      ['DAY 15','day-15-crew-honors.jpg','OLAF · SVEIN · INGVAR'],
-      ['DAY 14','day-14-crew-honors.jpg','RAGNAR · TOVA · KNUT'],
-      ['DAY 13','day-13-crew-honors.jpg','HARALD · BRAND · HALL'],
-      ['DAY 12','day-12-crew-honors-CORRECT.jpg','HOLMFRID · GYRID · GUNNAR'],
-      ['DAY 11','day-11-crew-honors.jpg','ASMUND · ÅSA · GUDRUN'],
-      ['DAY 10','day-10-crew-honors.jpg','MAGNUS · HELGA · ORM'],
-      ['DAY 8','day-8-crew-honors.jpg','ÞORBJØRN · ÞÓRA'],
-      ['DAY 7','day-7-crew-honors.jpg','BJORN · KARI'],
-      ['DAY 5','day-5-crew-honors.jpg','ULF · LIV'],
-      ['DAY 4','day-4-crew-honors.jpg','STEINN · HAFTHOR · FRODI'],
-      ['DAY 3','day-3-crew-honors.jpg','HRAFN · EIRIKR · FREYDIS · SIGRID'],
-      ['DAY 2','day-2-crew-honors.jpg','SOLVEIG'],
-      ['THE CAPTAIN','crew-honors-hakon-captain-naming.jpg','HÁKON · THE NAMING OF THE CAPTAIN']
+      ['DAY 18','day-18-crew-honors.png','TORSTEN · SVALA · BJARNI'],['DAY 17','day-17-crew-honors.png','LEIF · IVAR'],['DAY 16','day-16-crew-honors.png','ARNE · THYRA · HALFDAN'],['DAY 15','day-15-crew-honors.jpg','OLAF · SVEIN · INGVAR'],['DAY 14','day-14-crew-honors.jpg','RAGNAR · TOVA · KNUT'],['DAY 13','day-13-crew-honors.jpg','HARALD · BRAND · HALL'],['DAY 12','day-12-crew-honors-CORRECT.jpg','HOLMFRID · GYRID · GUNNAR'],['DAY 11','day-11-crew-honors.jpg','ASMUND · ÅSA · GUDRUN'],['DAY 10','day-10-crew-honors.jpg','MAGNUS · HELGA · ORM'],['DAY 8','day-8-crew-honors.jpg','ÞORBJØRN · ÞÓRA'],['DAY 7','day-7-crew-honors.jpg','BJORN · KARI'],['DAY 5','day-5-crew-honors.jpg','ULF · LIV'],['DAY 4','day-4-crew-honors.jpg','STEINN · HAFTHOR · FRODI'],['DAY 3','day-3-crew-honors.jpg','HRAFN · EIRIKR · FREYDIS · SIGRID'],['DAY 2','day-2-crew-honors.jpg','SOLVEIG'],['THE CAPTAIN','crew-honors-hakon-captain-naming.jpg','HÁKON · THE NAMING OF THE CAPTAIN']
     ].map(([label,src,names]) => {
       const isCaptain = label === 'THE CAPTAIN';
-      const runes = isCaptain ? `<span aria-hidden="true" style="position:absolute;inset:.22rem .22rem 4.42rem .22rem;z-index:3;pointer-events:none;border:1px solid rgba(201,163,91,.82);box-shadow:inset 0 0 12px rgba(201,163,91,.12)"><span style="position:absolute;top:.08rem;left:50%;transform:translateX(-50%);padding:0 .25rem;background:rgba(7,17,22,.78);color:#e0bd72;font-size:.62rem;letter-spacing:.22em;white-space:nowrap">ᚼᛅᚴᚢᚾ · ᚼᛅᚴᚢᚾ</span><span style="position:absolute;bottom:.08rem;left:50%;transform:translateX(-50%);padding:0 .25rem;background:rgba(7,17,22,.78);color:#e0bd72;font-size:.62rem;letter-spacing:.22em;white-space:nowrap">ᚼᛅᚴᚢᚾ · ᚼᛅᚴᚢᚾ</span><span style="position:absolute;top:50%;left:.04rem;transform:translateY(-50%);padding:.2rem 0;background:rgba(7,17,22,.78);color:#e0bd72;font-size:.58rem;writing-mode:vertical-rl;text-orientation:upright">ᚼᛅᚴᚢᚾ</span><span style="position:absolute;top:50%;right:.04rem;transform:translateY(-50%);padding:.2rem 0;background:rgba(7,17,22,.78);color:#e0bd72;font-size:.58rem;writing-mode:vertical-rl;text-orientation:upright">ᚼᛅᚴᚢᚾ</span></span>` : '';
-      return `<figure class="${isCaptain ? 'captain-honors-card' : ''}" style="position:relative;margin:0;width:100%;min-width:0;height:100%;display:grid;grid-template-rows:1fr 4.2rem;background:#071116;border:${isCaptain ? '2px solid #c9a35b' : '1px solid rgba(201,163,91,.45)'};box-shadow:${isCaptain ? '0 0 0 2px rgba(201,163,91,.18),0 0 22px rgba(201,163,91,.25)' : 'none'};overflow:hidden"><div style="aspect-ratio:4/5;background:#071116;display:flex;align-items:center;justify-content:center;overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in" src="${src}" alt="Crew Honors ${label} — ${names}" /></div>${runes}<figcaption style="height:4.2rem;box-sizing:border-box;padding:.58rem .6rem .65rem;background:#071116;text-align:left;overflow:hidden;${isCaptain ? 'box-shadow:inset 0 1px 0 rgba(201,163,91,.7)' : ''}"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">${label}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere">${names}</span></figcaption></figure>`;
+      return `<figure class="${isCaptain ? 'captain-honors-card' : ''}" style="position:relative;margin:0;width:100%;min-width:0;height:100%;display:grid;grid-template-rows:1fr 4.2rem;background:#071116;border:${isCaptain ? '3px solid #c9a35b' : '1px solid rgba(201,163,91,.45)'};box-shadow:${isCaptain ? '0 0 0 1px rgba(201,163,91,.38),0 0 18px rgba(201,163,91,.20)' : 'none'};overflow:hidden"><div style="aspect-ratio:4/5;background:#071116;display:flex;align-items:center;justify-content:center;overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in" src="${src}" alt="Crew Honors ${label} — ${names}" /></div><figcaption style="height:4.2rem;box-sizing:border-box;padding:.58rem .6rem .65rem;background:#071116;text-align:left;overflow:hidden;${isCaptain ? 'box-shadow:inset 0 1px 0 rgba(201,163,91,.7)' : ''}"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">${label}</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25;overflow-wrap:anywhere">${names}</span></figcaption></figure>`;
     }).join('');
-    honors.insertAdjacentHTML('afterend', `
-      <section class="parchment" id="crew-honors-archive" style="padding-bottom:5rem">
-        <div class="wrap">
-          <div class="kicker red">THE CREW HONORS ARCHIVE</div>
-          <h2>EVERY NAME HAS A FACE. EVERY FACE HAS A STORY.</h2>
-          <p style="max-width:780px;margin-bottom:2rem">Crew Honors portraits are part of the permanent record of Viking Voyage II. Once a Viking receives a name and a face in our saga, that moment remains here for the rest of the voyage.</p>
-          <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;align-items:stretch;max-width:760px">${cards}</div>
-          <p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Day 6 and Day 9 are being restored with face-forward portraits to match the permanent Crew Honors standard.</p>
-        </div>
-      </section>`);
+    honors.insertAdjacentHTML('afterend', `<section class="parchment" id="crew-honors-archive" style="padding-bottom:5rem"><div class="wrap"><div class="kicker red">THE CREW HONORS ARCHIVE</div><h2>EVERY NAME HAS A FACE. EVERY FACE HAS A STORY.</h2><p style="max-width:780px;margin-bottom:2rem">Crew Honors portraits are part of the permanent record of Viking Voyage II. Once a Viking receives a name and a face in our saga, that moment remains here for the rest of the voyage.</p><div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;align-items:stretch;max-width:760px">${cards}</div><p style="margin-top:1.75rem;margin-bottom:0;opacity:.8"><strong>Archive in progress.</strong> Day 6 and Day 9 are being restored with face-forward portraits to match the permanent Crew Honors standard.</p></div></section>`);
   }
 
   const archiveGrid = q('#crew-honors-archive .crew-honors-archive-grid');
@@ -64,15 +37,7 @@
     document.querySelectorAll('#crew-honors-archive img.zoomable').forEach((archiveZoom) => {
       if (archiveZoom.dataset.zoomBound) return;
       archiveZoom.dataset.zoomBound = '1';
-      archiveZoom.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (!full) return;
-        full.src = archiveZoom.src;
-        full.alt = archiveZoom.alt || 'Enlarged Crew Honors artwork';
-        lightbox.classList.add('open');
-        lightbox.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('lightbox-open');
-      });
+      archiveZoom.addEventListener('click', (event) => { event.preventDefault(); if (!full) return; full.src = archiveZoom.src; full.alt = archiveZoom.alt || 'Enlarged Crew Honors artwork'; lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden', 'false'); document.body.classList.add('lightbox-open'); });
     });
   }
 
