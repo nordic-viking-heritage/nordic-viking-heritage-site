@@ -5,11 +5,26 @@
   setHTML('#voyage .status-head > div:first-child', `<div class="kicker red">THE SHIP'S LOG — DAY 18</div><h1>LAND! — NEWFOUNDLAND</h1><p>After wind, waves and fog, the fleet found land. Chapter II is complete. Tonight the ships rest on the shores of Newfoundland.</p>`);
   setHTML('#voyage .stats', `<article><strong>89</strong><small>SAILORS ABOARD</small><em>One fleet</em></article><article><strong>30,701,056</strong><small>TOTAL STEPS</small><em>Steps toward Florida</em></article><article><strong>≈ 19,955.7 KM</strong><small>DISTANCE COVERED</small><em>From Greenland</em></article><article><strong>40.93%</strong><small>OF OUR GOAL</small><em>75,000,000 steps</em></article>`);
   const voyageSeal = q('#voyage .seal');
+  const voyageStatusHead = q('#voyage .status-head');
   if (voyageSeal) {
     const mobileSeal = window.matchMedia('(max-width: 800px)').matches;
     voyageSeal.style.width = mobileSeal ? '132px' : '170px';
     voyageSeal.style.flex = '0 0 auto';
-    voyageSeal.style.transform = mobileSeal ? 'translateX(-26px)' : 'none';
+    if (mobileSeal && voyageStatusHead) {
+      voyageStatusHead.style.position = 'relative';
+      voyageSeal.style.position = 'absolute';
+      voyageSeal.style.right = '18px';
+      voyageSeal.style.top = '0';
+      voyageSeal.style.transform = 'none';
+      voyageSeal.style.margin = '0';
+      voyageSeal.style.zIndex = '2';
+    } else {
+      voyageSeal.style.position = '';
+      voyageSeal.style.right = '';
+      voyageSeal.style.top = '';
+      voyageSeal.style.transform = 'none';
+      voyageSeal.style.margin = '';
+    }
   }
   setHTML('#dispatch .copy', `<div class="kicker gold">VIKING DISPATCH — DAY 18</div><h2>LAND! — NEWFOUNDLAND</h2><p>Yesterday, the sea showed us no mercy. Wind howled through the rigging, waves rose around the ships and fog swallowed the horizon.</p><p>Still, the crew rowed. Today, <strong>89 Vikings</strong> drove the fleet forward with another <strong>4,823,183 steps</strong> — approximately <strong>3,135.1 km</strong>.</p><p>And then a shape appeared through the mist. Dark. Solid. Real.</p><p><strong>LAND — NEWFOUNDLAND.</strong></p><p>After <strong>30,701,056 total steps</strong> — approximately <strong>19,955.7 km</strong> — our keels have reached the shore.</p><p><strong>CHAPTER II IS COMPLETE.</strong></p><p>Pull the ships ashore. Lay down the oars. Light the fires. Tonight, we sail no farther.</p><figure class="framed"><img class="zoomable" src="day-18-viking-dispatch.png" alt="Viking Dispatch Day 18 — Land Newfoundland" /><figcaption>VIKING DISPATCH — DAY 18 · NEWFOUNDLAND · CHAPTER II COMPLETE</figcaption></figure>`);
   setHTML('#voyage-map .wrap', `<div class="kicker gold">THE VOYAGE MAP — CHAPTER II</div><h2>NORTH AMERICAN MAINLAND → NEWFOUNDLAND</h2><p class="intro">The fleet has reached Newfoundland. <strong>Chapter II is complete and now frozen in the voyage record.</strong></p><p class="intro">Any progress beyond the Chapter II landfall is carried forward into the next chapter rather than rewriting the completed crossing.</p><div class="tags"><span>DAY 18</span><span>89 SAILORS</span><span>30,701,056 STEPS</span><span>≈ 19,955.7 KM</span><span>40.93% COMPLETE</span></div>`);
