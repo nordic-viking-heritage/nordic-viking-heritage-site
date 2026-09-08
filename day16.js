@@ -20,6 +20,23 @@
   // Permanent Crew Honors order: heading -> explainer -> artwork -> spacing -> naming list.
   setHTML('#honors .wrap', `<div class="kicker red">CREW HONORS — DAY 18</div><h2>THREE MORE NAMES ENTER THE SHIP'S ROLL</h2><div class="honors-explainer"><div class="kicker red">THE HONOR BEHIND THE NAME</div><h3>EVERY OAR MATTERS</h3><p>Crew Honors belongs to <strong>OUR SAGA</strong>. It is a Viking Voyage II tradition, not a claimed reconstruction of a documented Viking Age ceremony.</p><p>Once entered into <strong>THE SHIP'S ROLL</strong>, a sailor's name remains part of this voyage.</p></div><figure class="framed" style="margin-bottom:2.5rem"><img class="zoomable" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption>CREW HONORS — DAY 18 · TORSTEN · SVALA · BJARNI</figcaption></figure><div class="naming-list"><article><span>MANUELMORENOCAZ</span><strong>TORSTEN <em>(Þórsteinn)</em></strong><small>ᚦᚢᚱᛋᛏᛁᚾ</small></article><article><span>DANIA</span><strong>SVALA <em>(Svala)</em></strong><small>ᛋᚢᛅᛚᛅ</small></article><article><span>JONATHAN</span><strong>BJARNI <em>(Bjarni)</em></strong><small>ᛒᛁᛅᚱᚾᛁ</small></article></div>`);
 
+  // Permanent Crew Honors Archive. New nightly Crew Honors artwork is added here and never replaced.
+  const honors = q('#honors');
+  if (honors && !q('#crew-honors-archive')) {
+    honors.insertAdjacentHTML('afterend', `
+      <section class="parchment" id="crew-honors-archive">
+        <div class="wrap">
+          <div class="kicker red">THE CREW HONORS ARCHIVE</div>
+          <h2>EVERY NAME HAS A FACE. EVERY FACE HAS A STORY.</h2>
+          <p style="max-width:780px;margin-bottom:2rem">Crew Honors portraits are part of the permanent record of Viking Voyage II. Once a Viking receives a name and a face in our saga, that moment remains here for the rest of the voyage.</p>
+          <div class="crew-honors-archive-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem">
+            <figure class="framed" style="margin:0"><img class="zoomable" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption><strong>DAY 18</strong> · TORSTEN · SVALA · BJARNI</figcaption></figure>
+          </div>
+          <p style="margin-top:1.5rem;opacity:.8"><strong>Archive in progress.</strong> Earlier Crew Honors portraits will be restored as their original artwork is added to the voyage record.</p>
+        </div>
+      </section>`);
+  }
+
   const historyKicker = q('#history-day-17 .kicker'); if (historyKicker) historyKicker.textContent = 'LATEST HISTORY — DAY 17';
   const archiveTitle = q('#voyage-archive h2'); if (archiveTitle) archiveTitle.textContent = 'CHAPTER II — COMPLETE';
   const archiveIntro = q('#voyage-archive .gallery-intro'); if (archiveIntro) archiveIntro.innerHTML = 'Chapter I remains frozen in the archive. On Day 18 the fleet reached <strong>Newfoundland</strong>, completing Chapter II. Day 18 artwork records the landfall, while earlier artwork remains preserved as part of the voyage record.';
