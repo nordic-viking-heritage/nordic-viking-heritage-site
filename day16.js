@@ -15,6 +15,27 @@
   const roll = q('#ship-roll .roll-grid');
   if (roll && ![...roll.querySelectorAll('span')].some(x => x.textContent.trim() === 'manuelmorenocaz')) roll.insertAdjacentHTML('beforeend', `<article><span>manuelmorenocaz</span><strong>Torsten</strong><small class="old-norse">Þórsteinn</small><small class="runes">ᚦᚢᚱᛋᛏᛁᚾ</small></article><article><span>Dania</span><strong>Svala</strong><small class="old-norse">Svala</small><small class="runes">ᛋᚢᛅᛚᛅ</small></article><article><span>Jonathan</span><strong>Bjarni</strong><small class="old-norse">Bjarni</small><small class="runes">ᛒᛁᛅᚱᚾᛁ</small></article>`);
 
+  if (roll) {
+    const entries = [...roll.querySelectorAll('article')];
+    const captainEntry = entries.find((entry) => entry.querySelector('span')?.textContent.trim() === 'Stefan');
+    const thoraEntry = entries.find((entry) => entry.querySelector('span')?.textContent.trim().startsWith('Starfire Silverstar'));
+    if (captainEntry && thoraEntry) {
+      captainEntry.style.gridColumn = '1 / -1';
+      captainEntry.style.border = '3px solid #c9a35b';
+      captainEntry.style.boxShadow = '0 0 0 1px rgba(201,163,91,.32), 0 0 16px rgba(201,163,91,.14)';
+      captainEntry.style.background = 'linear-gradient(135deg, rgba(201,163,91,.10), rgba(7,17,22,.02))';
+      if (!captainEntry.querySelector('.ship-role')) captainEntry.insertAdjacentHTML('beforeend', `<small class="ship-role" style="display:block;margin-top:.55rem;color:#c9a35b;font-weight:700;letter-spacing:.12em">⚔️ THE CAPTAIN</small>`);
+
+      captainEntry.insertAdjacentElement('afterend', thoraEntry);
+      const thoraName = thoraEntry.querySelector('strong'); if (thoraName) thoraName.textContent = 'Þóra';
+      thoraEntry.style.gridColumn = '1 / -1';
+      thoraEntry.style.border = '2px solid rgba(201,163,91,.72)';
+      thoraEntry.style.boxShadow = '0 0 0 1px rgba(201,163,91,.18), 0 0 14px rgba(201,163,91,.10)';
+      thoraEntry.style.background = 'linear-gradient(135deg, rgba(114,18,27,.16), rgba(7,17,22,.02))';
+      if (!thoraEntry.querySelector('.saga-role')) thoraEntry.insertAdjacentHTML('beforeend', `<small class="saga-role" style="display:block;margin-top:.55rem;color:#c9a35b;font-weight:700;letter-spacing:.11em">🐦‍⬛ KEEPER OF THE SAGA</small>`);
+    }
+  }
+
   setHTML('#honors .wrap', `<div class="kicker red">CREW HONORS — DAY 18</div><h2>THREE MORE NAMES ENTER THE SHIP'S ROLL</h2><div class="honors-explainer"><div class="kicker red">THE HONOR BEHIND THE NAME</div><h3>EVERY OAR MATTERS</h3><p>Crew Honors belongs to <strong>OUR SAGA</strong>. It is a Viking Voyage II tradition, not a claimed reconstruction of a documented Viking Age ceremony.</p><p>Once entered into <strong>THE SHIP'S ROLL</strong>, a sailor's name remains part of this voyage.</p></div><figure class="framed" style="margin-bottom:2.5rem"><img class="zoomable" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption style="background:#071116;text-align:left;padding:.85rem 1rem"><strong style="color:#c9a35b">CREW HONORS — DAY 18</strong><span style="color:#f1eadb"> · TORSTEN · SVALA · BJARNI</span></figcaption></figure><div class="naming-list"><article><span>MANUELMORENOCAZ</span><strong>TORSTEN <em>(Þórsteinn)</em></strong><small>ᚦᚢᚱᛋᛏᛁᚾ</small></article><article><span>DANIA</span><strong>SVALA <em>(Svala)</em></strong><small>ᛋᚢᛅᛚᛅ</small></article><article><span>JONATHAN</span><strong>BJARNI <em>(Bjarni)</em></strong><small>ᛒᛁᛅᚱᚾᛁ</small></article></div>`);
 
   const honors = q('#honors');
