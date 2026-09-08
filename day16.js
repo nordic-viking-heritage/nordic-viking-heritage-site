@@ -14,7 +14,7 @@
       voyageStatusHead.style.position = 'relative';
       voyageSeal.style.position = 'absolute';
       voyageSeal.style.right = '18px';
-      voyageSeal.style.top = '0';
+      voyageSeal.style.top = '-52px';
       voyageSeal.style.transform = 'none';
       voyageSeal.style.margin = '0';
       voyageSeal.style.zIndex = '2';
