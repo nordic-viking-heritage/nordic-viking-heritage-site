@@ -23,7 +23,8 @@
     <p><strong>LAND — NEWFOUNDLAND.</strong></p>
     <p>After <strong>30,701,056 total steps</strong> — approximately <strong>19,955.7 km</strong> — our keels have reached the shore.</p>
     <p><strong>CHAPTER II IS COMPLETE.</strong></p>
-    <p>Pull the ships ashore. Lay down the oars. Light the fires. Tonight, we sail no farther.</p>`);
+    <p>Pull the ships ashore. Lay down the oars. Light the fires. Tonight, we sail no farther.</p>
+    <figure class="framed"><img class="zoomable" src="day-18-viking-dispatch.png" alt="Viking Dispatch Day 18 — Land Newfoundland" /><figcaption>VIKING DISPATCH — DAY 18 · NEWFOUNDLAND · CHAPTER II COMPLETE</figcaption></figure>`);
 
   // Chapter II map/status is now frozen at Newfoundland.
   setHTML('#voyage-map .wrap', `
@@ -33,7 +34,6 @@
     <p class="intro">Any progress beyond the Chapter II landfall is carried forward into the next chapter rather than rewriting the completed crossing.</p>
     <div class="tags"><span>DAY 18</span><span>89 SAILORS</span><span>30,701,056 STEPS</span><span>≈ 19,955.7 KM</span><span>40.93% COMPLETE</span></div>`);
 
-  // Three-layer links: Day 18 saga is current; Day 17 history/myth remain the latest verified entries.
   const sagaLayer = q('.layer-grid a[href="#our-saga-day-17"]');
   if (sagaLayer) sagaLayer.setAttribute('href', '#our-saga-day-18');
   const navSaga = q('.floating-nav a[href="#our-saga-day-17"]');
@@ -54,7 +54,8 @@
       <p>Pull the ships ashore. Lay down the oars. Light the fires. Listen to the waves behind us.</p>
       <p><strong>WE FOUND THE LAND WE FEARED WE MIGHT NEVER SEE.</strong></p>
       <p><strong>CHAPTER II IS COMPLETE.</strong></p>
-      <p>Tomorrow, a new chapter begins. But tonight… <strong>WE ARE IN NEWFOUNDLAND.</strong></p>`);
+      <p>Tomorrow, a new chapter begins. But tonight… <strong>WE ARE IN NEWFOUNDLAND.</strong></p>
+      <figure class="framed"><img class="zoomable" src="day-18-our-saga.png" alt="Our Saga Day 18 — The Land Beyond the Fog" /><figcaption>OUR SAGA — DAY 18 · THE LAND BEYOND THE FOG</figcaption></figure>`);
   }
 
   // Add Day 18 permanent names to THE SHIP'S ROLL if not already present.
@@ -77,19 +78,24 @@
       <article><span>MANUELMORENOCAZ</span><strong>TORSTEN <em>(Þórsteinn)</em></strong><small>ᚦᚢᚱᛋᛏᛁᚾ</small></article>
       <article><span>DANIA</span><strong>SVALA <em>(Svala)</em></strong><small>ᛋᚢᛅᛚᛅ</small></article>
       <article><span>JONATHAN</span><strong>BJARNI <em>(Bjarni)</em></strong><small>ᛒᛁᛅᚱᚾᛁ</small></article>
-    </div>`);
+    </div>
+    <figure class="framed"><img class="zoomable" src="day-18-crew-honors.png" alt="Crew Honors Day 18 — Torsten, Svala and Bjarni" /><figcaption>CREW HONORS — DAY 18 · TORSTEN · SVALA · BJARNI</figcaption></figure>`);
 
-  // Preserve Day 17 HISTORY and MYTH as the latest verified historical/myth entries until Day 18 entries are published.
   const historyKicker = q('#history-day-17 .kicker');
   if (historyKicker) historyKicker.textContent = 'LATEST HISTORY — DAY 17';
 
-  // Archive heading records the completed chapter without pretending unpublished Day 18 artwork exists.
   const archiveTitle = q('#voyage-archive h2');
   if (archiveTitle) archiveTitle.textContent = 'CHAPTER II — COMPLETE';
   const archiveIntro = q('#voyage-archive .gallery-intro');
-  if (archiveIntro) archiveIntro.innerHTML = 'Chapter I remains frozen in the archive. On Day 18 the fleet reached <strong>Newfoundland</strong>, completing Chapter II. Day 17 artwork remains preserved below as part of the voyage record.';
+  if (archiveIntro) archiveIntro.innerHTML = 'Chapter I remains frozen in the archive. On Day 18 the fleet reached <strong>Newfoundland</strong>, completing Chapter II. Day 18 artwork records the landfall, while earlier artwork remains preserved as part of the voyage record.';
+  const gallery = q('#voyage-archive .gallery-grid');
+  if (gallery && !gallery.querySelector('img[src="day-18-viking-dispatch.png"]')) {
+    gallery.insertAdjacentHTML('afterbegin', `
+      <figure><img src="day-18-viking-dispatch.png" alt="Day 18 Viking Dispatch" /><figcaption><strong>DAY 18 · VIKING DISPATCH</strong></figcaption></figure>
+      <figure><img src="day-18-crew-honors.png" alt="Day 18 Crew Honors" /><figcaption><strong>DAY 18 · CREW HONORS</strong></figcaption></figure>
+      <figure><img src="day-18-our-saga.png" alt="Day 18 Our Saga" /><figcaption><strong>DAY 18 · OUR SAGA</strong></figcaption></figure>`);
+  }
 
-  // Closing record
   const closing = q('.closing-saga .wrap');
   if (closing) closing.innerHTML = '<p>“Every step counts.<br>Every Viking matters.”</p><span>DAY 18 · 89 VIKINGS · 30,701,056 STEPS · NEWFOUNDLAND · CHAPTER II COMPLETE</span>';
 })();
