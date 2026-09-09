@@ -68,6 +68,43 @@
     archive.innerHTML = `<div class="wrap"><div class="kicker gold">THE VOYAGE ARCHIVE</div><h2>RELIVE THE JOURNEY — DAY BY DAY</h2><p class="archive-intro">Every completed day remains part of the voyage. Chapter I is frozen in the archive; Chapter II continues from the North American mainland toward Newfoundland.</p><div class="archive-days">${cards}</div></div>`;
   }
 
+  // Keeper's Chamber — a moderated home for crew voices.
+  // Public identity rule: never expose private real-world names here.
+  const sagaAnchor = document.getElementById('our-saga-day-19') || document.getElementById('our-saga-day-17');
+  if (sagaAnchor && !document.getElementById('keepers-chamber')) {
+    const chamberStyle = document.createElement('style');
+    chamberStyle.id = 'keepers-chamber-style';
+    chamberStyle.textContent = `
+      #keepers-chamber { padding:92px 0; background:#071116; border-top:1px solid rgba(201,163,91,.22); border-bottom:1px solid rgba(201,163,91,.22); }
+      #keepers-chamber .keeper-intro { max-width:760px; margin:0 0 1.8rem; color:#d9d1c2; line-height:1.75; }
+      #keepers-chamber .keeper-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.5rem; }
+      #keepers-chamber .keeper-card { min-width:0; padding:1.25rem; background:linear-gradient(145deg,rgba(114,18,27,.14),rgba(7,17,22,.95)); border:1px solid rgba(201,163,91,.38); }
+      #keepers-chamber .keeper-card span { display:block; color:#c9a35b; font-size:.75rem; font-weight:700; letter-spacing:.14em; margin-bottom:.65rem; }
+      #keepers-chamber .keeper-card strong { display:block; color:#f1eadb; font-size:1.05rem; margin-bottom:.6rem; }
+      #keepers-chamber .keeper-card p { margin:0; color:#cfc6b6; line-height:1.6; }
+      #keepers-chamber .keeper-quote { margin:2rem 0 0; padding:1.15rem 1.25rem; border-left:3px solid #c9a35b; background:rgba(201,163,91,.06); color:#f1eadb; font-style:italic; }
+      #keepers-chamber .keeper-note { margin-top:1.15rem; color:#9f9688; font-size:.86rem; line-height:1.55; }
+      @media (max-width:800px) { #keepers-chamber { padding:76px 0; } #keepers-chamber .keeper-grid { grid-template-columns:1fr; } }
+    `;
+    document.head.appendChild(chamberStyle);
+
+    const chamber = document.createElement('section');
+    chamber.id = 'keepers-chamber';
+    chamber.innerHTML = `<div class="wrap">
+      <div class="kicker gold">🐦‍⬛ THE KEEPER'S CHAMBER</div>
+      <h2>EVERY VIKING CARRIES A STORY</h2>
+      <p class="keeper-intro">Some stories are written in steps. Some are told around the fire. Some are remembered long after the ships have sailed. Here, Þóra — Keeper of the Saga — gathers the voices of our crew so the voyage can be remembered by more than one storyteller.</p>
+      <div class="keeper-grid">
+        <article class="keeper-card"><span>CREW VOICES</span><strong>Leave your mark on the saga</strong><p>Short thoughts, memories, reactions and moments from the voyage can become part of the crew's living record.</p></article>
+        <article class="keeper-card"><span>TALES FROM THE CREW</span><strong>Your Viking. Your voice.</strong><p>Longer stories can explore the people behind the oars and the paths that brought them aboard our fleet.</p></article>
+        <article class="keeper-card"><span>QUESTIONS & IDEAS</span><strong>Help shape what comes next</strong><p>The crew may ask questions, suggest ideas and help the Captain and Keeper discover where the saga wants to go.</p></article>
+      </div>
+      <div class="keeper-quote">“OUR SAGA IS THE CREW'S SAGA.”</div>
+      <p class="keeper-note">The Keeper's Chamber is curated rather than automatically published. Crew contributions remain theirs, and only public Viking identities are used on this site. Private real-world names are never displayed.</p>
+    </div>`;
+    sagaAnchor.insertAdjacentElement('afterend', chamber);
+  }
+
   // Keep the voyage seal inside the Ship's Log on mobile. day16.js runs after
   // this file, so defer this small override until both scripts have finished.
   setTimeout(() => {
