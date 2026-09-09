@@ -7,10 +7,14 @@ const json = (res, status, payload) => {
 };
 
 const clean = (value, max) => String(value ?? '').replace(/\u0000/g, '').trim().slice(0, max);
+const blobConfigured = () => Boolean(
+  process.env.BLOB_STORE_ID ||
+  process.env.BLOB_READ_WRITE_TOKEN
+);
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    return json(res, 200, { ready: Boolean(process.env.BLOB_READ_WRITE_TOKEN) });
+    return json(res, 200, { ready: blobConfigured() });
   }
 
   if (req.method !== 'POST') {
@@ -18,7 +22,7 @@ export default async function handler(req, res) {
     return json(res, 405, { ok: false, error: 'Method not allowed.' });
   }
 
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  if (!blobConfigured()) {
     return json(res, 503, { ok: false, error: 'The Keeper’s message route is not active yet.' });
   }
 
