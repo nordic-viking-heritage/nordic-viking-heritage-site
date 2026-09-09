@@ -68,6 +68,30 @@
     archive.innerHTML = `<div class="wrap"><div class="kicker gold">THE VOYAGE ARCHIVE</div><h2>RELIVE THE JOURNEY — DAY BY DAY</h2><p class="archive-intro">Every completed day remains part of the voyage. Chapter I is frozen in the archive; Chapter II continues from the North American mainland toward Newfoundland.</p><div class="archive-days">${cards}</div></div>`;
   }
 
+  // Keep the voyage seal inside the Ship's Log on mobile. day16.js runs after
+  // this file, so defer this small override until both scripts have finished.
+  setTimeout(() => {
+    const seal = document.querySelector('#voyage .seal');
+    const head = document.querySelector('#voyage .status-head');
+    if (!seal || !head || !window.matchMedia('(max-width: 800px)').matches) return;
+    head.style.display = 'grid';
+    head.style.gridTemplateColumns = 'minmax(0,1fr) 96px';
+    head.style.columnGap = '12px';
+    head.style.alignItems = 'start';
+    head.style.position = 'relative';
+    seal.style.position = 'static';
+    seal.style.width = '96px';
+    seal.style.maxWidth = '96px';
+    seal.style.height = 'auto';
+    seal.style.right = '';
+    seal.style.top = '';
+    seal.style.margin = '0';
+    seal.style.transform = 'none';
+    seal.style.justifySelf = 'end';
+    seal.style.alignSelf = 'start';
+    seal.style.zIndex = 'auto';
+  }, 0);
+
   const box = document.getElementById('lightbox');
   if (!box) return;
   const full = box.querySelector('img');
