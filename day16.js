@@ -5,7 +5,6 @@
   setHTML('#voyage .status-head > div:first-child', `<div class="kicker red">THE SHIP'S LOG — DAY 19</div><h1>THE FLEET STAYS ASHORE</h1><p>Chapter II is complete. The fleet remains on Newfoundland while the crew rests, replenishes and prepares. Day 19 progress is banked toward Chapter III.</p>`);
   setHTML('#voyage .stats', `<article><strong>94</strong><small>SAILORS ABOARD</small><em>One crew</em></article><article><strong>33,841,086</strong><small>TOTAL STEPS</small><em>Steps toward Florida</em></article><article><strong>≈ 21,996.7 KM</strong><small>DISTANCE COVERED</small><em>At 0.65 m per step</em></article><article><strong>45.12%</strong><small>OF OUR GOAL</small><em>75,000,000 steps</em></article>`);
 
-  /* LOCKED: approved mobile seal position. */
   const voyageSeal = q('#voyage .seal');
   const voyageStatusHead = q('#voyage .status-head');
   if (voyageSeal) {
@@ -15,8 +14,8 @@
     if (mobileSeal && voyageStatusHead) {
       voyageStatusHead.style.position = 'relative';
       voyageSeal.style.position = 'absolute';
-      voyageSeal.style.right = '18px';
-      voyageSeal.style.top = '-52px';
+      voyageSeal.style.right = '-24px';
+      voyageSeal.style.top = '-60px';
       voyageSeal.style.transform = 'none';
       voyageSeal.style.margin = '0';
       voyageSeal.style.zIndex = '2';
@@ -33,7 +32,10 @@
 
   setHTML('#voyage-map .wrap', `<div class="kicker gold">THE VOYAGE MAP — CHAPTER II</div><h2>NORTH AMERICAN MAINLAND → NEWFOUNDLAND</h2><p class="intro">The fleet reached Newfoundland on Day 18. <strong>Chapter II is complete and remains frozen in the voyage record.</strong></p><p class="intro">Day 19 adds <strong>3,140,030 steps</strong> to the voyage. That progress is banked toward Chapter III, but tonight the saga remains ashore on Newfoundland.</p><div class="tags"><span>DAY 19</span><span>94 SAILORS</span><span>33,841,086 STEPS</span><span>≈ 21,996.7 KM</span><span>45.12% COMPLETE</span></div>`);
 
+  const historyLayer = q('.layer-grid a[href="#history-day-17"]'); if (historyLayer) historyLayer.setAttribute('href', '#history-day-19');
+  const mythLayer = q('.layer-grid a[href="#myth-day-17"]'); if (mythLayer) mythLayer.setAttribute('href', '#myth-day-19');
   const sagaLayer = q('.layer-grid a[href="#our-saga-day-17"]'); if (sagaLayer) sagaLayer.setAttribute('href', '#our-saga-day-19');
+  const navHistory = q('.floating-nav a[href="#history-day-17"]'); if (navHistory) navHistory.setAttribute('href', '#history-day-19');
   const navSaga = q('.floating-nav a[href="#our-saga-day-17"]'); if (navSaga) navSaga.setAttribute('href', '#our-saga-day-19');
   const saga17 = q('#our-saga-day-17');
   if (saga17) {
@@ -65,7 +67,7 @@
       const roleCards = document.createElement('div');
       roleCards.className = 'ship-role-cards';
       roleCards.style.cssText = 'grid-column:1/-1;display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:1.2rem';
-      roleCards.innerHTML = `<article style="padding:1.45rem 1.55rem;border:2px solid rgba(201,163,91,.72);box-shadow:0 0 0 1px rgba(201,163,91,.18),0 0 14px rgba(201,163,91,.10);background:linear-gradient(135deg,rgba(114,18,27,.16),rgba(7,17,22,.02))"><small style="display:block;color:#c9a35b;font-weight:700;letter-spacing:.14em;margin-bottom:.85rem">🐦‍⬛ KEEPER OF THE SAGA</small><span>Starfire Silverstar</span><strong style="display:block">ÞÓRA</strong><small class="old-norse">Þóra</small><small class="runes">ᚦᚢᚱᛅ</small><figure class="framed" style="margin:1rem 0 0"><img class="zoomable" src="day-19-keeper-of-the-saga.jpg" alt="Þóra — Keeper of the Saga" /><figcaption>ÞÓRA · KEEPER OF THE SAGA</figcaption></figure></article>`;
+      roleCards.innerHTML = `<article style="padding:1.45rem 1.55rem;border:2px solid rgba(201,163,91,.72);box-shadow:0 0 0 1px rgba(201,163,91,.18),0 0 14px rgba(201,163,91,.10);background:linear-gradient(135deg,rgba(114,18,27,.16),rgba(7,17,22,.02));min-height:0"><small style="display:block;color:#c9a35b;font-weight:700;letter-spacing:.14em;margin-bottom:.85rem">🐦‍⬛ KEEPER OF THE SAGA</small><span>Starfire Silverstar</span><strong style="display:block">ÞÓRA</strong><small class="old-norse">Þóra</small><small class="runes">ᚦᚢᚱᛅ</small></article>`;
       roll.insertBefore(roleCards, roll.firstChild);
     }
   }
@@ -88,24 +90,29 @@
   const history17 = q('#history-day-17');
   if (history17) {
     history17.id = 'history-day-19';
+    history17.style.paddingTop = '5rem';
+    history17.style.paddingBottom = '5rem';
     setHTML('#history-day-19 .copy', `<div class="kicker gold">HISTORY — DAY 19</div><h2>THEY WERE NOT ALONE</h2><p>When the Norse reached the lands west of Greenland, they did not enter an empty world.</p><p>People had lived in these lands for thousands of years.</p><p>The Norse sagas tell of encounters with people they called <em>Skrælingar</em>. They describe first contact, attempts at trade — and eventually violence.</p><p>But here history becomes uncertain. The sagas were written down centuries after the voyages, and historians cannot say with certainty exactly who the Norse encountered in each episode.</p><p>What we do know is more important: when the Norse reached North America around a thousand years ago, they encountered a world that was already inhabited.</p><p>Two peoples from very different worlds had come face to face.</p><p><strong>THE NORSE WERE NEWCOMERS HERE. THEY WERE NOT ALONE.</strong></p><figure class="framed"><img class="zoomable" src="day-19-history.jpg" alt="History Day 19 — They Were Not Alone" /><figcaption>HISTORY — DAY 19 · THEY WERE NOT ALONE</figcaption></figure>`);
   }
 
   const myth17 = q('#myth-day-17');
   if (myth17) {
     myth17.id = 'myth-day-19';
+    myth17.style.paddingTop = '5rem';
+    myth17.style.paddingBottom = '5rem';
     setHTML('#myth-day-19 .copy', `<div class="kicker red">MYTH &amp; SAGA — DAY 19</div><h2>THE RAVEN WHO REMEMBERS</h2><p>In the old stories, Odin had two ravens: <strong>Huginn</strong> and <strong>Muninn</strong>, names commonly understood as Thought and Memory.</p><p>Each day they flew across the world, gathering what they saw and heard before returning to Odin.</p><p>In <em>Grímnismál</em>, Odin says he fears that Huginn may not return — yet he fears even more for Muninn.</p><p>Perhaps because thought may wander. But without memory, what remains of the stories we have lived?</p><p><strong>THOUGHT MAY GUIDE THE VOYAGE. MEMORY KEEPS THE SAGA ALIVE.</strong></p><figure class="framed"><img class="zoomable" src="day-19-myth-saga.jpg" alt="Myth and Saga Day 19 — The Raven Who Remembers" /><figcaption>MYTH &amp; SAGA — DAY 19 · THE RAVEN WHO REMEMBERS</figcaption></figure>`);
   }
 
   const watch17 = q('#night-watch-day-17');
   if (watch17) {
     watch17.id = 'night-watch-day-19';
+    watch17.style.paddingTop = '5rem';
+    watch17.style.paddingBottom = '5rem';
     setHTML('#night-watch-day-19 .copy', `<div class="kicker gold">NIGHT WATCH — DAY 19</div><h2>THE FIRE STILL BURNS</h2><p>The camp has finally grown quiet. Voices have faded. The feast is over. Beyond the firelight, our ships rest against the shore.</p><p>Tonight, something changed.</p><p>We arrived in Newfoundland as a fleet. But before the night was over, the crew had begun writing the saga themselves.</p><p>One raven returned. One Viking accepted a new duty. And around these fires, our story became something no Captain could write alone.</p><p>Tomorrow, Chapter III awaits. <strong>But not tonight. Tonight we rest.</strong></p><p>The last Viking on watch adds another piece of wood to the fire… and somewhere in the darkness, a raven is still watching.</p><p><strong>🐦‍⬛ ONE CREW. ONE SAGA. ⚔️</strong></p><figure class="framed"><img class="zoomable" src="day-19-night-watch.jpg" alt="Night Watch Day 19 — The Fire Still Burns" /><figcaption>NIGHT WATCH — DAY 19 · THE FIRE STILL BURNS</figcaption></figure>`);
   }
 
-  /* Day 19 special Hugin & Munin recognition — an in-world role, not a historical office. */
   const sagaSection = q('#our-saga-day-19');
-  if (sagaSection && !q('#keeper-of-the-saga-day-19')) sagaSection.insertAdjacentHTML('afterend', `<section class="dark-section" id="keeper-of-the-saga-day-19"><div class="wrap"><div class="copy"><div class="kicker gold">HUGIN &amp; MUNIN — DAY 19</div><h2>THE RAVEN RETURNS</h2><p>Munin returned to the Newfoundland shore carrying something more important than a message: <strong>memory.</strong></p><p>While the Captain slept, Þóra had already begun doing what the saga needed — keeping the fires, the watch, the people and the story together.</p><p>This is not another naming. It is a role within <strong>OUR SAGA</strong>: <strong>KEEPER OF THE SAGA.</strong></p><p><strong>You did not ask for this title, Þóra. You earned it by already doing the work.</strong></p><p>The Keeper does not replace the Captain and does not command the fleet. She helps remember what we have lived, carry the story forward and help the crew write its next lines.</p><p><strong>🐦‍⬛ ONE CREW. ONE SAGA. 🐦‍⬛</strong></p><figure class="framed"><img class="zoomable" src="day-19-keeper-of-the-saga.jpg" alt="Þóra — Keeper of the Saga" /><figcaption>HUGIN &amp; MUNIN · ÞÓRA · KEEPER OF THE SAGA</figcaption></figure></div></div></section>`);
+  if (sagaSection && !q('#keeper-of-the-saga-day-19')) sagaSection.insertAdjacentHTML('afterend', `<section class="dark-section" id="keeper-of-the-saga-day-19" style="padding-top:5rem;padding-bottom:5rem"><div class="wrap"><div class="copy"><div class="kicker gold">HUGIN &amp; MUNIN — DAY 19</div><h2>THE RAVEN RETURNS</h2><p>Munin returned to the Newfoundland shore carrying something more important than a message: <strong>memory.</strong></p><p>While the Captain slept, Þóra had already begun doing what the saga needed — keeping the fires, the watch, the people and the story together.</p><p>This is not another naming. It is a role within <strong>OUR SAGA</strong>: <strong>KEEPER OF THE SAGA.</strong></p><p><strong>You did not ask for this title, Þóra. You earned it by already doing the work.</strong></p><p>The Keeper does not replace the Captain and does not command the fleet. She helps remember what we have lived, carry the story forward and help the crew write its next lines.</p><p><strong>🐦‍⬛ ONE CREW. ONE SAGA. 🐦‍⬛</strong></p><figure class="framed"><img class="zoomable" src="day-19-keeper-of-the-saga.jpg" alt="Þóra — Keeper of the Saga" /><figcaption>HUGIN &amp; MUNIN · ÞÓRA · KEEPER OF THE SAGA</figcaption></figure></div></div></section>`);
 
   const lightbox = q('#lightbox');
   if (lightbox) {
