@@ -17,6 +17,28 @@ const readSubmission = async (pathname) => {
   return JSON.parse(await new Response(readback.stream).text());
 };
 
+const readBucket = async (status) => {
+  const result = await list({ prefix: `keepers-chamber/${status}/` });
+  const blobs = [...(result.blobs || [])]
+    .sort((a, b) => new Date(b.uploadedAt || 0) - new Date(a.uploadedAt || 0))
+    .slice(0, 50);
+  const messages = [];
+  for (const blob of blobs) {
+    const stored = await readSubmission(blob.pathname);
+    if (stored?.kind !== 'crew-voice') continue;
+    messages.push({
+      id: blob.pathname,
+      identity: stored.identity,
+      message: stored.message,
+      submittedAt: stored.submittedAt,
+      status: stored.status,
+      decidedAt: stored.moderation?.decidedAt || null,
+      automaticPublishing: stored.privacy?.automaticPublishing === true
+    });
+  }
+  return messages;
+};
+
 export default async function handler(req, res) {
   if (process.env.VERCEL_ENV !== 'preview') {
     return json(res, 404, { ok: false, error: 'Not found.' });
@@ -24,26 +46,18 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      const result = await list({ prefix: 'keepers-chamber/pending/' });
-      const blobs = [...(result.blobs || [])]
-        .sort((a, b) => new Date(b.uploadedAt || 0) - new Date(a.uploadedAt || 0))
-        .slice(0, 50);
-
-      const messages = [];
-      for (const blob of blobs) {
-        const stored = await readSubmission(blob.pathname);
-        if (stored?.kind !== 'crew-voice') continue;
-        messages.push({
-          id: blob.pathname,
-          identity: stored.identity,
-          message: stored.message,
-          submittedAt: stored.submittedAt,
-          status: stored.status,
-          automaticPublishing: stored.privacy?.automaticPublishing === true
-        });
-      }
-
-      return json(res, 200, { ok: true, count: messages.length, messages });
+      const [pending, approved, rejected] = await Promise.all([
+        readBucket('pending'),
+        readBucket('approved'),
+        readBucket('rejected')
+      ]);
+      return json(res, 200, {
+        ok: true,
+        counts: { pending: pending.length, approved: approved.length, rejected: rejected.length },
+        pending,
+        approved,
+        rejected
+      });
     } catch (error) {
       console.error('Keeper inbox read failed:', error);
       return json(res, 500, { ok: false, error: 'The Keeper could not open the message chest.' });
@@ -65,24 +79,14 @@ export default async function handler(req, res) {
       const moderated = {
         ...stored,
         status: action,
-        moderation: {
-          decision: action,
-          decidedAt: new Date().toISOString(),
-          automaticPublishing: false
-        },
-        privacy: {
-          ...(stored.privacy || {}),
-          automaticPublishing: false
-        }
+        moderation: { decision: action, decidedAt: new Date().toISOString(), automaticPublishing: false },
+        privacy: { ...(stored.privacy || {}), automaticPublishing: false }
       };
 
       const filename = pathname.split('/').pop();
       const destination = `keepers-chamber/${action}/${filename}`;
       await put(destination, JSON.stringify(moderated, null, 2), {
-        access: 'private',
-        addRandomSuffix: false,
-        allowOverwrite: false,
-        contentType: 'application/json'
+        access: 'private', addRandomSuffix: false, allowOverwrite: false, contentType: 'application/json'
       });
       await del(pathname);
 
