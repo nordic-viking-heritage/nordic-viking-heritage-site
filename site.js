@@ -45,7 +45,17 @@
     setArt('#history-day-20','day-20-history.jpg','History Day 20 — They Sailed South Before Us');
     setArt('#night-watch-day-20','day-20-night-watch.jpg','Night Watch Day 20 — The Sea Had Gone Quiet');
 
-    const archive=q('#voyage-archive');if(archive){archive.classList.add('voyage-archive','dark-section');archive.innerHTML=`<div class="wrap"><div class="kicker gold">THE VOYAGE ARCHIVE</div><h2>RELIVE THE JOURNEY — DAY BY DAY</h2><p class="archive-intro">Chapter I is frozen. Chapter II ended at Newfoundland on Day 18. Day 19 records the crew's night ashore. <strong>Day 20 marks the beginning of Chapter III: Newfoundland → Nova Scotia.</strong></p><div class="archive-days"><article class="archive-day"><div class="archive-day-copy"><span>DAY 20</span><strong>THE SAILS RISE AGAIN</strong><small>94 sailors · 35,729,859 steps · ≈ 23,224.4 km · Chapter III begins</small></div></article><article class="archive-day"><div class="archive-day-copy"><span>DAY 19</span><strong>THE FLEET STAYS ASHORE</strong><small>94 sailors · 33,841,086 steps · ≈ 21,996.7 km · progress banked</small></div></article><article class="archive-day"><div class="archive-day-copy"><span>DAY 18</span><strong>NEWFOUNDLAND REACHED</strong><small>Chapter II complete</small></div></article></div></div>`;}
+    const archive=q('#voyage-archive');
+    if(archive){
+      const archiveTitle=archive.querySelector('h2');
+      if(archiveTitle) archiveTitle.textContent='NEWFOUNDLAND → NOVA SCOTIA — DAY 20';
+      const archiveIntro=archive.querySelector('.gallery-intro');
+      if(archiveIntro) archiveIntro.innerHTML=`Chapter I and Chapter II remain frozen in the voyage record. Day 19 records the crew's night ashore on <strong>Newfoundland</strong>. Day 20 begins <strong>Chapter III</strong> as the fleet sails south toward Nova Scotia.`;
+      const gallery=archive.querySelector('.gallery-grid');
+      if(gallery && !gallery.querySelector('img[src="day-20-viking-dispatch.jpg"]')){
+        gallery.insertAdjacentHTML('afterbegin', `<figure><img src="day-20-viking-dispatch.jpg" alt="Day 20 Viking Dispatch" /><figcaption><strong>DAY 20 · VIKING DISPATCH</strong></figcaption></figure><figure><img src="day-20-crew-honors.jpg" alt="Day 20 Crew Honors" /><figcaption><strong>DAY 20 · CREW HONORS</strong></figcaption></figure><figure><img src="day-20-our-saga.jpg" alt="Day 20 Our Saga" /><figcaption><strong>DAY 20 · OUR SAGA</strong></figcaption></figure><figure><img src="day-20-myth-and-saga.jpg" alt="Day 20 Myth and Saga" /><figcaption><strong>DAY 20 · MYTH &amp; SAGA</strong></figcaption></figure><figure><img src="day-20-history.jpg" alt="Day 20 History" /><figcaption><strong>DAY 20 · HISTORY</strong></figcaption></figure><figure><img src="day-20-night-watch.jpg" alt="Day 20 Night Watch" /><figcaption><strong>DAY 20 · NIGHT WATCH</strong></figcaption></figure>`);
+      }
+    }
 
     const closing=q('.closing-saga span');if(closing)closing.textContent='DAY 20 · 94 VIKINGS · 35,729,859 STEPS · CHAPTER III · ONE LIVING SAGA';
 
