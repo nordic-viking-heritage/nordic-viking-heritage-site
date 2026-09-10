@@ -105,6 +105,14 @@
     sagaAnchor.insertAdjacentElement('afterend', chamber);
   }
 
+  // Load the Crew Voices form only after the chamber exists.
+  if (document.getElementById('keepers-chamber') && !document.getElementById('keepers-chamber-form-loader')) {
+    const crewVoicesScript = document.createElement('script');
+    crewVoicesScript.id = 'keepers-chamber-form-loader';
+    crewVoicesScript.src = 'keepers-chamber.js?v=preview-2';
+    document.body.appendChild(crewVoicesScript);
+  }
+
   // Keep the voyage seal inside the Ship's Log on mobile. day16.js runs after
   // this file, so defer this small override until both scripts have finished.
   setTimeout(() => {
