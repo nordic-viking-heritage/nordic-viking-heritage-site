@@ -1,67 +1,200 @@
 (() => {
   const q = (s) => document.querySelector(s);
+  const qa = (s) => [...document.querySelectorAll(s)];
   const setHTML = (s, html) => { const el = q(s); if (el) el.innerHTML = html; };
 
   const applyDay20 = () => {
+    document.title = 'Nordic Viking Heritage — Viking Voyage II — Day 20';
+    const meta = q('meta[name="description"]');
+    if (meta) meta.setAttribute('content', 'Nordic Viking Heritage — Viking Voyage II, Day 20. Chapter III: Newfoundland to Nova Scotia.');
+
     setHTML('#voyage .status-head > div:first-child', `<div class="kicker red">THE SHIP'S LOG — DAY 20</div><h1>THE SAILS RISE AGAIN</h1><p>Chapter III has begun. Newfoundland lies behind the fleet and Nova Scotia waits ahead.</p>`);
     setHTML('#voyage .stats', `<article><strong>94</strong><small>SAILORS ABOARD</small><em>One crew</em></article><article><strong>35,729,859</strong><small>TOTAL STEPS</small><em>Steps toward Florida</em></article><article><strong>≈ 23,224.4 KM</strong><small>DISTANCE COVERED</small><em>At 0.65 m per step</em></article><article><strong>47.64%</strong><small>OF OUR GOAL</small><em>75,000,000 steps</em></article>`);
+
+    const ravens = q('.ravens-band .ravens-inner');
+    if (ravens) ravens.innerHTML = `<img class="raven" src="assets/hugin.png" alt="Hugin the raven" /><div><strong>THE RAVENS FLY WITH THE FLEET.</strong><p>Memory has returned. The saga has a Keeper. Chapter III carries the crew south.</p></div><img class="raven" src="assets/munin.png" alt="Munin the raven" />`;
 
     setHTML('#dispatch .copy', `<div class="kicker gold">VIKING DISPATCH — DAY 20</div><h2>THE SAILS RISE AGAIN</h2><p>The fires of Newfoundland have burned long enough.</p><p>Tonight, <strong>94 Vikings</strong> return to the sea.</p><p>Our fleet now stands at <strong>35,729,859 steps</strong> — approximately <strong>23,224.4 km</strong> carried by one crew from the ice toward the sun.</p><p>Since yesterday, another <strong>1,888,773 steps</strong> have been added to our voyage — roughly <strong>1,227.7 km</strong>.</p><p>The rest was earned. The ships are ready. And now the coastline ahead calls us south.</p><p><strong>CHAPTER III BEGINS.</strong></p><p>Newfoundland falls behind us. Ahead lies Nova Scotia.</p><p><strong>ONE CREW. ONE SAGA.</strong></p>`);
 
     setHTML('#voyage-map .wrap', `<div class="kicker gold">THE VOYAGE MAP — CHAPTER III</div><h2>NEWFOUNDLAND → NOVA SCOTIA</h2><p class="intro">The fleet has left Newfoundland and is now sailing the waters of Chapter III. <strong>The new chart remains rolled up for now.</strong></p><p class="intro">Day 20 brings the voyage to <strong>35,729,859 steps</strong> — approximately <strong>23,224.4 km</strong> since Greenland.</p><div class="tags"><span>DAY 20</span><span>94 SAILORS</span><span>35,729,859 STEPS</span><span>≈ 23,224.4 KM</span><span>47.64% COMPLETE</span></div>`);
 
-    const saga = q('#our-saga-day-19') || q('#our-saga-day-17');
-    if (saga) { saga.id='our-saga-day-20'; setHTML('#our-saga-day-20 .copy', `<div class="kicker gold">OUR SAGA — DAY 20</div><h2>THE SHORE GREW QUIET BEHIND THEM</h2><p>One by one, the fires of Newfoundland disappeared into the darkness.</p><p>The longships were moving again.</p><p>Red-and-white sails filled above the fleet as <strong>94 Vikings</strong> returned to the sea, carrying new names, old friendships and stories still being written.</p><p>Somewhere among them sailed Ulf. No ceremony marked his place. Tonight, he was simply one Viking among many.</p><p>Ahead lay Nova Scotia. Between the fleet and that distant shore stretched only the dark Atlantic — calm for now, almost welcoming.</p><p>Hákon stood beneath the sail and watched the horizon.</p><p>Þóra would remember what came next.</p><p><strong>CHAPTER III HAD BEGUN.</strong></p><p><strong>ONE CREW. ONE SAGA.</strong></p>`); }
+    const saga = q('#our-saga-day-19') || q('#our-saga-day-17') || q('#our-saga-day-20');
+    if (saga) {
+      saga.id = 'our-saga-day-20';
+      setHTML('#our-saga-day-20 .copy', `<div class="kicker gold">OUR SAGA — DAY 20</div><h2>THE SHORE GREW QUIET BEHIND THEM</h2><p>One by one, the fires of Newfoundland disappeared into the darkness.</p><p>The longships were moving again.</p><p>Red-and-white sails filled above the fleet as <strong>94 Vikings</strong> returned to the sea, carrying new names, old friendships and stories still being written.</p><p>Somewhere among them sailed Ulf. No ceremony marked his place. Tonight, he was simply one Viking among many.</p><p>Ahead lay Nova Scotia. Between the fleet and that distant shore stretched only the dark Atlantic — calm for now, almost welcoming.</p><p>Hákon stood beneath the sail and watched the horizon.</p><p>Þóra would remember what came next.</p><p><strong>CHAPTER III HAD BEGUN.</strong></p><p><strong>ONE CREW. ONE SAGA.</strong></p>`);
+    }
 
-    const history=q('#history-day-19')||q('#history-day-17');
-    if(history){history.id='history-day-20';const copy=history.querySelector('.copy')||history.querySelector('.wrap');if(copy)copy.innerHTML=`<div class="kicker gold">HISTORY — DAY 20</div><h2>THE CLUE THAT POINTED SOUTH</h2><p>Archaeology at <strong>L'Anse aux Meadows</strong> preserves evidence that the Norse travelled beyond their Newfoundland base.</p><p>Butternuts and butternut wood were found at the site. Butternut does not grow in northern Newfoundland; its northern range lies farther south, including parts of Nova Scotia and New Brunswick.</p><p>The finds do not tell us an exact destination. They do tell us something important: people using L'Anse aux Meadows travelled farther south and returned with material from those regions.</p><p><strong>SAGAN FÅR VARA VILD. HISTORIEN SKA VARA SANN.</strong></p>`;}
+    const staleKeeper = q('#keeper-of-the-saga-day-19');
+    if (staleKeeper) staleKeeper.remove();
 
-    const myth=q('#myth-day-19')||q('#myth-day-17');
-    if(myth){myth.id='myth-day-20';const copy=myth.querySelector('.copy')||myth.querySelector('.wrap');if(copy)copy.innerHTML=`<div class="kicker gold">MYTH &amp; SAGA — DAY 20</div><h2>THE WIND DOES NOT BELONG TO THE CAPTAIN</h2><p>The Vikings knew that well.</p><p>Among the gods was <strong>Njǫrðr</strong>, associated with the sea, the wind and the fortunes of those who sailed upon them.</p><p>Tonight, as Newfoundland disappeared behind our fleet, the red-and-white sails began to fill.</p><p>Was it simply the Atlantic wind? Or had Njǫrðr noticed 94 Vikings returning to his waters?</p><p>Hákon could choose the course. The crew could pull the oars. But the wind belonged to powers older than either.</p><p><strong>AND TONIGHT, IT WAS BLOWING SOUTH.</strong></p>`;}
+    const history = q('#history-day-19') || q('#history-day-17') || q('#history-day-20');
+    if (history) {
+      history.id = 'history-day-20';
+      const copy = history.querySelector('.copy') || history.querySelector('.wrap');
+      if (copy) copy.innerHTML = `<div class="kicker gold">HISTORY — DAY 20</div><h2>THE CLUE THAT POINTED SOUTH</h2><p>Archaeology at <strong>L'Anse aux Meadows</strong> preserves evidence that the Norse travelled beyond their Newfoundland base.</p><p>Butternuts and butternut wood were found at the site. Butternut does not grow in northern Newfoundland; its northern range lies farther south, including parts of Nova Scotia and New Brunswick.</p><p>The finds do not tell us an exact destination. They do tell us something important: people using L'Anse aux Meadows travelled farther south and returned with material from those regions.</p><p><strong>SAGAN FÅR VARA VILD. HISTORIEN SKA VARA SANN.</strong></p>`;
+    }
 
-    const night=q('#night-watch-day-19')||q('#night-watch-day-17');
-    if(night){night.id='night-watch-day-20';const copy=night.querySelector('.copy')||night.querySelector('.wrap');if(copy)copy.innerHTML=`<div class="kicker gold">NIGHT WATCH — DAY 20</div><h2>THE SEA HAD GONE QUIET</h2><p>Behind the fleet, Newfoundland had vanished into darkness.</p><p>Above them, the red-and-white sails breathed gently beneath the stars. Most of the crew slept. Only the night watch remained awake.</p><p>The Atlantic stretched southward — black, calm and endless. For now, the waves moved softly against the hulls.</p><p>Far beyond the reach of the lanterns, something was changing.</p><p>Not a storm. <strong>Not yet.</strong></p><p>The watchman listened. Then looked toward the dark horizon.</p><p><strong>CHAPTER III HAD ONLY JUST BEGUN.</strong></p>`;}
+    const myth = q('#myth-day-19') || q('#myth-day-17') || q('#myth-day-20');
+    if (myth) {
+      myth.id = 'myth-day-20';
+      const copy = myth.querySelector('.copy') || myth.querySelector('.wrap');
+      if (copy) copy.innerHTML = `<div class="kicker red">MYTH &amp; SAGA — DAY 20</div><h2>THE WIND DOES NOT BELONG TO THE CAPTAIN</h2><p>The Vikings knew that well.</p><p>Among the gods was <strong>Njǫrðr</strong>, associated with the sea, the wind and the fortunes of those who sailed upon them.</p><p>Tonight, as Newfoundland disappeared behind our fleet, the red-and-white sails began to fill.</p><p>Was it simply the Atlantic wind? Or had Njǫrðr noticed 94 Vikings returning to his waters?</p><p>Hákon could choose the course. The crew could pull the oars. But the wind belonged to powers older than either.</p><p><strong>AND TONIGHT, IT WAS BLOWING SOUTH.</strong></p>`;
+    }
 
-    document.querySelectorAll('a[href="#history-day-19"],a[href="#history-day-17"]').forEach(a=>a.setAttribute('href','#history-day-20'));
-    document.querySelectorAll('a[href="#myth-day-19"],a[href="#myth-day-17"]').forEach(a=>a.setAttribute('href','#myth-day-20'));
-    document.querySelectorAll('a[href="#our-saga-day-19"],a[href="#our-saga-day-17"]').forEach(a=>a.setAttribute('href','#our-saga-day-20'));
+    const night = q('#night-watch-day-19') || q('#night-watch-day-17') || q('#night-watch-day-20');
+    if (night) {
+      night.id = 'night-watch-day-20';
+      const copy = night.querySelector('.copy') || night.querySelector('.wrap');
+      if (copy) copy.innerHTML = `<div class="kicker gold">NIGHT WATCH — DAY 20</div><h2>THE SEA HAD GONE QUIET</h2><p>Behind the fleet, Newfoundland had vanished into darkness.</p><p>Above them, the red-and-white sails breathed gently beneath the stars. Most of the crew slept. Only the night watch remained awake.</p><p>The Atlantic stretched southward — black, calm and endless. For now, the waves moved softly against the hulls.</p><p>Far beyond the reach of the lanterns, something was changing.</p><p>Not a storm. <strong>Not yet.</strong></p><p>The watchman listened. Then looked toward the dark horizon.</p><p><strong>CHAPTER III HAD ONLY JUST BEGUN.</strong></p>`;
+    }
 
-    const roll=q('#ship-roll .roll-grid');
-    if(roll){const add=(identity,name,oldNorse,runes)=>{if([...roll.querySelectorAll('span')].some(x=>x.textContent.trim()===identity))return;roll.insertAdjacentHTML('beforeend',`<article><span>${identity}</span><strong>${name}</strong><small class="old-norse">${oldNorse}</small><small class="runes">${runes}</small></article>`);};add('Telephon','Runa','Rúna','ᚱᚢᚾᛅ');add('Lea SamU','Egil','Egill','ᛁᚴᛁᛚ');add('Esha M','Hild','Hildr','ᚼᛁᛚᛏᛦ');}
+    qa('a[href="#history-day-19"],a[href="#history-day-17"]').forEach(a => a.setAttribute('href', '#history-day-20'));
+    qa('a[href="#myth-day-19"],a[href="#myth-day-17"]').forEach(a => a.setAttribute('href', '#myth-day-20'));
+    qa('a[href="#our-saga-day-19"],a[href="#our-saga-day-17"]').forEach(a => a.setAttribute('href', '#our-saga-day-20'));
 
-    const honorsWrap=q('#honors .wrap');
-    if(honorsWrap){const archive=q('#crew-honors-archive');honorsWrap.innerHTML=`<div class="kicker red">CREW HONORS — DAY 20</div><h2>THREE VIKINGS. THREE DIFFERENT PATHS. ONE CREW.</h2><div class="honors-explainer"><div class="kicker red">THE HONOR BEHIND THE NAME</div><h3>EVERY OAR MATTERS</h3><p>Crew Honors belongs to <strong>OUR SAGA</strong>. It is a Viking Voyage II tradition, not a claimed reconstruction of a documented Viking Age ceremony.</p><p>Once entered into <strong>THE SHIP'S ROLL</strong>, a sailor's name remains part of this voyage.</p></div><img class="day20-art zoomable" src="day-20-crew-honors.jpg" alt="Crew Honors Day 20 — Rúna, Egil and Hild"><div class="naming-list"><article><span>TELEPHON</span><strong>RUNA <em>(Rúna)</em></strong><small>ᚱᚢᚾᛅ</small></article><article><span>LEA SAMU</span><strong>EGIL <em>(Egill)</em></strong><small>ᛁᚴᛁᛚ</small></article><article><span>ESHA M</span><strong>HILD <em>(Hildr)</em></strong><small>ᚼᛁᛚᛏᛦ</small></article></div><p style="margin-top:1.5rem"><strong>EVERY OAR MATTERS. EVERY NAME HAS A STORY. ONE CREW. ONE SAGA.</strong></p>`;if(archive)honorsWrap.appendChild(archive);}
+    const roll = q('#ship-roll .roll-grid');
+    if (roll) {
+      const add = (identity, name, oldNorse, runes) => {
+        if ([...roll.querySelectorAll('span')].some(x => x.textContent.trim() === identity)) return;
+        roll.insertAdjacentHTML('beforeend', `<article><span>${identity}</span><strong>${name}</strong><small class="old-norse">${oldNorse}</small><small class="runes">${runes}</small></article>`);
+      };
+      add('Telephon', 'Runa', 'Rúna', 'ᚱᚢᚾᛅ');
+      add('Lea SamU', 'Egil', 'Egill', 'ᛁᚴᛁᛚ');
+      add('Esha M', 'Hild', 'Hildr', 'ᚼᛁᛚᛏᛦ');
 
-    if(roll){const existing=q('#ship-roll .ship-role-cards');if(existing)existing.remove();const roles=document.createElement('div');roles.className='ship-role-cards';roles.style.cssText='grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:1.2rem';roles.innerHTML=`<article><small>⚔️ THE CAPTAIN</small><span>Stefan</span><strong>HÁKON</strong></article><article><small>🐦‍⬛ KEEPER OF THE SAGA</small><span>Starfire Silverstar</span><strong>ÞÓRA</strong></article>`;roll.insertBefore(roles,roll.firstChild);}
+      const starfireEntry = [...roll.querySelectorAll('article')].find(entry => entry.querySelector('span')?.textContent.trim().startsWith('Starfire Silverstar'));
+      if (starfireEntry) {
+        const n = starfireEntry.querySelector('strong');
+        if (n) n.textContent = 'Þóra';
+      }
 
-    let chamber=q('#keepers-chamber');if(!chamber){chamber=document.createElement('section');chamber.id='keepers-chamber';chamber.className='dark-section';const anchor=q('#our-saga-day-20');if(anchor)anchor.insertAdjacentElement('afterend',chamber);}if(chamber)chamber.innerHTML=`<div class="wrap"><div class="kicker gold">🐦‍⬛ THE KEEPER'S CHAMBER</div><h2>EVERY VIKING CARRIES A STORY</h2><p>Some stories are written in steps. Some are told around the fire. Some are remembered long after the ships have sailed. Here, <strong>Þóra — Keeper of the Saga</strong> gathers the voices of our crew.</p><div class="keeper-grid"><article class="keeper-card"><span>CREW VOICES</span><strong>Leave your mark on the saga</strong><p>Short thoughts, memories, reactions and moments from the voyage can become part of the crew's living record.</p></article><article class="keeper-card"><span>TALES FROM THE CREW</span><strong>Your Viking. Your voice.</strong><p>Longer stories can explore the people behind the oars and the paths that brought them aboard our fleet.</p></article><article class="keeper-card"><span>QUESTIONS &amp; IDEAS</span><strong>Help shape what comes next</strong><p>The crew may ask questions, suggest ideas and help the Captain and Keeper discover where the saga wants to go.</p></article></div><blockquote>“OUR SAGA IS THE CREW'S SAGA.”</blockquote><p><small>The Keeper's Chamber is curated rather than automatically published. Only public Viking/Pacer identities are used here; private real-world names are never displayed.</small></p></div>`;
+      const existingRoles = q('#ship-roll .ship-role-cards');
+      if (existingRoles) existingRoles.remove();
+      const roles = document.createElement('div');
+      roles.className = 'ship-role-cards';
+      roles.style.cssText = 'grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:1.2rem';
+      roles.innerHTML = `<article><small>⚔️ THE CAPTAIN</small><span>Stefan</span><strong>HÁKON</strong></article><article><small>🐦‍⬛ KEEPER OF THE SAGA</small><span>Starfire Silverstar</span><strong>ÞÓRA</strong></article>`;
+      roll.insertBefore(roles, roll.firstChild);
+    }
 
-    if(!q('#day20-live-style')){const style=document.createElement('style');style.id='day20-live-style';style.textContent=`#keepers-chamber{padding:92px 0;border-top:1px solid rgba(201,163,91,.22);border-bottom:1px solid rgba(201,163,91,.22)}#keepers-chamber .keeper-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.5rem 0}.day20-art{display:block;width:min(100%,1000px);height:auto;margin:1.5rem auto 2.5rem;border:1px solid rgba(201,163,91,.45);cursor:zoom-in}#keepers-chamber .keeper-card{padding:1.25rem;background:linear-gradient(145deg,rgba(114,18,27,.14),rgba(7,17,22,.95));border:1px solid rgba(201,163,91,.38)}@media(max-width:800px){#keepers-chamber{padding:76px 0}#keepers-chamber .keeper-grid{grid-template-columns:1fr}.ship-role-cards{grid-template-columns:1fr!important}}`;document.head.appendChild(style);}
+    const honorsWrap = q('#honors .wrap');
+    if (honorsWrap) {
+      const archive = q('#crew-honors-archive');
+      honorsWrap.innerHTML = `<div class="kicker red">CREW HONORS — DAY 20</div><h2>THREE VIKINGS. THREE DIFFERENT PATHS. ONE CREW.</h2><div class="honors-explainer"><div class="kicker red">THE HONOR BEHIND THE NAME</div><h3>EVERY OAR MATTERS</h3><p>Crew Honors belongs to <strong>OUR SAGA</strong>. It is a Viking Voyage II tradition, not a claimed reconstruction of a documented Viking Age ceremony.</p><p>Once entered into <strong>THE SHIP'S ROLL</strong>, a sailor's name remains part of this voyage.</p></div><img class="day20-art zoomable" src="day-20-crew-honors.jpg" alt="Crew Honors Day 20 — Rúna, Egil and Hild"><div class="naming-list"><article><span>TELEPHON</span><strong>RUNA <em>(Rúna)</em></strong><small>ᚱᚢᚾᛅ</small></article><article><span>LEA SAMU</span><strong>EGIL <em>(Egill)</em></strong><small>ᛁᚴᛁᛚ</small></article><article><span>ESHA M</span><strong>HILD <em>(Hildr)</em></strong><small>ᚼᛁᛚᛏᛦ</small></article></div><p style="margin-top:1.5rem"><strong>EVERY OAR MATTERS. EVERY NAME HAS A STORY. ONE CREW. ONE SAGA.</strong></p>`;
+      if (archive) honorsWrap.appendChild(archive);
+    }
 
-    const setArt=(selector,src,alt)=>{const section=q(selector);if(!section)return;let img=section.querySelector('img');if(img){img.src=src;img.alt=alt;img.classList.add('zoomable');}else{const wrap=section.querySelector('.wrap')||section;const copy=section.querySelector('.copy');const art=document.createElement('img');art.src=src;art.alt=alt;art.className='day20-art zoomable';if(copy)copy.insertAdjacentElement('afterend',art);else wrap.appendChild(art);}};
-    setArt('#dispatch','day-20-viking-dispatch.jpg','Viking Dispatch Day 20 — The Sails Rise Again');
-    setArt('#our-saga-day-20','day-20-our-saga.jpg','Our Saga Day 20 — Chapter III begins');
-    setArt('#myth-day-20','day-20-myth-and-saga.jpg','Myth and Saga Day 20 — Njǫrðr');
-    setArt('#history-day-20','day-20-history.jpg','History Day 20 — They Sailed South Before Us');
-    setArt('#night-watch-day-20','day-20-night-watch.jpg','Night Watch Day 20 — The Sea Had Gone Quiet');
+    const honorsArchive = q('#crew-honors-archive .crew-honors-archive-grid');
+    if (honorsArchive && !honorsArchive.querySelector('img[src="day-20-crew-honors.jpg"]')) {
+      honorsArchive.insertAdjacentHTML('afterbegin', `<figure style="position:relative;margin:0;width:100%;min-width:0;height:100%;display:grid;grid-template-rows:1fr 4.2rem;background:#071116;border:1px solid rgba(201,163,91,.45);overflow:hidden"><div style="aspect-ratio:4/5;background:#071116;display:flex;align-items:center;justify-content:center;overflow:hidden"><img class="zoomable" style="display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in" src="day-20-crew-honors.jpg" alt="Crew Honors Day 20 — RUNA · EGIL · HILD" /></div><figcaption style="height:4.2rem;box-sizing:border-box;padding:.58rem .6rem .65rem;background:#071116;text-align:left;overflow:hidden"><strong style="display:block;color:#c9a35b;font-family:Georgia,serif;font-size:.64rem;letter-spacing:.09em;margin-bottom:.22rem">DAY 20</strong><span style="display:block;color:#f1eadb;font-family:Georgia,serif;font-size:.67rem;line-height:1.25">RUNA · EGIL · HILD</span></figcaption></figure>`);
+    }
 
-    const archive=q('#voyage-archive');
-    if(archive){
-      const archiveTitle=archive.querySelector('h2');
-      if(archiveTitle) archiveTitle.textContent='NEWFOUNDLAND → NOVA SCOTIA — DAY 20';
-      const archiveIntro=archive.querySelector('.gallery-intro');
-      if(archiveIntro) archiveIntro.innerHTML=`Chapter I and Chapter II remain frozen in the voyage record. Day 19 records the crew's night ashore on <strong>Newfoundland</strong>. Day 20 begins <strong>Chapter III</strong> as the fleet sails south toward Nova Scotia.`;
-      const gallery=archive.querySelector('.gallery-grid');
-      if(gallery && !gallery.querySelector('img[src="day-20-viking-dispatch.jpg"]')){
-        gallery.insertAdjacentHTML('afterbegin', `<figure><img src="day-20-viking-dispatch.jpg" alt="Day 20 Viking Dispatch" /><figcaption><strong>DAY 20 · VIKING DISPATCH</strong></figcaption></figure><figure><img src="day-20-crew-honors.jpg" alt="Day 20 Crew Honors" /><figcaption><strong>DAY 20 · CREW HONORS</strong></figcaption></figure><figure><img src="day-20-our-saga.jpg" alt="Day 20 Our Saga" /><figcaption><strong>DAY 20 · OUR SAGA</strong></figcaption></figure><figure><img src="day-20-myth-and-saga.jpg" alt="Day 20 Myth and Saga" /><figcaption><strong>DAY 20 · MYTH &amp; SAGA</strong></figcaption></figure><figure><img src="day-20-history.jpg" alt="Day 20 History" /><figcaption><strong>DAY 20 · HISTORY</strong></figcaption></figure><figure><img src="day-20-night-watch.jpg" alt="Day 20 Night Watch" /><figcaption><strong>DAY 20 · NIGHT WATCH</strong></figcaption></figure>`);
+    let chamber = q('#keepers-chamber');
+    if (!chamber) {
+      chamber = document.createElement('section');
+      chamber.id = 'keepers-chamber';
+      chamber.className = 'dark-section';
+      const anchor = q('#our-saga-day-20');
+      if (anchor) anchor.insertAdjacentElement('afterend', chamber);
+    }
+    if (chamber) chamber.innerHTML = `<div class="wrap"><div class="kicker gold">🐦‍⬛ THE KEEPER'S CHAMBER</div><h2>EVERY VIKING CARRIES A STORY</h2><p>Some stories are written in steps. Some are told around the fire. Some are remembered long after the ships have sailed. Here, <strong>Þóra — Keeper of the Saga</strong> gathers the voices of our crew.</p><div class="keeper-grid"><article class="keeper-card"><span>CREW VOICES</span><strong>Leave your mark on the saga</strong><p>Short thoughts, memories, reactions and moments from the voyage can become part of the crew's living record.</p></article><article class="keeper-card"><span>TALES FROM THE CREW</span><strong>Your Viking. Your voice.</strong><p>Longer stories can explore the people behind the oars and the paths that brought them aboard our fleet.</p></article><article class="keeper-card"><span>QUESTIONS &amp; IDEAS</span><strong>Help shape what comes next</strong><p>The crew may ask questions, suggest ideas and help the Captain and Keeper discover where the saga wants to go.</p></article></div><blockquote>“OUR SAGA IS THE CREW'S SAGA.”</blockquote><p><small>The Keeper's Chamber is curated rather than automatically published. Only public Viking/Pacer identities are used here; private real-world names are never displayed.</small></p></div>`;
+
+    if (!q('#day20-live-style')) {
+      const style = document.createElement('style');
+      style.id = 'day20-live-style';
+      style.textContent = `#keepers-chamber{padding:92px 0;border-top:1px solid rgba(201,163,91,.22);border-bottom:1px solid rgba(201,163,91,.22)}#keepers-chamber .keeper-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.5rem 0}.day20-art{display:block;width:min(100%,1000px);height:auto;margin:1.5rem auto 2.5rem;border:1px solid rgba(201,163,91,.45);cursor:zoom-in}#keepers-chamber .keeper-card{padding:1.25rem;background:linear-gradient(145deg,rgba(114,18,27,.14),rgba(7,17,22,.95));border:1px solid rgba(201,163,91,.38)}@media(max-width:800px){#keepers-chamber{padding:76px 0}#keepers-chamber .keeper-grid{grid-template-columns:1fr}.ship-role-cards{grid-template-columns:1fr!important}}`;
+      document.head.appendChild(style);
+    }
+
+    const setArt = (selector, src, alt) => {
+      const section = q(selector);
+      if (!section) return;
+      const oldImgs = qa(`${selector} img.day20-art, ${selector} > img.day20-art`);
+      oldImgs.forEach((img, i) => { if (i > 0) img.remove(); });
+      let img = section.querySelector('img.day20-art');
+      if (!img) {
+        const wrap = section.querySelector('.wrap') || section;
+        const copy = section.querySelector('.copy');
+        img = document.createElement('img');
+        img.className = 'day20-art zoomable';
+        if (copy) copy.insertAdjacentElement('afterend', img); else wrap.appendChild(img);
+      }
+      img.src = src;
+      img.alt = alt;
+    };
+    setArt('#dispatch', 'day-20-viking-dispatch.jpg', 'Viking Dispatch Day 20 — The Sails Rise Again');
+    setArt('#our-saga-day-20', 'day-20-our-saga.jpg', 'Our Saga Day 20 — Chapter III begins');
+    setArt('#myth-day-20', 'day-20-myth-and-saga.jpg', 'Myth and Saga Day 20 — Njǫrðr');
+    setArt('#history-day-20', 'day-20-history.jpg', 'History Day 20 — They Sailed South Before Us');
+    setArt('#night-watch-day-20', 'day-20-night-watch.jpg', 'Night Watch Day 20 — The Sea Had Gone Quiet');
+
+    const voyageArchive = q('#voyage-archive');
+    if (voyageArchive) {
+      const title = voyageArchive.querySelector('h2');
+      if (title) title.textContent = 'NEWFOUNDLAND → NOVA SCOTIA — DAY 20';
+      const intro = voyageArchive.querySelector('.gallery-intro');
+      if (intro) intro.innerHTML = `Chapter I and Chapter II remain frozen in the voyage record. Day 19 records the crew's night ashore on <strong>Newfoundland</strong>. Day 20 begins <strong>Chapter III</strong> as the fleet sails south toward Nova Scotia.`;
+      const gallery = voyageArchive.querySelector('.gallery-grid');
+      if (gallery && !gallery.querySelector('img[src="day-20-viking-dispatch.jpg"]')) {
+        gallery.insertAdjacentHTML('afterbegin', `<figure><img class="zoomable" src="day-20-viking-dispatch.jpg" alt="Day 20 Viking Dispatch" /><figcaption><strong>DAY 20 · VIKING DISPATCH</strong></figcaption></figure><figure><img class="zoomable" src="day-20-crew-honors.jpg" alt="Day 20 Crew Honors" /><figcaption><strong>DAY 20 · CREW HONORS</strong></figcaption></figure><figure><img class="zoomable" src="day-20-our-saga.jpg" alt="Day 20 Our Saga" /><figcaption><strong>DAY 20 · OUR SAGA</strong></figcaption></figure><figure><img class="zoomable" src="day-20-myth-and-saga.jpg" alt="Day 20 Myth and Saga" /><figcaption><strong>DAY 20 · MYTH &amp; SAGA</strong></figcaption></figure><figure><img class="zoomable" src="day-20-history.jpg" alt="Day 20 History" /><figcaption><strong>DAY 20 · HISTORY</strong></figcaption></figure><figure><img class="zoomable" src="day-20-night-watch.jpg" alt="Day 20 Night Watch" /><figcaption><strong>DAY 20 · NIGHT WATCH</strong></figcaption></figure>`);
       }
     }
 
-    const closing=q('.closing-saga span');if(closing)closing.textContent='DAY 20 · 94 VIKINGS · 35,729,859 STEPS · CHAPTER III · ONE LIVING SAGA';
+    const sources = q('#sources .wrap');
+    if (sources) sources.innerHTML = `<div class="kicker gold">SOURCES &amp; HISTORICAL NOTES</div><h2>THE HISTORY MUST BE TRUE</h2><p>Day 20's HISTORY entry uses archaeological evidence from <strong>L'Anse aux Meadows</strong>. Butternuts and butternut wood recovered there are evidence that people using the Norse site travelled into regions farther south than northern Newfoundland. The finds do not identify an exact destination.</p><p>MYTH &amp; SAGA remains clearly separate from HISTORY. Njǫrðr belongs to the mythic layer of Viking Voyage II; the voyage narrative around him is our saga, not a historical claim.</p><p>Old Norse forms and Viking Age name evidence used in Crew Honors are checked against runic and scholarly name resources.</p>`;
 
-    const seal=q('#voyage .seal'),head=q('#voyage .status-head');if(seal&&head&&window.matchMedia('(max-width: 800px)').matches){head.style.display='grid';head.style.gridTemplateColumns='minmax(0,1fr) 96px';head.style.columnGap='12px';head.style.alignItems='start';seal.style.position='static';seal.style.width='96px';seal.style.maxWidth='96px';seal.style.height='auto';seal.style.margin='0';seal.style.transform='none';seal.style.justifySelf='end';}
+    const closing = q('.closing-saga .wrap');
+    if (closing) closing.innerHTML = `<p>“One Crew.<br>One Saga.”</p><span>DAY 20 · 94 VIKINGS · 35,729,859 STEPS · CHAPTER III · NEWFOUNDLAND → NOVA SCOTIA</span>`;
 
-    const box=q('#lightbox');if(box){const full=box.querySelector('img'),close=box.querySelector('button');const shut=()=>{box.classList.remove('open');box.setAttribute('aria-hidden','true');if(full)full.removeAttribute('src');document.body.classList.remove('lightbox-open');};document.querySelectorAll('img.zoomable,.framed img,.gallery-grid img,.archive-day img').forEach(img=>{if(img.dataset.lbBound)return;img.dataset.lbBound='1';img.addEventListener('click',e=>{e.preventDefault();if(!full)return;full.src=img.src;full.alt=img.alt||'Enlarged voyage artwork';box.classList.add('open');box.setAttribute('aria-hidden','false');document.body.classList.add('lightbox-open');});});if(close&&!close.dataset.lbBound){close.dataset.lbBound='1';close.addEventListener('click',shut);}if(!box.dataset.lbBound){box.dataset.lbBound='1';box.addEventListener('click',e=>{if(e.target===box)shut();});}}
+    const seal = q('#voyage .seal');
+    const head = q('#voyage .status-head');
+    if (seal && head && window.matchMedia('(max-width: 800px)').matches) {
+      head.style.display = 'grid';
+      head.style.gridTemplateColumns = 'minmax(0,1fr) 96px';
+      head.style.columnGap = '12px';
+      head.style.alignItems = 'start';
+      seal.style.position = 'static';
+      seal.style.width = '96px';
+      seal.style.maxWidth = '96px';
+      seal.style.height = 'auto';
+      seal.style.margin = '0';
+      seal.style.transform = 'none';
+      seal.style.justifySelf = 'end';
+    }
+
+    const box = q('#lightbox');
+    if (box) {
+      const full = box.querySelector('img');
+      const close = box.querySelector('button');
+      const shut = () => {
+        box.classList.remove('open');
+        box.setAttribute('aria-hidden', 'true');
+        if (full) full.removeAttribute('src');
+        document.body.classList.remove('lightbox-open');
+      };
+      qa('img.zoomable,.framed img,.gallery-grid img,.crew-honors-archive-grid img').forEach(img => {
+        if (img.dataset.lbBound) return;
+        img.dataset.lbBound = '1';
+        img.addEventListener('click', e => {
+          e.preventDefault();
+          if (!full) return;
+          full.src = img.src;
+          full.alt = img.alt || 'Enlarged voyage artwork';
+          box.classList.add('open');
+          box.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('lightbox-open');
+        });
+      });
+      if (close && !close.dataset.lbBound) {
+        close.dataset.lbBound = '1';
+        close.addEventListener('click', shut);
+      }
+      if (!box.dataset.lbBound) {
+        box.dataset.lbBound = '1';
+        box.addEventListener('click', e => { if (e.target === box) shut(); });
+      }
+    }
   };
-  setTimeout(applyDay20,0);
+
+  setTimeout(applyDay20, 0);
 })();
