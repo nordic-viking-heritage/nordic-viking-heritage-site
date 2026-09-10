@@ -102,7 +102,7 @@
     if (!q('#day20-live-style')) {
       const style = document.createElement('style');
       style.id = 'day20-live-style';
-      style.textContent = `#keepers-chamber{padding:92px 0;border-top:1px solid rgba(201,163,91,.22);border-bottom:1px solid rgba(201,163,91,.22)}#keepers-chamber .keeper-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.5rem 0}.day20-art{display:block;width:min(100%,1000px);height:auto;margin:1.5rem auto 2.5rem;border:1px solid rgba(201,163,91,.45);cursor:zoom-in}#keepers-chamber .keeper-card{padding:1.25rem;background:linear-gradient(145deg,rgba(114,18,27,.14),rgba(7,17,22,.95));border:1px solid rgba(201,163,91,.38)}@media(max-width:800px){#keepers-chamber{padding:76px 0}#keepers-chamber .keeper-grid{grid-template-columns:1fr}.ship-role-cards{grid-template-columns:1fr!important}}`;
+      style.textContent = `#keepers-chamber{padding:92px 0;border-top:1px solid rgba(201,163,91,.22);border-bottom:1px solid rgba(201,163,91,.22)}#keepers-chamber .keeper-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.5rem 0}.day20-art{display:block;width:min(100%,1000px);height:auto;margin:1.5rem auto 2.5rem;border:1px solid rgba(201,163,91,.45);cursor:zoom-in}#keepers-chamber .keeper-card{padding:1.25rem;background:linear-gradient(145deg,rgba(114,18,27,.14),rgba(7,17,22,.95));border:1px solid rgba(201,163,91,.38)}.voyage-archive .archive-days{display:grid;gap:1rem}.voyage-archive .archive-day{display:grid;grid-template-columns:160px 1fr;text-decoration:none;background:#0b171d;border:1px solid rgba(201,163,91,.32);overflow:hidden}.voyage-archive .archive-day-image{aspect-ratio:4/3;background:#071116;overflow:hidden}.voyage-archive .archive-day-image img{width:100%;height:100%;object-fit:cover;display:block}.voyage-archive .archive-day-copy{padding:1rem 1.1rem;display:flex;flex-direction:column;justify-content:center}.voyage-archive .archive-day-copy span{color:#c9a35b;font-weight:700;letter-spacing:.1em;font-size:.74rem}.voyage-archive .archive-day-copy strong{color:#f1eadb;margin:.25rem 0}.voyage-archive .archive-day-copy small{color:#bdb4a6}.voyage-archive .archive-intro{max-width:760px;margin-bottom:1.5rem}@media(max-width:800px){#keepers-chamber{padding:76px 0}#keepers-chamber .keeper-grid{grid-template-columns:1fr}.ship-role-cards{grid-template-columns:1fr!important}.voyage-archive .archive-day{grid-template-columns:100px 1fr}.voyage-archive .archive-day-copy{padding:.8rem}}`;
       document.head.appendChild(style);
     }
 
@@ -130,14 +130,31 @@
 
     const voyageArchive = q('#voyage-archive');
     if (voyageArchive) {
-      const title = voyageArchive.querySelector('h2');
-      if (title) title.textContent = 'NEWFOUNDLAND → NOVA SCOTIA — DAY 20';
-      const intro = voyageArchive.querySelector('.gallery-intro');
-      if (intro) intro.innerHTML = `Chapter I and Chapter II remain frozen in the voyage record. Day 19 records the crew's night ashore on <strong>Newfoundland</strong>. Day 20 begins <strong>Chapter III</strong> as the fleet sails south toward Nova Scotia.`;
-      const gallery = voyageArchive.querySelector('.gallery-grid');
-      if (gallery && !gallery.querySelector('img[src="day-20-viking-dispatch.jpg"]')) {
-        gallery.insertAdjacentHTML('afterbegin', `<figure><img class="zoomable" src="day-20-viking-dispatch.jpg" alt="Day 20 Viking Dispatch" /><figcaption><strong>DAY 20 · VIKING DISPATCH</strong></figcaption></figure><figure><img class="zoomable" src="day-20-crew-honors.jpg" alt="Day 20 Crew Honors" /><figcaption><strong>DAY 20 · CREW HONORS</strong></figcaption></figure><figure><img class="zoomable" src="day-20-our-saga.jpg" alt="Day 20 Our Saga" /><figcaption><strong>DAY 20 · OUR SAGA</strong></figcaption></figure><figure><img class="zoomable" src="day-20-myth-and-saga.jpg" alt="Day 20 Myth and Saga" /><figcaption><strong>DAY 20 · MYTH &amp; SAGA</strong></figcaption></figure><figure><img class="zoomable" src="day-20-history.jpg" alt="Day 20 History" /><figcaption><strong>DAY 20 · HISTORY</strong></figcaption></figure><figure><img class="zoomable" src="day-20-night-watch.jpg" alt="Day 20 Night Watch" /><figcaption><strong>DAY 20 · NIGHT WATCH</strong></figcaption></figure>`);
-      }
+      const days = [
+        {day:20,title:'THE SAILS RISE AGAIN',meta:'94 sailors · 35,729,859 steps · ≈ 23,224.4 km',img:'day-20-viking-dispatch.jpg',alt:'Viking Dispatch — Day 20',href:'#dispatch'},
+        {day:19,title:'THE FLEET STAYS ASHORE',meta:'94 sailors · 33,841,086 steps · ≈ 21,996.7 km',img:'day-19-viking-dispatch.jpg',alt:'Viking Dispatch — Day 19',href:'#voyage-archive'},
+        {day:18,title:'NEWFOUNDLAND REACHED',meta:'89 active Vikings · 30,701,056 steps · Chapter II complete',img:'day-18-viking-dispatch.png',alt:'Viking Dispatch — Day 18',href:'archive/day-18.html'},
+        {day:17,title:'THE SEA CHANGED OUR COURSE',meta:'82 sailors · 25,877,873 steps · ≈ 16,820.6 km',img:'day-17-viking-dispatch.png',alt:'Viking Dispatch — Day 17',href:'archive/day-17.html'},
+        {day:16,title:'CHAPTER II HAS BEGUN',meta:'73 sailors · 20,646,067 steps · ≈ 13,419.9 km',img:'day-16-map.png',alt:'Viking Voyage II — Day 16',href:'archive/day-16.html'},
+        {day:15,title:'CHAPTER I COMPLETE',meta:'72 sailors · 19,155,478 steps · ≈ 12,451.1 km',img:'wide_cinematic_promotional_poster_infographic_styl.png',alt:'Viking Dispatch — Day 15',href:'archive/day-15.html'},
+        {day:14,title:'THE POWER OF SIXTY OARS',meta:'72 sailors · 17,840,511 steps · ≈ 11,596.3 km',img:'day-14-history.jpg',alt:'History — Day 14',href:'archive/day-14.html'},
+        {day:13,title:'THE SILENCE AFTER THE STORM',meta:'71 sailors · 15,984,888 steps · ≈ 10,390.2 km',img:'day-13-dispatch.jpg',alt:'Viking Dispatch — Day 13',href:'archive/day-13.html'},
+        {day:12,title:'THE OCEAN IS LOSING GROUND',meta:'69 sailors · 14,331,674 steps · ≈ 9,315.6 km',img:'day-12-dispatch.jpg',alt:'Viking Dispatch — Day 12',href:'archive/day-12.html'},
+        {day:11,title:'THE SEA CHANGES',meta:'66 sailors · 12,567,373 steps · ≈ 8,168.8 km',img:'3603CAC6-D075-49DC-A4AC-C0DA57129282.png',alt:'Viking Dispatch — Day 11',href:'archive/day-11.html'},
+        {day:10,title:'WESTWARD',meta:'65 sailors · 11,159,358 steps · ≈ 7,253.6 km',img:'day-10-dispatch.jpg',alt:'Viking Dispatch — Day 10',href:'archive/day-10.html'},
+        {day:9,title:'THE TEN MILLION HORIZON',meta:'64 sailors · 9,904,699 steps · ≈ 6,438 km',img:'day-9-dispatch.jpg',alt:'The Ten Million Horizon — Day 9',href:'archive/day-9.html'},
+        {day:8,title:'WHEN ONE OAR RESTS...',meta:'63 sailors · 8,765,483 steps',img:'day-8-dispatch.jpg',alt:'Viking Dispatch — Day 8',href:'archive/day-8.html'},
+        {day:7,title:'THE CROSSING',meta:'7,446,095 steps · ≈ 4,840 km',img:'day-7-dispatch.jpg',alt:'The fleet at sea — Day 7',href:'archive/day-7.html'},
+        {day:6,title:'5,185,209 STEPS',meta:'51 sailors · ≈ 3,370.4 km',img:'viking-dispatch-day-6.png',alt:'Viking Dispatch — Day 6',href:'archive/day-6.html'},
+        {day:5,title:'3,972,538 STEPS',meta:'48 sailors · ≈ 2,582 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-5.html'},
+        {day:4,title:'THE CROSSING',meta:'3,071,194 steps · ≈ 1,996 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-4.html'},
+        {day:3,title:'1,859,699 STEPS',meta:'42 sailors · ≈ 1,208.8 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-3.html'},
+        {day:2,title:'897,818 STEPS',meta:'29 sailors · ≈ 583.6 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-2.html'},
+        {day:1,title:'THE JOURNEY BEGINS',meta:'29 sailors · 733,419 steps',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-1.html'}
+      ];
+      const cards = days.map(d => `<a class="archive-day" href="${d.href}"><div class="archive-day-image"><img src="${d.img}" alt="${d.alt}" loading="lazy"></div><div class="archive-day-copy"><span>DAY ${d.day}</span><strong>${d.title}</strong><small>${d.meta}</small></div></a>`).join('');
+      voyageArchive.classList.add('voyage-archive','dark-section');
+      voyageArchive.innerHTML = `<div class="wrap"><div class="kicker gold">THE VOYAGE ARCHIVE</div><h2>RELIVE THE JOURNEY — DAY BY DAY</h2><p class="archive-intro">Every completed day remains part of the voyage. Chapter I and Chapter II are frozen in the archive. Day 20 begins Chapter III: Newfoundland → Nova Scotia.</p><div class="archive-days">${cards}</div></div>`;
     }
 
     const sources = q('#sources .wrap');
@@ -172,10 +189,11 @@
         if (full) full.removeAttribute('src');
         document.body.classList.remove('lightbox-open');
       };
-      qa('img.zoomable,.framed img,.gallery-grid img,.crew-honors-archive-grid img').forEach(img => {
+      qa('img.zoomable,.framed img,.archive-day img,.crew-honors-archive-grid img').forEach(img => {
         if (img.dataset.lbBound) return;
         img.dataset.lbBound = '1';
         img.addEventListener('click', e => {
+          if (img.closest('a.archive-day')) return;
           e.preventDefault();
           if (!full) return;
           full.src = img.src;
