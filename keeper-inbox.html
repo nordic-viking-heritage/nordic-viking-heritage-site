@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keeper's Inbox — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#061014;--panel:#0a1117;--gold:#c9a35b;--text:#f1eadb;--muted:#b8ae9e;--red:#72121b}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif} .wrap{width:min(920px,calc(100% - 32px));margin:0 auto;padding:40px 0 72px}
+    .kicker{font-family:Cinzel,serif;letter-spacing:.14em;color:var(--gold);font-weight:700;font-size:.86rem} h1{font-family:Cinzel,serif;font-size:clamp(2rem,7vw,4rem);margin:.45rem 0 1rem} .intro{color:var(--muted);line-height:1.65;max-width:720px}
+    .bar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin:1.4rem 0 1rem;padding:1rem;border:1px solid rgba(201,163,91,.35);background:rgba(201,163,91,.04)} .count{color:var(--gold);font-weight:700}.note{font-size:.9rem;color:var(--muted)}
+    #status{padding:1rem;border:1px solid rgba(201,163,91,.25);color:var(--muted)} .list{display:grid;gap:1rem;margin-top:1rem}.card{border:1px solid rgba(201,163,91,.38);background:linear-gradient(145deg,rgba(114,18,27,.14),rgba(7,17,22,.96));padding:1.15rem}.meta{display:flex;flex-wrap:wrap;gap:.6rem 1rem;color:var(--gold);font-size:.8rem;font-weight:700;letter-spacing:.05em}.identity{font-family:Cinzel,serif;font-size:1.2rem;margin:.7rem 0}.message{white-space:pre-wrap;line-height:1.6;color:#ddd3c3}.pending{display:inline-block;margin-top:.9rem;padding:.28rem .5rem;border:1px solid rgba(201,163,91,.5);font-size:.72rem;letter-spacing:.1em;color:var(--gold)} .empty{color:var(--muted);padding:1rem;border:1px dashed rgba(201,163,91,.3)}
+    @media(max-width:600px){.bar{align-items:flex-start;flex-direction:column}.wrap{width:min(100% - 24px,920px)}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="kicker">🐦‍⬛ THE KEEPER'S CHAMBER</div>
+    <h1>KEEPER'S INBOX</h1>
+    <p class="intro">Private Preview moderation view for Crew Voices. Messages shown here remain unpublished and keep their <strong>pending</strong> status.</p>
+    <div class="bar"><div class="count" id="count">—</div><div class="note">READ-ONLY PREVIEW · NOTHING CAN BE PUBLISHED HERE</div></div>
+    <div id="status">Opening the message chest…</div>
+    <section class="list" id="list" aria-live="polite"></section>
+  </main>
+  <script>
+    const statusEl=document.getElementById('status'),listEl=document.getElementById('list'),countEl=document.getElementById('count');
+    const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const fmt=v=>{if(!v)return 'Unknown time';const d=new Date(v);return Number.isNaN(d.getTime())?v:d.toLocaleString();};
+    fetch('/api/keeper-inbox',{headers:{Accept:'application/json'},cache:'no-store'})
+      .then(async r=>{const data=await r.json().catch(()=>({}));if(!r.ok||!data.ok)throw new Error(data.error||'Could not open inbox.');return data;})
+      .then(data=>{
+        statusEl.remove();countEl.textContent=`${data.count} PENDING MESSAGE${data.count===1?'':'S'}`;
+        if(!data.messages.length){listEl.innerHTML='<div class="empty">No pending Crew Voices yet.</div>';return;}
+        listEl.innerHTML=data.messages.map(item=>`<article class="card"><div class="meta"><span>${esc(fmt(item.submittedAt))}</span><span>AUTO-PUBLISH: ${item.automaticPublishing?'YES':'NO'}</span></div><div class="identity">${esc(item.identity)}</div><div class="message">${esc(item.message)}</div><span class="pending">${esc(String(item.status||'pending').toUpperCase())}</span></article>`).join('');
+      })
+      .catch(err=>{statusEl.textContent=err.message;countEl.textContent='INBOX UNAVAILABLE';});
+  </script>
+</body>
+</html>
