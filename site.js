@@ -2,151 +2,24 @@
   // Current voyage content remains in index.html. This script only restores
   // stable layout/behaviour and the voyage archive; it never rewrites day data.
 
-  // Safe, scoped visual corrections. Kept here to avoid replacing the complete
-  // minified stylesheet while preserving all existing site styles.
   if (!document.getElementById('day17-layout-fixes')) {
-    const style = document.createElement('style');
-    style.id = 'day17-layout-fixes';
-    style.textContent = `
-      .ship-roll > .wrap { border: 0; padding: 0; box-shadow: none; }
-      #myth-day-17 { padding-top: 92px; padding-bottom: 92px; }
-      #night-watch-day-17 { padding-top: 96px; }
-      @media (max-width:800px) { .ship-roll > .wrap { padding: 0; } #myth-day-17 { padding-top: 82px; } #night-watch-day-17 { padding-top: 86px; } }
-    `;
-    document.head.appendChild(style);
+    const style = document.createElement('style'); style.id='day17-layout-fixes'; style.textContent=`.ship-roll > .wrap{border:0;padding:0;box-shadow:none}#myth-day-17{padding-top:92px;padding-bottom:92px}#night-watch-day-17{padding-top:96px}@media(max-width:800px){.ship-roll > .wrap{padding:0}#myth-day-17{padding-top:82px}#night-watch-day-17{padding-top:86px}}`; document.head.appendChild(style);
   }
+  const roll=document.querySelector('.ship-roll .roll-grid'); if(roll&&!document.querySelector('.captain-roll')){const captain=document.createElement('article');captain.className='captain-roll';captain.innerHTML='<span class="captain-label">THE CAPTAIN</span><span>Stefan</span><strong>HÁKON</strong><small class="old-norse">Hákon</small><small class="runes">ᚼᛅᚴᚢᚾ</small>';roll.parentNode.insertBefore(captain,roll);}
+  const ourSaga=document.getElementById('our-saga-day-17');if(ourSaga&&!ourSaga.querySelector('img[src="day-17-our-saga.jpg"]')){const copy=ourSaga.querySelector('.copy');if(copy){const figure=document.createElement('figure');figure.className='framed';figure.innerHTML='<img class="zoomable" src="day-17-our-saga.jpg" alt="Our Saga — Day 17" loading="lazy"><figcaption>OUR SAGA — DAY 17</figcaption>';copy.appendChild(figure);}}
+  const honors=document.getElementById('honors');if(honors){const figure=honors.querySelector('figure'),naming=honors.querySelector('.naming-list');if(figure&&naming){figure.classList.add('light');naming.parentNode.insertBefore(figure,naming);}}
 
-  const roll = document.querySelector('.ship-roll .roll-grid');
-  if (roll && !document.querySelector('.captain-roll')) {
-    const captain = document.createElement('article');
-    captain.className = 'captain-roll';
-    captain.innerHTML = '<span class="captain-label">THE CAPTAIN</span><span>Stefan</span><strong>HÁKON</strong><small class="old-norse">Hákon</small><small class="runes">ᚼᛅᚴᚢᚾ</small>';
-    roll.parentNode.insertBefore(captain, roll);
+  // Keeper's Chamber — moderated crew contributions plus the public Crew Voices record.
+  const sagaAnchor=document.getElementById('our-saga-day-19')||document.getElementById('our-saga-day-17');
+  if(sagaAnchor&&!document.getElementById('keepers-chamber')){
+    const chamberStyle=document.createElement('style');chamberStyle.id='keepers-chamber-style';chamberStyle.textContent=`#keepers-chamber{padding:92px 0;background:#071116;border-top:1px solid rgba(201,163,91,.22);border-bottom:1px solid rgba(201,163,91,.22)}#keepers-chamber .keeper-intro{max-width:760px;margin:0 0 1.8rem;color:#d9d1c2;line-height:1.75}#keepers-chamber .keeper-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.5rem}#keepers-chamber .keeper-card{min-width:0;padding:1.25rem;background:linear-gradient(145deg,rgba(114,18,27,.14),rgba(7,17,22,.95));border:1px solid rgba(201,163,91,.38)}#keepers-chamber .keeper-card span{display:block;color:#c9a35b;font-size:.75rem;font-weight:700;letter-spacing:.14em;margin-bottom:.65rem}#keepers-chamber .keeper-card strong{display:block;color:#f1eadb;font-size:1.05rem;margin-bottom:.6rem}#keepers-chamber .keeper-card p{margin:0;color:#cfc6b6;line-height:1.6}#keepers-chamber .keeper-quote{margin:2rem 0 0;padding:1.15rem 1.25rem;border-left:3px solid #c9a35b;background:rgba(201,163,91,.06);color:#f1eadb;font-style:italic}#keepers-chamber .keeper-note{margin-top:1.15rem;color:#9f9688;font-size:.86rem;line-height:1.55}.crew-voices-public{margin-top:3rem;padding-top:2.3rem;border-top:1px solid rgba(201,163,91,.3)}.crew-voices-public h3{font-family:Georgia,serif;color:#f1eadb;font-size:clamp(1.8rem,5vw,2.8rem);margin:.35rem 0}.crew-voices-public .cv-intro{color:#b8ae9e;line-height:1.65;max-width:720px}.cv-list{display:grid;gap:1rem;margin-top:1.4rem}.cv-entry{padding:1.2rem;border:1px solid rgba(201,163,91,.35);background:rgba(9,23,28,.7)}.cv-name{font-family:Georgia,serif;color:#c9a35b;font-size:1.2rem}.cv-message{white-space:pre-wrap;line-height:1.65;margin:.65rem 0}.cv-date{color:#9f9688;font-size:.78rem;letter-spacing:.08em}.cv-empty{padding:1.15rem;border:1px solid rgba(201,163,91,.3);color:#b8ae9e}@media(max-width:800px){#keepers-chamber{padding:76px 0}#keepers-chamber .keeper-grid{grid-template-columns:1fr}}`;document.head.appendChild(chamberStyle);
+    const chamber=document.createElement('section');chamber.id='keepers-chamber';chamber.innerHTML=`<div class="wrap"><div class="kicker gold">🐦‍⬛ THE KEEPER'S CHAMBER</div><h2>EVERY VIKING CARRIES A STORY</h2><p class="keeper-intro">Some stories are written in steps. Some are told around the fire. Some are remembered long after the ships have sailed. Here, Þóra — Keeper of the Saga — gathers the voices of our crew so the voyage can be remembered by more than one storyteller.</p><div class="keeper-grid"><article class="keeper-card"><span>CREW VOICES</span><strong>Leave your mark on the saga</strong><p>Short thoughts, memories, reactions and moments from the voyage can become part of the crew's living record.</p></article><article class="keeper-card"><span>TALES FROM THE CREW</span><strong>Your Viking. Your voice.</strong><p>Longer stories can explore the people behind the oars and the paths that brought them aboard our fleet.</p></article><article class="keeper-card"><span>QUESTIONS & IDEAS</span><strong>Help shape what comes next</strong><p>The crew may ask questions, suggest ideas and help the Captain and Keeper discover where the saga wants to go.</p></article></div><div class="keeper-quote">“OUR SAGA IS THE CREW'S SAGA.”</div><p class="keeper-note">The Keeper's Chamber is curated rather than automatically published. Crew contributions remain theirs, and only public Viking identities are used on this site. Private real-world names are never displayed.</p><section class="crew-voices-public" id="crew-voices"><div class="kicker gold">CREW VOICES</div><h3>VOICES FROM THE SHIP</h3><p class="cv-intro">Words carried from the crew and chosen by the Keepers to enter our shared voyage.</p><div class="cv-list" id="crew-voices-list"><div class="cv-empty">Listening for voices from the ship…</div></div></section></div>`;sagaAnchor.insertAdjacentElement('afterend',chamber);
   }
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const cvList=document.getElementById('crew-voices-list');if(cvList){fetch('/api/crew-voices-public',{cache:'no-store'}).then(async r=>{const d=await r.json();if(!r.ok||!d.ok)throw Error();cvList.innerHTML=d.voices.length?d.voices.map(x=>`<article class="cv-entry"><div class="cv-name">${esc(x.identity)}</div><div class="cv-message">${esc(x.message)}</div><div class="cv-date">${esc(new Date(x.publishedAt||x.submittedAt).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}))}</div></article>`).join(''):'<div class="cv-empty">No Crew Voices have been published yet.</div>';}).catch(()=>cvList.innerHTML='<div class="cv-empty">The voices cannot be reached right now.</div>');}
+  if(document.getElementById('keepers-chamber')&&!document.getElementById('keepers-chamber-form-loader')){const s=document.createElement('script');s.id='keepers-chamber-form-loader';s.src='keepers-chamber.js?v=preview-2';document.body.appendChild(s);}
 
-  const ourSaga = document.getElementById('our-saga-day-17');
-  if (ourSaga && !ourSaga.querySelector('img[src="day-17-our-saga.jpg"]')) {
-    const copy = ourSaga.querySelector('.copy');
-    if (copy) {
-      const figure = document.createElement('figure');
-      figure.className = 'framed';
-      figure.innerHTML = '<img class="zoomable" src="day-17-our-saga.jpg" alt="Our Saga — Day 17" loading="lazy"><figcaption>OUR SAGA — DAY 17</figcaption>';
-      copy.appendChild(figure);
-    }
-  }
-
-  const honors = document.getElementById('honors');
-  if (honors) {
-    const figure = honors.querySelector('figure');
-    const naming = honors.querySelector('.naming-list');
-    if (figure && naming) { figure.classList.add('light'); naming.parentNode.insertBefore(figure, naming); }
-  }
-
-  const archive = document.getElementById('voyage-archive');
-  if (archive) {
-    const days = [
-      {day:17,title:'THE SEA CHANGED OUR COURSE',meta:'82 sailors · 25,877,873 steps · ≈ 16,820.6 km',img:'day-17-viking-dispatch.png',alt:'Viking Dispatch — Day 17',href:'#dispatch'},
-      {day:16,title:'CHAPTER II HAS BEGUN',meta:'73 sailors · 20,646,067 steps · ≈ 13,419.9 km',img:'day-16-map.png',alt:'Viking Voyage II — Day 16',href:'archive/day-16.html'},
-      {day:15,title:'CHAPTER I COMPLETE',meta:'72 sailors · 19,155,478 steps · ≈ 12,451.1 km',img:'wide_cinematic_promotional_poster_infographic_styl.png',alt:'Viking Dispatch — Day 15',href:'archive/day-15.html'},
-      {day:14,title:'THE POWER OF SIXTY OARS',meta:'72 sailors · 17,840,511 steps · ≈ 11,596.3 km',img:'day-14-history.jpg',alt:'History — Day 14',href:'archive/day-14.html'},
-      {day:13,title:'THE SILENCE AFTER THE STORM',meta:'71 sailors · 15,984,888 steps · ≈ 10,390.2 km',img:'day-13-dispatch.jpg',alt:'Viking Dispatch — Day 13',href:'archive/day-13.html'},
-      {day:12,title:'THE OCEAN IS LOSING GROUND',meta:'69 sailors · 14,331,674 steps · ≈ 9,315.6 km',img:'day-12-dispatch.jpg',alt:'Viking Dispatch — Day 12',href:'archive/day-12.html'},
-      {day:11,title:'THE SEA CHANGES',meta:'66 sailors · 12,567,373 steps · ≈ 8,168.8 km',img:'3603CAC6-D075-49DC-A4AC-C0DA57129282.png',alt:'Viking Dispatch — Day 11',href:'archive/day-11.html'},
-      {day:10,title:'WESTWARD',meta:'65 sailors · 11,159,358 steps · ≈ 7,253.6 km',img:'day-10-dispatch.jpg',alt:'Viking Dispatch — Day 10',href:'archive/day-10.html'},
-      {day:9,title:'THE TEN MILLION HORIZON',meta:'64 sailors · 9,904,699 steps · ≈ 6,438 km',img:'day-9-dispatch.jpg',alt:'The Ten Million Horizon — Day 9',href:'archive/day-9.html'},
-      {day:8,title:'WHEN ONE OAR RESTS...',meta:'63 sailors · 8,765,483 steps',img:'day-8-dispatch.jpg',alt:'Viking Dispatch — Day 8',href:'archive/day-8.html'},
-      {day:7,title:'THE CROSSING',meta:'7,446,095 steps · ≈ 4,840 km',img:'day-7-dispatch.jpg',alt:'The fleet at sea — Day 7',href:'archive/day-7.html'},
-      {day:6,title:'5,185,209 STEPS',meta:'51 sailors · ≈ 3,370.4 km',img:'viking-dispatch-day-6.png',alt:'Viking Dispatch — Day 6',href:'archive/day-6.html'},
-      {day:5,title:'3,972,538 STEPS',meta:'48 sailors · ≈ 2,582 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-5.html'},
-      {day:4,title:'THE CROSSING',meta:'3,071,194 steps · ≈ 1,996 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-4.html'},
-      {day:3,title:'1,859,699 STEPS',meta:'42 sailors · ≈ 1,208.8 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-3.html'},
-      {day:2,title:'897,818 STEPS',meta:'29 sailors · ≈ 583.6 km',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-2.html'},
-      {day:1,title:'THE JOURNEY BEGINS',meta:'29 sailors · 733,419 steps',img:'hero.png',alt:'Viking Voyage II opening artwork',href:'archive/day-1.html'}
-    ];
-    const cards = days.map(d => `<a class="archive-day" href="${d.href}"><div class="archive-day-image"><img src="${d.img}" alt="${d.alt}" loading="lazy"></div><div class="archive-day-copy"><span>DAY ${d.day}</span><strong>${d.title}</strong><small>${d.meta}</small></div></a>`).join('');
-    archive.classList.add('voyage-archive','dark-section');
-    archive.innerHTML = `<div class="wrap"><div class="kicker gold">THE VOYAGE ARCHIVE</div><h2>RELIVE THE JOURNEY — DAY BY DAY</h2><p class="archive-intro">Every completed day remains part of the voyage. Chapter I is frozen in the archive; Chapter II continues from the North American mainland toward Newfoundland.</p><div class="archive-days">${cards}</div></div>`;
-  }
-
-  // Keeper's Chamber — a moderated home for crew voices.
-  // Public identity rule: never expose private real-world names here.
-  const sagaAnchor = document.getElementById('our-saga-day-19') || document.getElementById('our-saga-day-17');
-  if (sagaAnchor && !document.getElementById('keepers-chamber')) {
-    const chamberStyle = document.createElement('style');
-    chamberStyle.id = 'keepers-chamber-style';
-    chamberStyle.textContent = `
-      #keepers-chamber { padding:92px 0; background:#071116; border-top:1px solid rgba(201,163,91,.22); border-bottom:1px solid rgba(201,163,91,.22); }
-      #keepers-chamber .keeper-intro { max-width:760px; margin:0 0 1.8rem; color:#d9d1c2; line-height:1.75; }
-      #keepers-chamber .keeper-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.5rem; }
-      #keepers-chamber .keeper-card { min-width:0; padding:1.25rem; background:linear-gradient(145deg,rgba(114,18,27,.14),rgba(7,17,22,.95)); border:1px solid rgba(201,163,91,.38); }
-      #keepers-chamber .keeper-card span { display:block; color:#c9a35b; font-size:.75rem; font-weight:700; letter-spacing:.14em; margin-bottom:.65rem; }
-      #keepers-chamber .keeper-card strong { display:block; color:#f1eadb; font-size:1.05rem; margin-bottom:.6rem; }
-      #keepers-chamber .keeper-card p { margin:0; color:#cfc6b6; line-height:1.6; }
-      #keepers-chamber .keeper-quote { margin:2rem 0 0; padding:1.15rem 1.25rem; border-left:3px solid #c9a35b; background:rgba(201,163,91,.06); color:#f1eadb; font-style:italic; }
-      #keepers-chamber .keeper-note { margin-top:1.15rem; color:#9f9688; font-size:.86rem; line-height:1.55; }
-      @media (max-width:800px) { #keepers-chamber { padding:76px 0; } #keepers-chamber .keeper-grid { grid-template-columns:1fr; } }
-    `;
-    document.head.appendChild(chamberStyle);
-
-    const chamber = document.createElement('section');
-    chamber.id = 'keepers-chamber';
-    chamber.innerHTML = `<div class="wrap">
-      <div class="kicker gold">🐦‍⬛ THE KEEPER'S CHAMBER</div>
-      <h2>EVERY VIKING CARRIES A STORY</h2>
-      <p class="keeper-intro">Some stories are written in steps. Some are told around the fire. Some are remembered long after the ships have sailed. Here, Þóra — Keeper of the Saga — gathers the voices of our crew so the voyage can be remembered by more than one storyteller.</p>
-      <div class="keeper-grid">
-        <article class="keeper-card"><span>CREW VOICES</span><strong>Leave your mark on the saga</strong><p>Short thoughts, memories, reactions and moments from the voyage can become part of the crew's living record.</p></article>
-        <article class="keeper-card"><span>TALES FROM THE CREW</span><strong>Your Viking. Your voice.</strong><p>Longer stories can explore the people behind the oars and the paths that brought them aboard our fleet.</p></article>
-        <article class="keeper-card"><span>QUESTIONS & IDEAS</span><strong>Help shape what comes next</strong><p>The crew may ask questions, suggest ideas and help the Captain and Keeper discover where the saga wants to go.</p></article>
-      </div>
-      <div class="keeper-quote">“OUR SAGA IS THE CREW'S SAGA.”</div>
-      <p class="keeper-note">The Keeper's Chamber is curated rather than automatically published. Crew contributions remain theirs, and only public Viking identities are used on this site. Private real-world names are never displayed.</p>
-    </div>`;
-    sagaAnchor.insertAdjacentElement('afterend', chamber);
-  }
-
-  // Load the Crew Voices form only after the chamber exists.
-  if (document.getElementById('keepers-chamber') && !document.getElementById('keepers-chamber-form-loader')) {
-    const crewVoicesScript = document.createElement('script');
-    crewVoicesScript.id = 'keepers-chamber-form-loader';
-    crewVoicesScript.src = 'keepers-chamber.js?v=preview-2';
-    document.body.appendChild(crewVoicesScript);
-  }
-
-  // Keep the voyage seal inside the Ship's Log on mobile. day16.js runs after
-  // this file, so defer this small override until both scripts have finished.
-  setTimeout(() => {
-    const seal = document.querySelector('#voyage .seal');
-    const head = document.querySelector('#voyage .status-head');
-    if (!seal || !head || !window.matchMedia('(max-width: 800px)').matches) return;
-    head.style.display = 'grid';
-    head.style.gridTemplateColumns = 'minmax(0,1fr) 96px';
-    head.style.columnGap = '12px';
-    head.style.alignItems = 'start';
-    head.style.position = 'relative';
-    seal.style.position = 'static';
-    seal.style.width = '96px';
-    seal.style.maxWidth = '96px';
-    seal.style.height = 'auto';
-    seal.style.right = '';
-    seal.style.top = '';
-    seal.style.margin = '0';
-    seal.style.transform = 'none';
-    seal.style.justifySelf = 'end';
-    seal.style.alignSelf = 'start';
-    seal.style.zIndex = 'auto';
-  }, 0);
-
-  const box = document.getElementById('lightbox');
-  if (!box) return;
-  const full = box.querySelector('img');
-  const close = box.querySelector('button');
-  const shut = () => { box.classList.remove('open'); box.setAttribute('aria-hidden','true'); if (full) full.removeAttribute('src'); document.body.classList.remove('lightbox-open'); };
-  const openImage = img => { if (!full || !img) return; full.src = img.src; full.alt = img.alt || 'Enlarged voyage artwork'; box.classList.add('open'); box.setAttribute('aria-hidden','false'); document.body.classList.add('lightbox-open'); };
-  document.querySelectorAll('img.zoomable, .framed img, .gallery-grid img, .archive-day img').forEach(img => {
-    img.addEventListener('click', event => { if (img.closest('a.archive-day')) return; event.preventDefault(); openImage(img); });
-  });
-  if (close) close.addEventListener('click', shut);
-  box.addEventListener('click', event => { if (event.target === box) shut(); });
-  document.addEventListener('keydown', event => { if (event.key === 'Escape') shut(); });
+  // Keep the voyage seal inside the Ship's Log on mobile.
+  setTimeout(()=>{const seal=document.querySelector('#voyage .seal'),head=document.querySelector('#voyage .status-head');if(!seal||!head||!window.matchMedia('(max-width: 800px)').matches)return;head.style.display='grid';head.style.gridTemplateColumns='minmax(0,1fr) 96px';head.style.columnGap='12px';head.style.alignItems='start';head.style.position='relative';seal.style.position='static';seal.style.width='96px';seal.style.maxWidth='96px';seal.style.height='auto';seal.style.right='';seal.style.top='';seal.style.margin='0';seal.style.transform='none';seal.style.justifySelf='end';seal.style.alignSelf='start';seal.style.zIndex='auto';},0);
+  const box=document.getElementById('lightbox');if(!box)return;const full=box.querySelector('img'),close=box.querySelector('button');const shut=()=>{box.classList.remove('open');box.setAttribute('aria-hidden','true');if(full)full.removeAttribute('src');document.body.classList.remove('lightbox-open')};const openImage=img=>{if(!full||!img)return;full.src=img.src;full.alt=img.alt||'Enlarged voyage artwork';box.classList.add('open');box.setAttribute('aria-hidden','false');document.body.classList.add('lightbox-open')};document.querySelectorAll('img.zoomable,.framed img,.gallery-grid img,.archive-day img').forEach(img=>img.addEventListener('click',event=>{if(img.closest('a.archive-day'))return;event.preventDefault();openImage(img)}));if(close)close.addEventListener('click',shut);box.addEventListener('click',event=>{if(event.target===box)shut()});document.addEventListener('keydown',event=>{if(event.key==='Escape')shut()});
 })();
