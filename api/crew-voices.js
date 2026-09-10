@@ -1,4 +1,4 @@
-import { put } from '@vercel/blob';
+import { get, put } from '@vercel/blob';
 
 const json = (res, status, payload) => {
   res.status(status).setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -9,11 +9,83 @@ const json = (res, status, payload) => {
 const clean = (value, max) => String(value ?? '').replace(/\u0000/g, '').trim().slice(0, max);
 const blobConfigured = () => Boolean(
   process.env.BLOB_STORE_ID ||
-  process.env.BLOB_READ_WRITE_TOKEN
+  process.env.BLOB_READ_WRITE_TOKEN ||
+  process.env.VERCEL_OIDC_TOKEN
 );
+
+const makeSubmission = ({ identity, message }) => ({
+  kind: 'crew-voice',
+  status: 'pending',
+  identity,
+  message,
+  submittedAt: new Date().toISOString(),
+  source: 'keepers-chamber',
+  privacy: {
+    publicIdentityOnly: true,
+    automaticPublishing: false
+  }
+});
+
+const persistSubmission = async (submission, prefix = 'keepers-chamber/pending') => put(
+  `${prefix}/${Date.now()}-crew-voice.json`,
+  JSON.stringify(submission, null, 2),
+  {
+    access: 'private',
+    addRandomSuffix: true,
+    contentType: 'application/json'
+  }
+);
+
+const runPreviewSmokeTest = async () => {
+  if (process.env.VERCEL_ENV !== 'preview') {
+    return { ok: false, blocked: true, error: 'Preview smoke test is disabled outside Preview.' };
+  }
+
+  const marker = `preview-${Date.now()}`;
+  const submission = makeSubmission({
+    identity: `Preview Test ${marker}`,
+    message: 'Automated Crew Voices Preview chain verification.'
+  });
+
+  const blob = await persistSubmission(submission, 'keepers-chamber/preview-tests/pending');
+  const readback = await get(blob.pathname, { access: 'private', useCache: false });
+
+  if (!readback?.stream) {
+    throw new Error('Private Blob readback returned no stream.');
+  }
+
+  const stored = JSON.parse(await new Response(readback.stream).text());
+  const verified = stored.kind === 'crew-voice' &&
+    stored.status === 'pending' &&
+    stored.identity === submission.identity &&
+    stored.message === submission.message &&
+    stored.privacy?.automaticPublishing === false;
+
+  if (!verified) {
+    throw new Error('Stored Crew Voices payload did not match the pending submission.');
+  }
+
+  return {
+    ok: true,
+    environment: process.env.VERCEL_ENV,
+    privateBlob: true,
+    status: stored.status,
+    automaticPublishing: stored.privacy.automaticPublishing,
+    pathname: blob.pathname
+  };
+};
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
+    if (req.query?.smoke === '1') {
+      try {
+        const result = await runPreviewSmokeTest();
+        return json(res, result.ok ? 200 : 403, result);
+      } catch (error) {
+        console.error('Crew Voices Preview smoke test failed:', error);
+        return json(res, 500, { ok: false, error: error?.message || 'Preview smoke test failed.' });
+      }
+    }
     return json(res, 200, { ready: blobConfigured() });
   }
 
@@ -48,28 +120,8 @@ export default async function handler(req, res) {
       return json(res, 400, { ok: false, error: 'Please confirm that your public Viking/Pacer name may be shown if the message is approved.' });
     }
 
-    const submission = {
-      kind: 'crew-voice',
-      status: 'pending',
-      identity,
-      message,
-      submittedAt: new Date().toISOString(),
-      source: 'keepers-chamber',
-      privacy: {
-        publicIdentityOnly: true,
-        automaticPublishing: false
-      }
-    };
-
-    await put(
-      `keepers-chamber/pending/${Date.now()}-crew-voice.json`,
-      JSON.stringify(submission, null, 2),
-      {
-        access: 'private',
-        addRandomSuffix: true,
-        contentType: 'application/json'
-      }
-    );
+    const submission = makeSubmission({ identity, message });
+    await persistSubmission(submission);
 
     return json(res, 201, {
       ok: true,
