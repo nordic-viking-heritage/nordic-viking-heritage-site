@@ -1,4 +1,4 @@
-import { get, put } from '@vercel/blob';
+import { get, list, put } from '@vercel/blob';
 
 const json = (res, status, payload) => {
   res.status(status).setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -75,8 +75,73 @@ const runPreviewSmokeTest = async () => {
   };
 };
 
+const runPreviewVisitorTest = async (req) => {
+  if (process.env.VERCEL_ENV !== 'preview') {
+    return { ok: false, blocked: true, error: 'Preview visitor test is disabled outside Preview.' };
+  }
+
+  const marker = `Visitor E2E ${Date.now()}`;
+  const message = `Preview form-path verification ${marker}`;
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const proto = req.headers['x-forwarded-proto'] || 'https';
+  const endpoint = `${proto}://${host}/api/crew-voices`;
+
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ identity: marker, message, consent: true, website: '' })
+  });
+
+  const postResult = await response.json().catch(() => ({}));
+  if (response.status !== 201 || postResult?.ok !== true) {
+    throw new Error(`Visitor-style POST failed with HTTP ${response.status}.`);
+  }
+
+  const listed = await list({ prefix: 'keepers-chamber/pending/' });
+  const candidates = [...(listed.blobs || [])].sort((a, b) => (b.uploadedAt || 0) - (a.uploadedAt || 0));
+
+  for (const blob of candidates.slice(0, 20)) {
+    const readback = await get(blob.pathname, { access: 'private', useCache: false });
+    if (!readback?.stream) continue;
+    const stored = JSON.parse(await new Response(readback.stream).text());
+    if (stored.identity !== marker) continue;
+
+    const verified = stored.kind === 'crew-voice' &&
+      stored.status === 'pending' &&
+      stored.message === message &&
+      stored.source === 'keepers-chamber' &&
+      stored.privacy?.automaticPublishing === false;
+
+    if (!verified) {
+      throw new Error('Visitor-style POST was stored, but moderation/privacy fields were incorrect.');
+    }
+
+    return {
+      ok: true,
+      environment: process.env.VERCEL_ENV,
+      httpPost: response.status,
+      apiAccepted: true,
+      privateBlobReadback: true,
+      status: stored.status,
+      automaticPublishing: stored.privacy.automaticPublishing,
+      pathname: blob.pathname
+    };
+  }
+
+  throw new Error('Visitor-style POST succeeded, but its private pending Blob could not be located for readback.');
+};
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
+    if (req.query?.visitorTest === '1') {
+      try {
+        const result = await runPreviewVisitorTest(req);
+        return json(res, result.ok ? 200 : 403, result);
+      } catch (error) {
+        console.error('Crew Voices Preview visitor test failed:', error);
+        return json(res, 500, { ok: false, error: error?.message || 'Preview visitor test failed.' });
+      }
+    }
     if (req.query?.smoke === '1') {
       try {
         const result = await runPreviewSmokeTest();
