@@ -71,6 +71,19 @@ jobs:
           path.write_text(text, encoding='utf-8')
           PY
 
+      - name: Preserve Crew Honors breathing room
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('styles.css')
+          css = path.read_text(encoding='utf-8')
+          rule = '#honors .framed + .naming-list{margin-top:32px}'
+          if rule not in css:
+              css += '\n' + rule + '\n'
+          path.write_text(css, encoding='utf-8')
+          PY
+
       - name: Commit restored structure
         run: |
           if git diff --quiet -- index.html styles.css; then
