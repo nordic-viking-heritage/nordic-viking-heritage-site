@@ -1,11 +1,7 @@
 name: Restore approved permanent site structure
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/restore-approved-structure.yml
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -31,8 +27,6 @@ jobs:
           path = Path('index.html')
           text = path.read_text(encoding='utf-8')
 
-          # The daily Viking Dispatch visual tradition began on Day 6.
-          # Days 1-5 intentionally retain the shared opening artwork.
           images = {
               20: 'day-20-viking-dispatch.jpg',
               19: 'day-19-viking-dispatch.jpg',
@@ -83,6 +77,9 @@ jobs:
               css += '\n' + rule + '\n'
           path.write_text(css, encoding='utf-8')
           PY
+
+      - name: Validate restored structure
+        run: python3 scripts/validate_site_structure.py
 
       - name: Commit restored structure
         run: |
