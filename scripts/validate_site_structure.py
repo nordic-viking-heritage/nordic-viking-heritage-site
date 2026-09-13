@@ -73,7 +73,8 @@ else:
     fail('Ship\'s Roll ordinary registry grid is missing')
 
 # Crew Honors visual spacing approved by Stefan.
-require('#honors .framed + .naming-list{margin-top:32px}' in css.replace(' ', ''),
+normalized_css = re.sub(r'\s+', '', css)
+require('#honors.framed+.naming-list{margin-top:32px}' in normalized_css,
         'Approved Crew Honors spacing rule is missing')
 
 # Keeper's Chamber is a permanent workspace, not a disposable daily block.
