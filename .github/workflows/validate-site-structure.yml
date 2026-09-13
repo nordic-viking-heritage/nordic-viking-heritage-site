@@ -1,0 +1,34 @@
+name: Validate permanent site structure
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - index.html
+      - styles.css
+      - 'archive/**'
+      - 'scripts/**'
+      - '.github/workflows/validate-site-structure.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - index.html
+      - styles.css
+      - 'archive/**'
+      - 'scripts/**'
+      - '.github/workflows/validate-site-structure.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate locked website structure
+        run: python3 scripts/validate_site_structure.py
