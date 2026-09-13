@@ -16,3 +16,5 @@
 .sources .source-list a:hover,.sources .source-list a:focus{border-color:rgba(215,190,140,.75);color:#fff}
 @media(max-width:800px){#keepers-chamber .keeper-grid{grid-template-columns:1fr}}
 @media(max-width:520px){#myth-day-20{padding:54px 0}#keepers-chamber{padding:64px 0}#keepers-chamber .keeper-grid{gap:12px;margin:24px 0}#keepers-chamber .keeper-card{padding:20px}}
+
+#honors .framed + .naming-list{margin-top:32px}
