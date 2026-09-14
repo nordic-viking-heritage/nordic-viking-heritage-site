@@ -18,6 +18,9 @@ jobs:
       - name: Apply approved restoration
         run: python3 scripts/restore_approved_structure.py
 
+      - name: Restore approved Voyage Archive artwork
+        run: python3 scripts/fix_archive_artwork.py
+
       - name: Apply Day 21 additions
         run: python3 scripts/apply_day21.py
 
