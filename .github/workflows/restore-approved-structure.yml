@@ -1,43 +1,27 @@
-name: Restore approved permanent site structure
+name: Verify approved permanent site structure
 
 on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  restore:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Apply approved restoration
-        run: python3 scripts/restore_approved_structure.py
-
-      - name: Restore approved Voyage Archive artwork
-        run: python3 scripts/fix_archive_artwork.py
-
-      - name: Apply Day 21 additions
-        run: python3 scripts/apply_day21.py
-
-      - name: Add Day 21 archive guardrails
-        run: python3 scripts/day21_archive_patch.py
-
-      - name: Validate restored structure
+      - name: Validate locked website structure
         run: python3 scripts/validate_site_structure.py
 
-      - name: Commit verified Day 21
+      - name: Confirm no legacy runtime overlays are active
         run: |
-          if git diff --quiet -- index.html styles.css scripts/validate_site_structure.py; then
-            echo "No site changes required."
-            exit 0
+          if grep -Eq '<script[^>]+src=["'"'][^"'"']*(site\.js|day16\.js)["'"']' index.html; then
+            echo "Legacy runtime overlay detected"
+            exit 1
           fi
-          git config user.name "nordic-viking-heritage"
-          git config user.email "nkfrhf5h7b@privaterelay.appleid.com"
-          git add index.html styles.css scripts/validate_site_structure.py
-          git commit -m "Publish verified Day 21 website update"
-          git push
+
+      - name: Confirm repository stayed unchanged
+        run: git diff --exit-code
