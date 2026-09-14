@@ -21,17 +21,20 @@ jobs:
       - name: Apply Day 21 additions
         run: python3 scripts/apply_day21.py
 
+      - name: Add Day 21 archive guardrails
+        run: python3 scripts/day21_archive_patch.py
+
       - name: Validate restored structure
         run: python3 scripts/validate_site_structure.py
 
       - name: Commit verified Day 21
         run: |
-          if git diff --quiet -- index.html styles.css; then
+          if git diff --quiet -- index.html styles.css scripts/validate_site_structure.py; then
             echo "No site changes required."
             exit 0
           fi
           git config user.name "nordic-viking-heritage"
           git config user.email "nkfrhf5h7b@privaterelay.appleid.com"
-          git add index.html styles.css
+          git add index.html styles.css scripts/validate_site_structure.py
           git commit -m "Publish verified Day 21 website update"
           git push
