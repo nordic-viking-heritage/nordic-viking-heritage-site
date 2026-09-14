@@ -2,7 +2,7 @@
 
 /* APPROVED STABLE STRUCTURE — 2026-09-12 */
 /* Approved sections are locked. Daily updates must not restructure these permanent modules. */
-#myth-day-20{padding:76px 0}
+[id^="myth-day-"]{padding:76px 0}
 #keepers-chamber{padding:92px 0;border-top:1px solid rgba(201,163,91,.22);border-bottom:1px solid rgba(201,163,91,.22)}
 #keepers-chamber .keeper-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:32px 0}
 #keepers-chamber .keeper-card{border:1px solid rgba(199,164,92,.42);background:#10191c;padding:24px;color:#ece8df;min-width:0}
@@ -15,6 +15,6 @@
 .sources .source-list a{display:block;padding:15px 18px;border:1px solid rgba(199,164,92,.35);background:#10191c;color:#d8bd7b;text-decoration:none;overflow-wrap:anywhere}
 .sources .source-list a:hover,.sources .source-list a:focus{border-color:rgba(215,190,140,.75);color:#fff}
 @media(max-width:800px){#keepers-chamber .keeper-grid{grid-template-columns:1fr}}
-@media(max-width:520px){#myth-day-20{padding:54px 0}#keepers-chamber{padding:64px 0}#keepers-chamber .keeper-grid{gap:12px;margin:24px 0}#keepers-chamber .keeper-card{padding:20px}}
+@media(max-width:520px){[id^="myth-day-"]{padding:54px 0}#keepers-chamber{padding:64px 0}#keepers-chamber .keeper-grid{gap:12px;margin:24px 0}#keepers-chamber .keeper-card{padding:20px}}
 
 #honors .framed + .naming-list{margin-top:32px}
