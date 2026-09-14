@@ -90,12 +90,13 @@ require(len(source_links) >= 8, f'Sources appears truncated: only {len(source_li
 
 # Voyage Archive must remain complete for all published days through Day 20.
 archive = sections.get('voyage-archive', '')
-for day in range(1, 21):
+for day in range(1, 22):
     require(f'archive/day-{day}.html' in archive, f'Voyage Archive link missing for Day {day}')
     require((ROOT / f'archive/day-{day}.html').exists(), f'Archive file missing for Day {day}')
 
 # The agreed artwork convention: Day 6 onward uses its Viking Dispatch visual; Days 1-5 use prologue artwork.
 approved_archive_images = {
+    21: 'day-21-viking-dispatch.jpg',
     20: 'day-20-viking-dispatch.jpg',
     19: 'day-19-viking-dispatch.jpg',
     18: 'day-18-viking-dispatch.png',
