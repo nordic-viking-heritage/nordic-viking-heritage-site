@@ -10,11 +10,14 @@
 #keepers-chamber .keeper-card span{font-family:Cinzel,serif;color:#c7a45c;font-size:.78rem;font-weight:800;letter-spacing:.12em;margin-bottom:10px}
 #keepers-chamber .keeper-card strong{font-family:Cinzel,serif;color:#f0e8d8;font-size:1.2rem;line-height:1.35;margin-bottom:12px}
 #keepers-chamber .keeper-card p{margin:0;color:#d8d0c2;line-height:1.7}
+#keepers-chamber .keeper-card .keeper-card-note{margin-top:14px;color:#f0e8d8;font-weight:700}
+#keepers-chamber .keeper-action{display:inline-block;margin-top:18px;padding:13px 16px;border:1px solid rgba(199,164,92,.72);color:#d8bd7b;text-decoration:none;font-family:Cinzel,serif;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-align:center}
+#keepers-chamber .keeper-action:hover,#keepers-chamber .keeper-action:focus{background:rgba(199,164,92,.1);color:#fff}
 #keepers-chamber blockquote{margin:34px 0 20px;padding:22px 24px;border-left:4px solid #c7a45c;background:#10191c;font-family:Cinzel,serif;color:#f0e8d8}
 .sources .source-list{display:grid;gap:12px;margin-top:30px}
 .sources .source-list a{display:block;padding:15px 18px;border:1px solid rgba(199,164,92,.35);background:#10191c;color:#d8bd7b;text-decoration:none;overflow-wrap:anywhere}
 .sources .source-list a:hover,.sources .source-list a:focus{border-color:rgba(215,190,140,.75);color:#fff}
 @media(max-width:800px){#keepers-chamber .keeper-grid{grid-template-columns:1fr}}
-@media(max-width:520px){[id^="myth-day-"]{padding:54px 0}#keepers-chamber{padding:64px 0}#keepers-chamber .keeper-grid{gap:12px;margin:24px 0}#keepers-chamber .keeper-card{padding:20px}}
+@media(max-width:520px){[id^="myth-day-"]{padding:54px 0}#keepers-chamber{padding:64px 0}#keepers-chamber .keeper-grid{gap:12px;margin:24px 0}#keepers-chamber .keeper-card{padding:20px}#keepers-chamber .keeper-action{display:block;width:100%}}
 
 #honors .framed + .naming-list{margin-top:32px}

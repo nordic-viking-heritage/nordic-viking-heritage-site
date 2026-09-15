@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Crew Voices — words from the Viking Voyage II crew, gathered by the Keeper of the Saga.">
+  <title>Crew Voices — Nordic Viking Heritage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#061014;--gold:#c9a35b;--text:#f1eadb;--muted:#b8ae9e}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at 50% 0,#10242a 0,#061014 55%);color:var(--text);font-family:Inter,Arial,sans-serif}
+    a{color:inherit}
+    .wrap{width:min(920px,calc(100% - 32px));margin:auto;padding:52px 0 90px}
+    .topline{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:3rem}
+    .brand,.kicker,h1,h2,.name{font-family:Cinzel,Georgia,serif}
+    .brand,.kicker{color:var(--gold);letter-spacing:.14em;font-weight:700;font-size:.8rem}
+    .back{border:1px solid rgba(201,163,91,.5);padding:.72rem .9rem;text-decoration:none;font-size:.72rem;font-weight:800;letter-spacing:.1em}
+    .back:hover,.back:focus{background:rgba(201,163,91,.08)}
+    h1{font-size:clamp(2.8rem,10vw,5.5rem);margin:.35rem 0 1rem}
+    h2{font-size:clamp(1.7rem,5vw,2.6rem);margin:.35rem 0 1rem}
+    .intro,.submit-intro{color:var(--muted);line-height:1.75;max-width:760px}
+    .keeper-line{color:var(--text);font-weight:700;margin:1.25rem 0 0}
+    .panel{margin-top:3rem;padding:1.4rem;border:1px solid rgba(201,163,91,.35);background:rgba(9,23,28,.7)}
+    .voices{display:grid;gap:1rem;margin-top:1.5rem}
+    .voice{border:1px solid rgba(201,163,91,.35);padding:1.3rem;background:rgba(5,13,17,.65)}
+    .name{font-size:1.18rem;color:var(--gold)}
+    .message{white-space:pre-wrap;line-height:1.7;margin:.7rem 0}
+    .date{font-size:.78rem;color:var(--muted);letter-spacing:.08em}
+    .empty{border:1px solid rgba(201,163,91,.3);padding:1.3rem;color:var(--muted)}
+    @media(max-width:620px){.wrap{padding-top:28px}.topline{align-items:flex-start;flex-direction:column;margin-bottom:2.3rem}.back{width:100%;text-align:center}.panel{padding:1rem}}
+  </style>
+</head>
+<body>
+  <main class="wrap" id="crew-voices-page">
+    <div class="topline">
+      <div class="brand">⚔ NORDIC VIKING HERITAGE</div>
+      <a class="back" href="/#keepers-chamber">← KEEPER'S CHAMBER</a>
+    </div>
+
+    <div class="kicker">🐦‍⬛ GATHERED BY ÞÓRA</div>
+    <h1>CREW VOICES</h1>
+    <p class="intro">Every voyage is carried not only by oars, but by voices.</p>
+    <p class="intro">Here, the words of our crew are gathered and guarded by Þóra, Keeper of the Saga. Read the voices already carried into the chamber — or leave your own message for the Keeper.</p>
+    <p class="keeper-line">Nothing enters the saga until it has passed through the Keeper's hands.</p>
+
+    <section class="panel" aria-labelledby="voices-heading">
+      <div class="kicker">VOICES FROM THE SHIP</div>
+      <h2 id="voices-heading">WORDS CARRIED INTO THE SAGA</h2>
+      <div id="voices" class="voices"><div class="empty">Listening for voices from the ship…</div></div>
+    </section>
+
+    <section class="panel" id="crew-voices-submit" aria-label="Send a Crew Voice"></section>
+  </main>
+  <script>
+    const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const fmt=v=>v?new Date(v).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}):'';
+    fetch('/api/crew-voices-public',{cache:'no-store'}).then(async r=>{const d=await r.json();if(!r.ok||!d.ok)throw Error();const el=document.getElementById('voices');el.innerHTML=d.voices.length?d.voices.map(x=>`<article class="voice"><div class="name">${esc(x.identity)}</div><div class="message">${esc(x.message)}</div><div class="date">${esc(fmt(x.publishedAt||x.submittedAt))}</div></article>`).join(''):'<div class="empty">No Crew Voices have been published yet.</div>';}).catch(()=>document.getElementById('voices').innerHTML='<div class="empty">The voices cannot be reached right now.</div>');
+  </script>
+  <script src="keepers-chamber.js?v=1"></script>
+</body>
+</html>
