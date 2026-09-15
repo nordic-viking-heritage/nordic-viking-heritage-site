@@ -1,0 +1,32 @@
+name: Fix Day 25 map tagline
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-day25-map-tagline.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Move tagline
+        run: python scripts/fix_day25_map_tagline.py
+      - name: Validate permanent site structure
+        run: python scripts/validate_site_structure.py
+      - name: Commit verified correction
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Move Day 25 map tagline below intro"
+          git push
