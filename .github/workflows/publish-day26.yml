@@ -1,4 +1,4 @@
-name: Publish Day 26
+name: Day 26 Myth Background Fix
 on:
   push:
     branches: [main]
@@ -6,26 +6,24 @@ on:
 permissions:
   contents: write
 jobs:
-  publish:
+  fix:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Apply protected Day 26 update
-        run: python3 scripts/publish_day26.py
-      - name: Verify only index is changed by publication
+      - name: Apply isolated Day 26 Myth and Saga background
         run: |
-          test "$(git diff --name-only)" = "index.html"
-          grep -q "THE SHIP'S LOG — DAY 26" index.html
-          grep -q 'id="keepers-chamber"' index.html
-          grep -q 'archive/day-26.html' index.html
-          grep -q 'day-26-crew-honors.jpg' index.html
-          grep -q 'day-26-night-watch.jpg' index.html
-      - name: Commit protected Day 26 update
+          printf '\n/* DAY 26 — isolated Myth & Saga chapter contrast */\n#myth-day-26{background:#10191c;color:#eae6dc;border-top:1px solid rgba(199,164,92,.30);border-bottom:1px solid rgba(199,164,92,.22)}\n#myth-day-26 .red{color:#c45a48}\n' >> styles.css
+      - name: Verify only stylesheet changed
+        run: |
+          test "$(git diff --name-only)" = "styles.css"
+          grep -q '#myth-day-26{background:#10191c' styles.css
+          git diff --exit-code -- index.html
+      - name: Commit isolated style fix
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Publish Day 26 website update"
+          git add styles.css
+          git commit -m "Separate Day 26 Myth and Saga background"
           git push
