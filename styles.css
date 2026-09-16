@@ -21,3 +21,7 @@
 @media(max-width:520px){[id^="myth-day-"]{padding:54px 0}#keepers-chamber{padding:64px 0}#keepers-chamber .keeper-grid{gap:12px;margin:24px 0}#keepers-chamber .keeper-card{padding:20px}#keepers-chamber .keeper-action{display:block;width:100%}}
 
 #honors .framed + .naming-list{margin-top:32px}
+
+/* DAY 26 — isolated Myth & Saga chapter contrast */
+#myth-day-26{background:#10191c;color:#eae6dc;border-top:1px solid rgba(199,164,92,.30);border-bottom:1px solid rgba(199,164,92,.22)}
+#myth-day-26 .red{color:#c45a48}
