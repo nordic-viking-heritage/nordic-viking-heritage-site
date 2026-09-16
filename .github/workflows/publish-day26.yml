@@ -1,4 +1,4 @@
-name: Voyage Archive Image Framing
+name: Add Chapter III Completion
 on:
   push:
     branches: [main]
@@ -6,26 +6,41 @@ on:
 permissions:
   contents: write
 jobs:
-  fix:
+  add:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Extend safe framing to all Voyage Archive images
+      - name: Insert Chapter III after Chapter II only
         run: |
-          printf '\n/* VOYAGE ARCHIVE — safe framing for every archive card */\n#voyage-archive .archive-day-image img{width:100%%;height:100%%;object-fit:cover;object-position:50%% 38%%}\n#voyage-archive .archive-day:nth-child(1) .archive-day-image img{object-position:52%% 25%%}\n#voyage-archive .archive-day:nth-child(2) .archive-day-image img{object-position:44%% 32%%}\n@media(max-width:520px){#voyage-archive .archive-day-image img{object-position:50%% 34%%}#voyage-archive .archive-day:nth-child(1) .archive-day-image img{object-position:52%% 25%%}#voyage-archive .archive-day:nth-child(2) .archive-day-image img{object-position:44%% 32%%}}\n' >> styles.css
-      - name: Verify only stylesheet changed
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          if 'id="chapter-three-complete"' in s:
+              raise SystemExit('Chapter III already exists')
+          chapter2='<section class="dark-section" id="chapter-two-complete"><div class="wrap"><div class="copy"><div class="kicker gold">VIKING VOYAGE II — CHAPTER II</div><h2>NEWFOUNDLAND REACHED</h2><p>From the North American mainland, the fleet turned east toward Newfoundland.</p><p>On Day 18, <strong>89 Vikings</strong> carried the voyage to <strong>30,701,056 steps</strong> — approximately <strong>19,955.7 km</strong> since Greenland.</p><p>The fleet reached Newfoundland. Chapter II was complete and the chapter was frozen into the voyage record.</p><p><strong>CHAPTER II IS COMPLETE.<br>CHAPTER III AWAITS.</strong></p></div></div></section>'
+          chapter3='<section class="dark-section" id="chapter-three-complete"><div class="wrap"><div class="copy"><div class="kicker gold">VIKING VOYAGE II — CHAPTER III</div><h2>NOVA SCOTIA REACHED</h2><p>From Newfoundland, the fleet continued south toward Nova Scotia.</p><p>On Day 26, <strong>103 Vikings</strong> carried the voyage to <strong>50,647,198 steps</strong> — approximately <strong>32,920.7 km</strong> since Greenland.</p><p>The fleet reached Nova Scotia. Chapter III was complete and the chapter was frozen into the voyage record.</p><p><strong>CHAPTER III IS COMPLETE.<br>CHAPTER IV AWAITS.</strong></p></div></div></section>'
+          if s.count(chapter2)!=1:
+              raise SystemExit('Exact locked Chapter II marker not found once')
+          before=s
+          s=s.replace(chapter2,chapter2+'\n'+chapter3,1)
+          if s.replace('\n'+chapter3,'',1)!=before:
+              raise SystemExit('Unexpected content changed')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify surgical change
         run: |
-          test "$(git diff --name-only)" = "styles.css"
-          grep -q 'VOYAGE ARCHIVE — safe framing for every archive card' styles.css
-          grep -q 'object-position:50% 38%' styles.css
-          grep -q 'object-position:50% 34%' styles.css
-          git diff --exit-code -- index.html
-      - name: Commit isolated archive framing fix
+          test "$(git diff --name-only)" = "index.html"
+          grep -q 'id="chapter-three-complete"' index.html
+          grep -q 'CHAPTER III IS COMPLETE.<br>CHAPTER IV AWAITS.' index.html
+          grep -q '50,647,198 steps' index.html
+          git diff --exit-code -- styles.css
+      - name: Commit Chapter III milestone
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add styles.css
-          git commit -m "Improve framing for all Voyage Archive images"
+          git add index.html
+          git commit -m "Add completed Chapter III milestone"
           git push
