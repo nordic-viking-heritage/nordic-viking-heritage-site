@@ -29,3 +29,7 @@
 /* DAY 26 — balanced Myth & Saga chapter spacing */
 #myth-day-26{padding-top:76px;padding-bottom:76px}
 @media(max-width:520px){#myth-day-26{padding-top:64px;padding-bottom:64px}}
+
+/* DAY 26 — balanced History chapter spacing */
+#history-day-26{padding-top:76px;padding-bottom:76px}
+@media(max-width:520px){#history-day-26{padding-top:64px;padding-bottom:64px}}
