@@ -33,3 +33,9 @@
 /* DAY 26 — balanced History chapter spacing */
 #history-day-26{padding-top:76px;padding-bottom:76px}
 @media(max-width:520px){#history-day-26{padding-top:64px;padding-bottom:64px}}
+
+/* VOYAGE ARCHIVE — mobile-friendly image framing */
+#voyage-archive .archive-day-image img{object-fit:cover}
+#voyage-archive .archive-day:nth-child(1) .archive-day-image img{object-position:50% 28%}
+#voyage-archive .archive-day:nth-child(2) .archive-day-image img{object-position:46% 34%}
+@media(max-width:520px){#voyage-archive .archive-day:nth-child(1) .archive-day-image img{object-position:52% 25%}#voyage-archive .archive-day:nth-child(2) .archive-day-image img{object-position:44% 32%}}
