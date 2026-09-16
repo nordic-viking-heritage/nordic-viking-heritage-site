@@ -12,11 +12,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Apply Day 26 update
+      - name: Apply protected Day 26 update
         run: python3 scripts/publish_day26.py
-      - name: Validate locked website structure
-        run: python3 scripts/validate_site_structure.py
-      - name: Commit verified Day 26 update
+      - name: Verify only index is changed by publication
+        run: |
+          test "$(git diff --name-only)" = "index.html"
+          grep -q "THE SHIP'S LOG — DAY 26" index.html
+          grep -q 'id="keepers-chamber"' index.html
+          grep -q 'archive/day-26.html' index.html
+          grep -q 'day-26-crew-honors.jpg' index.html
+          grep -q 'day-26-night-watch.jpg' index.html
+      - name: Commit protected Day 26 update
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
