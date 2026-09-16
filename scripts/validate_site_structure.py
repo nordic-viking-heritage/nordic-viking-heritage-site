@@ -29,7 +29,7 @@ sections = {sid: section(html, sid) for sid in required_sections}
 
 # Locked completed chapters.
 for sid,label,destination in [
-    ('chapter-one-complete','CHAPTER I','NORTH ATLANTIC'),
+    ('chapter-one-complete','CHAPTER I','NORTH ATLANTIC CROSSING'),
     ('chapter-two-complete','CHAPTER II','NEWFOUNDLAND'),
     ('chapter-three-complete','CHAPTER III','NOVA SCOTIA'),
 ]:
@@ -57,50 +57,40 @@ for pacer,viking in [
     ('Robert Drope','Eyvind'),('Khalil Saudi Arabia','Hjalti'),('Litus','Dag'),
     ('COPY157','Tryggve'),('iphv','Gudny'),('JASSI','Gunni'),
     ('Pat','Hjalmar'),('Mark','Starkad'),('fateme.berenji','Alfhild')
-]:
-    require(f'<span>{pacer}</span>' in ship and f'<strong>{viking}</strong>' in ship, f'Ship\'s Roll pairing missing: {pacer} → {viking}')
+]: require(f'<span>{pacer}</span>' in ship and f'<strong>{viking}</strong>' in ship, f'Ship\'s Roll pairing missing: {pacer} → {viking}')
 
-# Day 26 is the verified current baseline. Future publishing must deliberately advance this validator.
 honors=sections.get('honors','')
 require('CREW HONORS — DAY 26' in honors,'Current Crew Honors is not Day 26')
 require('day-26-crew-honors.jpg' in honors,'Current Crew Honors is not using Day 26 artwork')
 for token in ('Pat','HJALMAR','Mark','STARKAD','fateme.berenji','ALFHILD'): require(token in honors,f'Current Crew Honors is missing {token}')
 require(len(re.findall(r'<section\b(?=[^>]*\bid=["\']honors["\'])',html,re.I))==1,'There must be exactly one canonical current Crew Honors section')
 
-# Crew Honors archive remains append-only through Day 26.
 honors_archive=sections.get('crew-honors-archive','')
-for marker in (
-    'DAY 26 · HJALMAR · STARKAD · ALFHILD','DAY 25 · TRYGGVE · GUDNY · GUNNI','DAY 24 · EYVIND · HJALTI · DAG',
-    'DAY 23 · GISLI · GUDRID · BIRGER','DAY 22 · FINN · UNN · AUD','DAY 21 · AUÐUN · EINAR · RAGNA','DAY 20 · RUNA · EGIL · HILD'):
+for marker in ('DAY 26 · HJALMAR · STARKAD · ALFHILD','DAY 25 · TRYGGVE · GUDNY · GUNNI','DAY 24 · EYVIND · HJALTI · DAG','DAY 23 · GISLI · GUDRID · BIRGER','DAY 22 · FINN · UNN · AUD','DAY 21 · AUÐUN · EINAR · RAGNA','DAY 20 · RUNA · EGIL · HILD'):
     require(marker in honors_archive, f'Crew Honors Archive missing {marker}')
 for image in ('day-26-crew-honors.jpg','day-25-crew-honors.jpg','day-24-crew-honors.jpg','day-23-crew-honors.jpg','day-22-crew-honors.jpg','day-21-crew-honors.jpg'):
     require(honors_archive.count(image)==1,f'{image} archive entry must occur exactly once')
 
-# Approved visual structure.
 normalized_css=re.sub(r'\s+','',css)
 require('#honors.framed+.naming-list{margin-top:32px}' in normalized_css,'Approved Crew Honors spacing rule is missing')
 require('#myth-day-26' in css, 'Day 26 Myth & Saga styling is missing')
 require('#history-day-26' in css, 'Day 26 History spacing is missing')
 
-# Keeper's Chamber.
 keeper=sections.get('keepers-chamber','')
 for label in ('CREW VOICES','TALES FROM THE CREW','QUESTIONS &amp; IDEAS'): require(label in keeper,f'Keeper\'s Chamber card missing: {label}')
 require('.keeper-grid' in css and '.keeper-card' in css,'Keeper\'s Chamber permanent card styling is missing')
 
-# Sources.
 sources=sections.get('sources',''); source_links=re.findall(r'<a\b[^>]+href=["\']https?://',sources,re.I)
 require(len(source_links)>=10,f'Sources appears truncated: only {len(source_links)} external references found')
 require('INSTRUMENT NAVIGATION IN THE VIKING AGE' in sources,'Day 24 navigation source is missing')
 require('NOAA FISHERIES — THE GIANT OARFISH' in sources,'Day 25 oarfish source is missing')
 
-# Voyage Archive continuity through Day 26.
 archive=sections.get('voyage-archive','')
 for day in range(1,27):
     require(f'archive/day-{day}.html' in archive,f'Voyage Archive link missing for Day {day}')
     require((ROOT/f'archive/day-{day}.html').exists(),f'Archive file missing for Day {day}')
 require('day-26-saga-scene.jpg' in archive, 'Voyage Archive Day 26 artwork changed or is missing')
 
-# Day 26 rolling content baseline.
 require('THE SHIP\'S LOG — DAY 26' in sections.get('voyage',''),'Current Ship Log is not Day 26')
 require('50,647,198' in sections.get('voyage','') and '103' in sections.get('voyage',''),'Day 26 status figures are stale')
 require('VIKING DISPATCH — DAY 26' in sections.get('dispatch','') and 'day-26-saga-scene.jpg' in sections.get('dispatch',''),'Current Dispatch is not Day 26')
@@ -111,12 +101,9 @@ require(html.count('id="our-saga-day-26"')==1 and 'day-26-our-saga.jpg' in html,
 require('href="#our-saga-day-26">SAGA</a>' in html,'SAGA navigation is not pointing to Day 26')
 require('id="night-watch-day-26"' in html and 'day-26-night-watch.jpg' in html,'Day 26 Night Watch is incomplete')
 
-# Local image references on current page must resolve.
 for src in re.findall(r'<img\b[^>]+src=["\']([^"\']+)["\']',html,re.I):
     if src.startswith(('http://','https://','data:')): continue
     require((ROOT/src).exists(),f'Local image referenced by index.html is missing: {src}')
-
-# Internal anchors and structural sanity.
 ids=re.findall(r'\bid=["\']([^"\']+)["\']',html,re.I); id_set=set(ids)
 for href in re.findall(r'<a\b[^>]+href=["\']#([^"\']+)["\']',html,re.I): require(href in id_set,f'Broken internal anchor: #{href}')
 for legacy in ('site.js','day16.js'): require(not re.search(rf'<script[^>]+src=["\'][^"\']*{re.escape(legacy)}["\']',html,re.I),f'Legacy runtime overlay {legacy} must not be loaded by index.html')
