@@ -10,7 +10,7 @@ on:
       - 'archive/**'
       - 'api/**'
       - 'scripts/**'
-      - '.github/workflows/**'
+      - '.github/workflows/validate-site-structure.yml'
   pull_request:
     branches:
       - main
@@ -20,7 +20,7 @@ on:
       - 'archive/**'
       - 'api/**'
       - 'scripts/**'
-      - '.github/workflows/**'
+      - '.github/workflows/validate-site-structure.yml'
 
 permissions:
   contents: read
