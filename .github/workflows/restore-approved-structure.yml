@@ -1,4 +1,4 @@
-name: Verify approved permanent site structure
+name: Legacy structure restore — retired
 
 on:
   workflow_dispatch:
@@ -7,21 +7,9 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  retired:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Validate locked website structure
-        run: python3 scripts/validate_site_structure.py
-
-      - name: Confirm no legacy runtime overlays are active
-        run: |
-          if grep -Eq '<script[^>]+src=["'"'][^"'"']*(site\.js|day16\.js)["'"']' index.html; then
-            echo "Legacy runtime overlay detected"
-            exit 1
-          fi
-
-      - name: Confirm repository stayed unchanged
-        run: git diff --exit-code
+      - run: |
+          echo "Automatic legacy restore is retired to prevent stale content from overwriting the current site."
+          echo "Use validation and an explicit reviewed repair instead."
