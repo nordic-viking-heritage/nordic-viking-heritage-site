@@ -25,3 +25,7 @@
 /* DAY 26 — isolated Myth & Saga chapter contrast */
 #myth-day-26{background:#10191c;color:#eae6dc;border-top:1px solid rgba(199,164,92,.30);border-bottom:1px solid rgba(199,164,92,.22)}
 #myth-day-26 .red{color:#c45a48}
+
+/* DAY 26 — balanced Myth & Saga chapter spacing */
+#myth-day-26{padding-top:76px;padding-bottom:76px}
+@media(max-width:520px){#myth-day-26{padding-top:64px;padding-bottom:64px}}
