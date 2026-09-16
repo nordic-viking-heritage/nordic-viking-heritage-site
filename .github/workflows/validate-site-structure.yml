@@ -8,8 +8,9 @@ on:
       - index.html
       - styles.css
       - 'archive/**'
+      - 'api/**'
       - 'scripts/**'
-      - '.github/workflows/validate-site-structure.yml'
+      - '.github/workflows/**'
   pull_request:
     branches:
       - main
@@ -17,8 +18,9 @@ on:
       - index.html
       - styles.css
       - 'archive/**'
+      - 'api/**'
       - 'scripts/**'
-      - '.github/workflows/validate-site-structure.yml'
+      - '.github/workflows/**'
 
 permissions:
   contents: read
