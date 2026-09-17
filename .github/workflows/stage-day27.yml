@@ -1,0 +1,74 @@
+name: Stage Day 27 safely
+on:
+  push:
+    branches: [day-27-staging]
+    paths: ['.github/workflows/stage-day27.yml']
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: day-27-staging
+      - name: Patch only Day 27 current-content regions
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text()
+          original=s
+          def section(id_, html):
+              global s
+              pat=rf'<section([^>]*\bid="{re.escape(id_)}"[^>]*)>.*?</section>'
+              s2,n=re.subn(pat,html,s,count=1,flags=re.S)
+              if n!=1: raise SystemExit(f'Expected exactly one section #{id_}, found {n}')
+              s=s2
+          s=s.replace('Nordic Viking Heritage — Viking Voyage II, Day 26. Chapter III complete: Newfoundland to Nova Scotia.','Nordic Viking Heritage — Viking Voyage II, Day 27. The fleet rests in Nova Scotia.')
+          s=s.replace('<title>Nordic Viking Heritage — Viking Voyage II — Day 26</title>','<title>Nordic Viking Heritage — Viking Voyage II — Day 27</title>')
+          s=s.replace('href="#history-day-26">HISTORY','href="#history-day-27">HISTORY').replace('href="#our-saga-day-26">SAGA','href="#our-saga-day-27">SAGA')
+          section('voyage','''<section class="status parchment" id="voyage"><div class="wrap"><div class="status-head"><div><div class="kicker red">THE SHIP'S LOG — DAY 27</div><h1>THE LAND WAS NEVER EMPTY</h1><p>The fleet remains in Nova Scotia. Today we do not sail. Tonight we listen before Chapter IV begins.</p></div><img class="seal" src="assets/one-crew-one-saga.png" alt="One Crew, One Saga"></div><div class="stats"><article><strong>103</strong><small>SAILORS ABOARD</small><em>One crew</em></article><article><strong>52,604,210</strong><small>TOTAL STEPS</small><em>Steps toward Florida</em></article><article><strong>≈ 34,193 KM</strong><small>DISTANCE COVERED</small><em>At 0.65 m per step</em></article><article><strong>70.14%</strong><small>OF OUR GOAL</small><em>75,000,000 steps</em></article></div></div></section>''')
+          section('dispatch','''<section class="dark-section" id="dispatch"><div class="wrap"><div class="copy"><div class="kicker gold">⚔️ VIKING DISPATCH — DAY 27 ⚔️</div><h2>THE LAND WAS NEVER EMPTY.</h2><p>103 Vikings. 52,604,210 steps. ≈34,193 km behind us.</p><p>Tonight, we do not sail. Our ships rest along the shores of Nova Scotia, and for once the oars fall silent.</p><p>We have entered Mi'kma'ki — the traditional homeland of the Mi'kmaq. Tonight we listen before we sail again.</p><figure class="framed"><img class="zoomable" src="day-27-viking-dispatch.jpg" alt="Viking Dispatch Day 27"><figcaption>VIKING DISPATCH — DAY 27 · THE LAND WAS NEVER EMPTY</figcaption></figure></div></div></section>''')
+          s=s.replace('href="#history-day-26"','href="#history-day-27"').replace('href="#myth-day-26"','href="#myth-day-27"').replace('href="#our-saga-day-26"','href="#our-saga-day-27"')
+          section('our-saga-day-26','''<section class="dark-section" id="our-saga-day-27"><div class="wrap"><div class="copy"><div class="kicker gold">⚔️ OUR SAGA — DAY 27 ⚔️</div><h2>YOU ARE NO LONGER ALONE</h2><p>Þóra came from the mist with Hugin and Munin above her. She brought no sword, no orders and no map. She brought a message: <strong>“Lean upon us now, my old friend. You are no longer alone.”</strong></p><p>103 Vikings. Different people, different lives, different paths — aboard the same ship.</p><p><strong>EVERY SAILOR MATTERS. TOGETHER WE CREATE OUR SAGA.</strong></p><figure class="framed"><img class="zoomable" src="day-27-our-saga.jpg" alt="Our Saga Day 27 — You Are No Longer Alone"><figcaption>OUR SAGA — DAY 27 · YOU ARE NO LONGER ALONE</figcaption></figure></div></div></section>''')
+          section('honors','''<section class="parchment honors" id="honors"><div class="wrap"><div class="kicker red">CREW HONORS — DAY 27</div><h2>EVERY SAILOR MATTERS</h2><div class="honors-explainer"><div class="kicker red">THE HONOR BEHIND THE NAME</div><h3>EVERY OAR MATTERS</h3><p>Crew Honors belongs to <strong>OUR SAGA</strong>. Once entered into <strong>THE SHIP'S ROLL</strong>, a sailor's name remains part of this voyage.</p></div><figure class="framed"><img class="zoomable" src="day-27-crew-honors.jpg" alt="Crew Honors Day 27 — Hallveig, Arnfinn and Geir"><figcaption>CREW HONORS — DAY 27 · HALLVEIG · ARNFINN · GEIR</figcaption></figure><div class="naming-list"><article><span>Valerica</span><strong>HALLVEIG <em>(Hallveig)</em></strong><small>ᚼᛅᛚᚢᛅᛁᚴ</small></article><article><span>Daniel</span><strong>ARNFINN <em>(Arnfinnr)</em></strong><small>ᛅᚱᚾᚠᛁᚾᛦ</small></article><article><span>elson cardoso</span><strong>GEIR <em>(Geirr)</em></strong><small>ᚴᛅᛁᛦ</small></article></div></div></section>''')
+          section('history-day-26','''<section class="parchment history-section" id="history-day-27"><div class="wrap"><div class="copy"><div class="kicker red">HISTORY — DAY 27</div><h2>THE LAND WAS NEVER EMPTY</h2><p>This is Mi'kma'ki — the traditional and ancestral homeland of the Mi'kmaq. Indigenous peoples had lived in this region for thousands of years before Norse sails crossed the western Atlantic.</p><p>Around 1,000 years ago, the Norse also reached North America. L'Anse aux Meadows proves their presence, while the Vinland sagas describe encounters with Indigenous peoples whom the Norse called Skrælingar. Were they Mi'kmaq? <strong>We do not know.</strong></p><p><strong>HISTORY BEFORE LEGEND. LISTEN BEFORE WE SAIL.</strong></p><figure class="framed"><img class="zoomable" src="day-27-history.jpg" alt="History Day 27 — The Land Was Never Empty"><figcaption>HISTORY — DAY 27 · THE LAND WAS NEVER EMPTY</figcaption></figure></div></div></section>''')
+          section('myth-day-26','''<section class="parchment" id="myth-day-27"><div class="wrap"><div class="copy"><div class="kicker red">⚡ MYTH &amp; SAGA — DAY 27 ⚡</div><h2>WHEN TWO WORLDS MET</h2><p>Now we leave archaeology behind and enter the Vinland sagas. They tell of Thorfinn Karlsefni and his people meeting Indigenous inhabitants whom the Norse called Skrælingar — first through trade, then through fear, misunderstanding and conflict.</p><p>How much happened exactly as the sagas describe? We cannot know.</p><p><strong>HERE HISTORY FADES — AND THE SAGA BEGINS.</strong></p><figure class="framed"><img class="zoomable" src="day-27-myth-saga.jpg" alt="Myth and Saga Day 27 — When Two Worlds Met"><figcaption>MYTH &amp; SAGA — DAY 27 · WHEN TWO WORLDS MET</figcaption></figure></div></div></section>''')
+          section('night-watch-day-26','''<section class="dark-section" id="night-watch-day-27"><div class="wrap"><div class="copy"><div class="kicker gold">NIGHT WATCH — DAY 27</div><h2>ULF STANDS THE WATCH</h2><p>The fires burn low along the shore of Nova Scotia. Behind them, 103 Vikings sleep. Tonight Hákon does not carry the watch. Ulf takes his place by the sea.</p><p><strong>REST, VIKINGS. ULF KEEPS THE WATCH.</strong></p><figure class="framed"><img class="zoomable" src="day-27-night-watch-ulf.jpg" alt="Night Watch Day 27 — Ulf stands the watch"><figcaption>NIGHT WATCH — DAY 27 · ULF STANDS THE WATCH</figcaption></figure></div></div></section>''')
+          marker='<div class="roll-grid">'
+          pos=s.find(marker)
+          if pos<0: raise SystemExit('Ship Roll grid not found')
+          end=s.find('</div></div></section>',pos)
+          if end<0: raise SystemExit('Ship Roll end not found')
+          additions='<article><span>Valerica</span><strong>Hallveig</strong><small class="old-norse">Hallveig</small><small class="runes">ᚼᛅᛚᚢᛅᛁᚴ</small></article><article><span>Daniel</span><strong>Arnfinn</strong><small class="old-norse">Arnfinnr</small><small class="runes">ᛅᚱᚾᚠᛁᚾᛦ</small></article><article><span>elson cardoso</span><strong>Geir</strong><small class="old-norse">Geirr</small><small class="runes">ᚴᛅᛁᛦ</small></article>'
+          if 'Valerica</span><strong>Hallveig' not in s: s=s[:end]+additions+s[end:]
+          archive_marker='<div class="crew-honors-archive-grid">'
+          s=s.replace(archive_marker,archive_marker+'<figure><img class="zoomable" src="day-27-crew-honors.jpg" alt="Day 27 Crew Honors"><figcaption>DAY 27 · HALLVEIG · ARNFINN · GEIR</figcaption></figure>',1)
+          voyage_marker='<div class="archive-days">'
+          day27='<a class="archive-day" href="archive/day-27.html"><div class="archive-day-image"><img src="day-27-viking-dispatch.jpg" alt="Day 27 voyage archive"></div><div class="archive-day-copy"><span>DAY 27</span><strong>The land was never empty</strong><small>Open the permanent voyage record.</small></div></a>'
+          s=s.replace(voyage_marker,voyage_marker+day27,1)
+          s=s.replace('DAY 26 · 103 VIKINGS · 50,647,198 STEPS · ONE LIVING SAGA','DAY 27 · 103 VIKINGS · 52,604,210 STEPS · ONE LIVING SAGA')
+          if s==original: raise SystemExit('No changes made')
+          p.write_text(s)
+      - name: Verify protected structure and Day 27 assets
+        run: |
+          set -e
+          grep -q 'THE SHIP.S LOG — DAY 27' index.html
+          grep -q 'day-27-viking-dispatch.jpg' index.html
+          grep -q 'day-27-history.jpg' index.html
+          grep -q 'day-27-myth-saga.jpg' index.html
+          grep -q 'day-27-our-saga.jpg' index.html
+          grep -q 'day-27-crew-honors.jpg' index.html
+          grep -q 'day-27-night-watch-ulf.jpg' index.html
+          grep -q 'THE KEEPER.S CHAMBER' index.html
+          grep -q 'archive/day-26.html' index.html
+          test -f archive/day-27.html
+      - name: Commit staged Day 27 page
+        run: |
+          git config user.name 'Viking Voyage Publisher'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Stage Day 27 current voyage page'
+          git push origin day-27-staging
