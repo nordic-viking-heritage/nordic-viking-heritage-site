@@ -3,22 +3,38 @@
 Status: RESEARCH DRAFT — NOT PUBLIC
 Project: Nordic Viking Heritage — The People Behind the Viking Age
 
+## Evidence status
+
+CORE KINSHIP: PRIMARY-SOURCE SUPPLEMENT CONFIRMED
+INDIVIDUAL BIOGRAPHIES: NOT ESTABLISHED
+PUBLICATION: BLOCKED PENDING CAPTAIN APPROVAL
+
 ## Verified core
 
-At Salme on Saaremaa, present-day Estonia, two vessels held the remains of men from an expedition in the 8th century. Ancient-DNA kinship analysis in Margaryan et al. identifies four male siblings in the Salme II ship burial:
+At Salme on Saaremaa, present-day Estonia, two vessels held the remains of men from an expedition in the 8th century. The supplementary kinship analysis published with Margaryan et al. identifies four male siblings in the Salme II ship burial:
 
 - VK483 — Estonia_Salme_II-V
 - VK485 — Estonia_Salme_II-O
 - VK490 — Estonia_Salme_II-N
 - VK497 — Estonia_Salme_II-Ö
 
-The four were buried relatively close to one another in the same layer. The study reports matching maternal lineage (mtDNA H16); minor differences in Y-chromosome assignment were treated by the authors as likely consequences of ancient-DNA damage or insufficient genomic coverage. The wider Salme analysis also identified a third-degree relative of one of the brothers.
+The four were buried relatively close to one another in the same layer. The study reports the same maternal lineage (mtDNA H16). The authors explicitly caution that small differences in their Y-chromosome haplogroup assignments are likely consequences of ancient-DNA damage or insufficient genomic coverage. The wider Salme kinship analysis also reports a third-degree relative of one of the brothers.
 
 This is the historical centre of the story: close family members sailed together and died within the same expeditionary group.
 
+## Evidence hierarchy
+
+PRIMARY — Margaryan et al. 2020, Nature, and its supplementary material. This controls the historical claims in this dossier.
+
+PRIMARY DATA — European Nucleotide Archive project PRJEB37976. This is the sequence-data trail for the study.
+
+DISCOVERY / CROSS-CHECK ONLY — commercial ancient-DNA services, genealogy sites, forums and derivative databases. These may help locate an identifier or discrepancy but may not establish a Nordic Viking Heritage historical claim.
+
+If a derivative source conflicts with the published study or supplement, the record remains unresolved until a primary source settles it.
+
 ## What the evidence permits us to say
 
-The Salme burials provide unusually direct evidence that close kin could participate together in an early Viking-age maritime expedition. The wider burial context includes violent deaths, ships and high-status weaponry. Isotope and genomic evidence discussed by the study connects the group closely with Scandinavia, especially the Mälaren region of eastern Sweden.
+The Salme burials provide unusually direct evidence that close kin could participate together in an early Viking-age maritime expedition. The wider burial context includes violent deaths, ships and high-status weaponry. The genomic study discusses strong Scandinavian connections for the Salme group.
 
 ## What we must NOT invent
 
@@ -27,6 +43,7 @@ We do not assign personalities, dialogue or motives.
 We do not identify any brother as commander, king or saga character without evidence.
 We do not claim VK486 or VK492 were members of this sibling group.
 We do not turn a commercial historical DNA match into evidence of modern direct descent.
+We do not convert a database's single-year estimate into an exact death date unless the archaeological dating supports it.
 
 ## Original Nordic Viking Heritage HISTORY draft
 
@@ -68,6 +85,19 @@ https://www.ebi.ac.uk/ena/browser/view/PRJEB37976
 
 Relevant original supplementary material: Supplementary Note 4 / kinship analysis and Supplementary Table 5.
 
+Author Correction (2021):
+https://doi.org/10.1038/s41586-021-03328-2
+
+## Final source-check record
+
+2026-09-17 — The four-sibling identification (VK483, VK485, VK490, VK497), their proximity in the same Salme II layer, and the H16 / Y-assignment caveat were checked against the wording of the study's published supplementary material. Derivative databases were consulted only as cross-checks and are not evidentiary sources for the portrait.
+
+The exact personal biographies of the four men remain unknown. No rank, historical name, motive, direct modern descendant, or exact individual death year is asserted.
+
 ## Publication gate
 
-The historical prose above is an original Nordic Viking Heritage draft. It may not be moved to the public website until the Captain explicitly approves publication and the supporting primary-source details have received a final source check.
+SOURCE GATE: PASSED for the four-brother core narrative.
+EDITORIAL GATE: READY FOR CAPTAIN REVIEW.
+PUBLICATION GATE: CLOSED until the Captain explicitly approves publication.
+
+The historical prose above is an original Nordic Viking Heritage draft. No public website file has been changed by this research record.
