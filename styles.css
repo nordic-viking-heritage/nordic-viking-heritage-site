@@ -45,3 +45,12 @@
 #voyage-archive .archive-day:nth-child(1) .archive-day-image img{object-position:52% 25%}
 #voyage-archive .archive-day:nth-child(2) .archive-day-image img{object-position:44% 32%}
 @media(max-width:520px){#voyage-archive .archive-day-image img{object-position:50% 34%}#voyage-archive .archive-day:nth-child(1) .archive-day-image img{object-position:52% 25%}#voyage-archive .archive-day:nth-child(2) .archive-day-image img{object-position:44% 32%}}
+
+/* DAY 27 — approved History spacing */
+#history-day-27{padding-top:76px;padding-bottom:76px}
+@media(max-width:520px){#history-day-27{padding-top:64px;padding-bottom:64px}}
+
+/* DAY 27 — approved Myth & Saga chapter contrast */
+#myth-day-27{background:#10191c;color:#eae6dc;border-top:1px solid rgba(199,164,92,.30);border-bottom:1px solid rgba(199,164,92,.22);padding-top:76px;padding-bottom:76px}
+#myth-day-27 .red{color:#c45a48}
+@media(max-width:520px){#myth-day-27{padding-top:64px;padding-bottom:64px}}
