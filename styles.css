@@ -63,3 +63,7 @@
 #myth-day-27{background:#10191c;color:#eae6dc;border-top:1px solid rgba(199,164,92,.30);border-bottom:1px solid rgba(199,164,92,.22);padding-top:76px;padding-bottom:76px}
 #myth-day-27 .red{color:#c45a48}
 @media(max-width:520px){#myth-day-27{padding-top:64px;padding-bottom:64px}}
+
+
+/* THREE LAYERS — contrast below The Ship's Log */
+.layers-after-log{background:#10191c;color:#eae6dc;border-top:1px solid rgba(199,164,92,.30);border-bottom:1px solid rgba(199,164,92,.22)}
