@@ -1,0 +1,12 @@
+record_id	sample_id	site	country	period	status	source_study	notes
+ADNA-001	VK404	Varnhem / Skara	Sweden	Viking Age	VERIFIED	Margaryan et al. 2020	Existing Captain's Log record.
+ADNA-002	VK308	Varnhem / Skara	Sweden	900-1200 CE	PARTIAL	Margaryan et al. 2020	Primary supplementary context still to verify.
+ADNA-003	VK528	Tussøya / Tromsø	Norway	700-900 CE	PARTIAL	Margaryan et al. 2020	Primary supplementary context still to verify.
+ADNA-004	VK492	Salme II / Saaremaa	Estonia	8th century CE	PARTIAL	Margaryan et al. 2020	Early Viking / transition context; verify primary supplementary record.
+ADNA-005	VK486	Salme II / Saaremaa	Estonia	8th century CE	PARTIAL	Margaryan et al. 2020	Early Viking / transition context; verify primary supplementary record.
+ADNA-006	VK342	Öland	Sweden	c. 800 CE	PARTIAL	Margaryan et al. 2020	Exact archaeological context still to verify.
+ADNA-007	VK364	Bogøvej / Langeland	Denmark	Viking-period candidate	LEAD	Margaryan et al. 2020	Do not publish details until primary supplementary record is checked.
+ADNA-008	VK1	Eastern Settlement	Greenland	10th-11th centuries CE	PARTIAL	Margaryan et al. 2020	Norse Greenland candidate; exact context still to verify.
+ADNA-009	VK455	Fröjel / Gotland	Sweden	900-1050 CE	LEAD	Margaryan et al. 2020	Verify all fields against primary supplementary record.
+ADNA-010	VK323	Ribe / Jutland	Denmark	800-1100 CE	LEAD	Margaryan et al. 2020	Verify all fields against primary supplementary record.
+ADNA-011	VK285	Kaagården / Langeland	Denmark	900-1000 CE	LEAD	Margaryan et al. 2020	Verify all fields against primary supplementary record.
